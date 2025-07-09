@@ -1,0 +1,20 @@
+lastupdatecheck: 0
+recentrepos:
+    - /home/antonio/shizuru
+    - /home/antonio/Pictures/Wallpapers
+    - /home/antonio/templates-dot/shizuruPkgs
+    - /home/antonio/Public/nvchad_config
+    - /home/antonio/Pictures/wallpapers
+startuppopupversion: 5
+lastversion: 0.50.0
+customcommandshistory:
+    - q
+    - ecf5513d51ae77db42d810425829ead45a8a554a
+hidecommandlog: true
+ignorewhitespaceindiffview: false
+diffcontextsize: 2
+renamesimilaritythreshold: 50
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: author-date-order
+gitlogshowgraph: when-maximised

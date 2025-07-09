@@ -1,0 +1,315 @@
+#!/usr/bin/env bash
+
+# -*- mode: bash; -*-
+# NixOS System Manager - Simplified Version
+# Colors: blue=#458588, green=#98971a, red=#cc241d
+
+# Check dependencies
+check_deps() {
+    local missing=()
+    for cmd in gum jq nixos-rebuild nix lazygit; do
+        if ! command -v $cmd &>/dev/null; then
+            missing+=("$cmd")
+        fi
+    done
+
+    if [ ${#missing[@]} -gt 0 ]; then
+        gum style --foreground "#cc241d" "Missing dependencies: ${missing[*]}"
+        gum confirm "Install missing dependencies?" && {
+            gum spin --spinner dot --title="Installing dependencies..." -- bash -c "
+                nix-shell -p ${missing[*]}
+                if [[ \" ${missing[*]} \" =~ gum ]]; then
+                    echo 'For permanent gum installation: nix-env -iA nixpkgs.gum'
+                fi
+            "
+        }
+        exit 1
+    fi
+}
+
+# Initialize environment
+init_env() {
+    export GUM_SPIN_SPINNER="dot"
+    export GUM_CHOOSE_CURSOR="❯ "
+    export GUM_CHOOSE_SELECTED_BACKGROUND="#458588"
+    export GUM_CONFIRM_SELECTED_BACKGROUND="#458588"
+    export GUM_INPUT_CURSOR_FOREGROUND="#458588"
+}
+
+# Main menu
+main_menu() {
+    while true; do
+        clear
+        gum style --border rounded --padding "1 2" --margin 1 --border-foreground "#458588" \
+            " $(gum style --foreground "#458588" "NixOS System Manager") "
+
+        CHOICE=$(gum choose --cursor-prefix " ❯ " --selected-prefix " ✓ " \
+            "🔄 Rebuild System" \
+            "📦 Package Management" \
+            "🗑️  Garbage Collection" \
+            "⏱️  Generation Management" \
+            "💻 Edit Config (Lazygit)" \
+            "📊 System Info" \
+            "🚪 Exit")
+
+        case "$CHOICE" in
+            "🔄 Rebuild System")
+                rebuild_system
+                ;;
+            "📦 Package Management")
+                package_management
+                ;;
+            "🗑️  Garbage Collection")
+                garbage_collection_menu
+                ;;
+            "⏱️  Generation Management")
+                generation_menu
+                ;;
+            "💻 Edit Config (Lazygit)")
+                lazygit_integration
+                ;;
+            "📊 System Info")
+                system_info
+                ;;
+            "🚪 Exit")
+                exit 0
+                ;;
+        esac
+    done
+}
+
+# Rebuild system
+# Rebuild system with proper error handling
+rebuild_system() {
+    OPTIONS=("⚡ Switch" "🔨 Test" "🛠️  Build" "⬅️ Cancel")
+    ACTION=$(gum choose --header="Select rebuild type" "${OPTIONS[@]}")
+    
+    case "$ACTION" in
+        "⚡ Switch"|"🔨 Test"|"🛠️  Build")
+            TYPE=${ACTION:3}
+            LOG_FILE=$(mktemp)
+            
+            # First try traditional rebuild
+            CMD="sudo nixos-rebuild ${TYPE,,}"
+            gum spin --spinner dot --title="Attempting standard rebuild..." -- bash -c "$CMD &> $LOG_FILE"
+            
+            if [ $? -ne 0 ]; then
+                # If failed, try flake-based rebuild
+                if [ -f "$HOME/shizuru/" ]; then
+                    gum style --foreground "#b16286" "Standard rebuild failed, trying flake..."
+                    CMD="sudo nixos-rebuild ${TYPE,,} --flake $HOME/shizuru/#$(hostname)"
+                    gum spin --spinner dot --title="Attempting flake rebuild..." -- bash -c "$CMD &>> $LOG_FILE"
+                fi
+            fi
+
+            if [ $? -eq 0 ]; then
+                gum style --foreground "#98971a" "✓ ${TYPE} successful!"
+            else
+                gum style --foreground "#cc241d" "✗ ${TYPE} failed!"
+                echo -e "\nCommon solutions:"
+                echo "1. Ensure $HOME/shizuru/ exists"
+                echo "2. For flakes, verify flake.nix has proper outputs"
+                echo "3. Check sudo permissions"
+                
+                gum confirm "View error logs?" && gum pager < "$LOG_FILE"
+            fi
+            
+            echo -e "\nLast operation log:"
+            tail -n 8 "$LOG_FILE" | gum format -t code
+            rm "$LOG_FILE"
+            ;;
+    esac
+}
+# Lazygit integration
+lazygit_integration() {
+    CONFIG_DIR="$HOME/shizuru/"
+    if [ ! -d "$CONFIG_DIR" ]; then
+        gum style --foreground "#cc241d" "NixOS configuration not found at $CONFIG_DIR"
+        return 1
+    fi
+
+    gum confirm "Open NixOS config in Lazygit?" && {
+        lazygit -p "$CONFIG_DIR"
+    }
+}
+
+# Package management
+package_management() {
+    while true; do
+        CHOICE=$(gum choose --cursor-prefix " ❯ " --selected-prefix " ✓ " \
+            "🔍 Search Packages" \
+            "📦 Installed Packages" \
+            "⬇️  Install Package" \
+            "❌ Remove Package" \
+            "🔄 Update Packages" \
+            "⬅️  Back")
+
+        case "$CHOICE" in
+            "🔍 Search Packages")
+                search_packages
+                ;;
+            "📦 Installed Packages")
+                list_installed_packages
+                ;;
+            "⬇️  Install Package")
+                install_package
+                ;;
+            "❌ Remove Package")
+                remove_package
+                ;;
+            "🔄 Update Packages")
+                update_packages
+                ;;
+            "⬅️  Back")
+                break
+                ;;
+        esac
+    done
+}
+
+# Garbage collection menu
+garbage_collection_menu() {
+    OPTS=$(gum choose --cursor-prefix " ❯ " --selected-prefix " ✓ " --no-limit \
+        "Delete old generations" \
+        "Remove unused packages" \
+        "Optimize store" \
+        "All of the above" \
+        "⬅️ Cancel")
+    
+    [[ "$OPTS" == *"Cancel"* ]] && return
+    [[ "$OPTS" == *"All of the above"* ]] && OPTS="Delete old generations Remove unused packages Optimize store"
+    
+    FLAGS=""
+    [[ "$OPTS" == *"Delete old generations"* ]] && FLAGS+=" -d"
+    [[ "$OPTS" == *"Remove unused packages"* ]] && FLAGS+=" --delete-old"
+    [[ "$OPTS" == *"Optimize store"* ]] && FLAGS+=" --optimise"
+    
+    [ -n "$FLAGS" ] && {
+        gum confirm "Run garbage collection with:$FLAGS ?" && {
+            gum spin --spinner dot --title="Collecting garbage..." -- sudo nix-collect-garbage $FLAGS
+            gum style --foreground "#98971a" "✓ Garbage collection complete!"
+        }
+    }
+}
+
+# Generation management
+generation_menu() {
+    while true; do
+        CHOICE=$(gum choose --cursor-prefix " ❯ " --selected-prefix " ✓ " \
+            "📋 List Generations" \
+            "⏪ Rollback to Generation" \
+            "🧹 Remove Old Generations" \
+            "🧽 Clean Boot Menu" \
+            "⬅️ Back")
+
+        case "$CHOICE" in
+            "📋 List Generations")
+                list_generations
+                ;;
+            "⏪ Rollback to Generation")
+                rollback_generation
+                ;;
+            "🧹 Remove Old Generations")
+                remove_old_generations
+                ;;
+            "🧽 Clean Boot Menu")
+                clean_boot
+                ;;
+            "⬅️ Back")
+                break
+                ;;
+        esac
+    done
+}
+
+# Helper functions
+list_generations() {
+    gum spin --spinner dot --title="Loading generations..." -- bash -c "
+        echo 'Current generation:'
+        readlink /run/current-system
+        echo '\nAll generations:'
+        sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+    " | gum pager
+}
+
+rollback_generation() {
+    GEN=$(sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | \
+        gum filter --header="Select generation to rollback" | awk '{print $1}')
+    
+    [ -n "$GEN" ] && {
+        gum confirm "Rollback to generation $GEN?" && {
+            gum spin --spinner dot --title="Rolling back..." -- sudo nixos-rebuild switch --rollback "$GEN"
+            gum style --foreground "#98971a" "✓ Rolled back to generation $GEN!"
+        }
+    }
+}
+
+remove_old_generations() {
+    gum confirm "Remove all old generations?" && {
+        gum spin --spinner dot --title="Cleaning up..." -- sudo nix-env --delete-generations old
+        gum style --foreground "#98971a" "✓ Old generations removed!"
+    }
+}
+
+clean_boot() {
+    gum confirm "Clean boot menu?" && {
+        gum spin --spinner dot --title="Cleaning boot entries..." -- sudo /run/current-system/bin/switch-to-configuration boot
+        gum style --foreground "#98971a" "✓ Boot menu cleaned!"
+    }
+}
+
+search_packages() {
+    QUERY=$(gum input --placeholder "Search term")
+    [ -n "$QUERY" ] && {
+        gum spin --spinner dot --title="Searching packages..." -- bash -c \
+            "nix search nixpkgs $QUERY" | gum pager
+    }
+}
+
+list_installed_packages() {
+    gum spin --spinner dot --title="Getting installed packages..." -- bash -c \
+        "nix-env -q" | gum pager
+}
+
+install_package() {
+    PKG=$(gum input --placeholder "Package name")
+    [ -n "$PKG" ] && {
+        gum spin --spinner dot --title="Installing $PKG..." -- sudo nix-env -iA nixpkgs."$PKG"
+        gum style --foreground "#98971a" "✓ Package $PKG installed!"
+    }
+}
+
+remove_package() {
+    PKG=$(nix-env -q | gum choose --header="Select package to remove")
+    [ -n "$PKG" ] && {
+        gum confirm "Remove package $PKG?" && {
+            gum spin --spinner dot --title="Removing $PKG..." -- sudo nix-env -e "$PKG"
+            gum style --foreground "#98971a" "✓ Package $PKG removed!"
+        }
+    }
+}
+
+update_packages() {
+    gum confirm "Update packages?" && {
+        gum spin --spinner dot --title="Updating packages..." -- sudo nix-channel --update && sudo nix-env -u
+        gum style --foreground "#98971a" "✓ Packages updated!"
+    }
+}
+
+system_info() {
+    gum spin --spinner dot --title="Getting system info..." -- bash -c "
+        echo 'NixOS Version: $(nixos-version)'; 
+        echo 'Kernel: $(uname -r)'; 
+        echo 'Uptime: $(uptime -p)';
+        echo 'Current Generation: $(readlink /run/current-system)';
+        echo 'Disk Usage:';
+        df -h / /nix;
+        echo '';
+        echo 'Memory Usage:';
+        free -h" | gum pager
+}
+
+# Main execution
+check_deps
+init_env
+main_menu

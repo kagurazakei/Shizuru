@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+rebuild_system() {
+    local current_system=$(readlink -f /nix/var/nix/profiles/system)
+
+    # Show rebuild process in FZF with colored output
+    local rebuild_output=$(mktemp)
+    (
+        echo -e "${YELLOW}🚀 Starting system rebuild...${RESET}"
+        echo -e "${CYAN}══════════════════════════════════════════${RESET}"
+        nixos-rebuild switch --flake "${CONFIG_DIR}#${HOSTNAME}" &> >(tee "$rebuild_output" |
+            sed -u 's/^/  /' |
+            nom --color=always
+        )
+        rebuild_status=$?
+        echo -e "\n${CYAN}══════════════════════════════════════════${RESET}"
+
+        if [ $rebuild_status -eq 0 ]; then
+            echo -e "${GREEN}✅ Rebuild successful!${RESET}"
+        else
+            echo -e "${RED}❌ Rebuild failed!${RESET}"
+            exit $rebuild_status
+        fi
+    ) | fzf --ansi \
+            --height=90% \
+            --border=rounded \
+            --color=border:cyan \
+            --preview-window=right:60% \
+            --header=" NixOS Rebuild Process " \
+            --bind="ctrl-c:abort"
+
+    # Show generation diff if rebuild succeeded
+    if [ $rebuild_status -eq 0 ]; then
+        local new_system=$(readlink -f /nix/var/nix/profiles/system)
+
+        # Prepare nvd diff output
+        local diff_output=$(mktemp)
+        (
+            echo -e "${MAGENTA}🔄 System Changes:${RESET}"
+            echo -e "${CYAN}══════════════════════════════════════════${RESET}"
+            if command -v nvd &>/dev/null; then
+                nvd diff "$current_system" "$new_system"
+            else
+                nix store diff-closures "$current_system" "$new_system" |
+                    sed 's/^-/[31m-/; s/^+/[32m+/; s/^@/[33m@/; s/$/[0m/'
+            fi
+            echo -e "${CYAN}══════════════════════════════════════════${RESET}"
+            echo -e "${GREEN}Press q to close this view${RESET}"
+        ) > "$diff_output"
+
+        # Show diff in FZF
+        fzf --ansi \
+            --height=90% \
+            --border=rounded \
+            --color=border:magenta \
+            --preview="cat $diff_output" \
+            --preview-window=right:70%:wrap \
+            --header=" System Changes (nvd diff) " \
+            --bind="ctrl-c:abort,q:abort"
+
+        rm "$diff_output"
+    fi
+
+    rm "$rebuild_output"
+    return $rebuild_status
+}

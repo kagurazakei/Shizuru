@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# Run nixos-rebuild with pretty output
+sudo nixos-rebuild switch --flake .# |& nom
+
+# Get the latest and previous system profiles
+CURRENT_SYSTEM="/nix/var/nix/profiles/system"
+PREVIOUS_SYSTEM=$(ls -v /nix/var/nix/profiles/system-*-link | tail -n 2 | head -n 1)
+
+echo -e "\n✅ Switch complete. Showing diff between:\n  OLD: $PREVIOUS_SYSTEM\n  NEW: $CURRENT_SYSTEM\n"
+
+# Show diff using nvd
+nvd diff "$PREVIOUS_SYSTEM" "$CURRENT_SYSTEM"
+
+

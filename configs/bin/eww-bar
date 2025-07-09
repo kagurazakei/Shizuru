@@ -1,0 +1,7 @@
+
+#!/usr/bin/env fish
+
+pgrep -x "waybar" && killall waybar || true
+pgrep -x "eww" && killall eww || true
+launchme --bar >  /dev/null 2>&1 & disown
+

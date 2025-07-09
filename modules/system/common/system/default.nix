@@ -1,0 +1,22 @@
+{
+  imports = [
+    ./bootloader.nix
+    ./cachix.nix
+    ./grub.nix
+    ./kernel.nix
+    ./local-hardware-clock.nix
+    ./locale.nix
+    ./network.nix
+    ./nix.nix
+    ./plymouth.nix
+    ./powermanagement.nix
+    ./scheduler.nix
+    ./security.nix
+    ./services.nix
+    ./system.nix
+    ./virtualization.nix
+    ./vm-guest-services.nix
+    ./zfs.nix
+    ./zram.nix
+  ];
+}

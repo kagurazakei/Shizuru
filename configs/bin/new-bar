@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+pgrep -x "waybar" && killall waybar || true
+
+waybar -c ~/.config/niri/waybar/config -s ~/.config/niri/waybar/style.css >  /dev/null 2>&1 & disown

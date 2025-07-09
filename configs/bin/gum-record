@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+# Check dependencies
+for cmd in wf-recorder ffmpeg gum; do
+    if ! command -v $cmd &>/dev/null; then
+        echo "Installing missing dependencies..."
+        if command -v apt &>/dev/null; then
+            sudo apt install -y ffmpeg wf-recorder
+        elif command -v pacman &>/dev/null; then
+            sudo pacman -S --noconfirm ffmpeg wf-recorder
+        fi
+        # Install gum
+        go install github.com/charmbracelet/gum@latest || {
+            echo "Couldn't install gum automatically"
+            echo "Please install manually: https://github.com/charmbracelet/gum"
+            exit 1
+        }
+    fi
+done
+
+# Gum style configuration
+export GUM_SPIN_SPINNER="dot"
+export GUM_INPUT_CURSOR_FOREGROUND="#FF7AC6"
+export GUM_INPUT_PROMPT_FOREGROUND="#FF7AC6"
+export GUM_CONFIRM_SELECTED_BACKGROUND="#FF7AC6"
+export GUM_CHOOSE_SELECTED_BACKGROUND="#FF7AC6"
+
+# Main function
+main() {
+    clear
+    gum style --border rounded --padding "1 2" --margin 1 --border-foreground "#FF7AC6" \
+        " $(gum style --foreground "#FF7AC6" "🎥 Desktop Recorder") "
+    
+    # Record or convert existing file
+    ACTION=$(gum choose --header="Select action" --cursor="➤ " --limit=1 \
+        "🎬 Record new desktop" \
+        "🔄 Convert existing video to GIF")
+    
+    case $ACTION in
+        "🎬 Record new desktop")
+            record_desktop
+            ;;
+        "🔄 Convert existing video to GIF")
+            convert_to_gif
+            ;;
+        *)
+            exit
+            ;;
+    esac
+}
+
+record_desktop() {
+    # Get recording parameters
+    DURATION=$(gum input --placeholder="10" --header="Recording duration (seconds)" --value="10")
+    FPS=$(gum input --placeholder="15" --header="GIF frames per second" --value="15")
+    WIDTH=$(gum input --placeholder="800" --header="Output width (pixels)" --value="800")
+    
+    # Create output directory
+    OUTPUT_DIR="$HOME/Videos/ScreenRecords"
+    mkdir -p "$OUTPUT_DIR"
+    TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+    RAW_FILE="$OUTPUT_DIR/recording_$TIMESTAMP.mp4"
+    GIF_FILE="$OUTPUT_DIR/recording_$TIMESTAMP.gif"
+    
+    # Start recording
+    gum confirm "Start recording for $DURATION seconds?" && {
+        gum spin --title="Recording in progress (Press Ctrl+C to stop early)" -- \
+            timeout "$DURATION" wf-recorder -f "$RAW_FILE" -c h264_vaapi -d /dev/dri/renderD128
+        
+        # Convert to GIF
+        convert_to_gif "$RAW_FILE" "$GIF_FILE" "$FPS" "$WIDTH"
+    }
+}
+
+convert_to_gif() {
+    local input_file=${1:-$(gum file --file --allow-other --directory="$HOME" --header="Select video file")}
+    [ -z "$input_file" ] && exit 1
+    
+    local output_file=${2:-"${input_file%.*}.gif"}
+    local fps=${3:-$(gum input --placeholder="15" --header="Frames per second" --value="15")}
+    local width=${4:-$(gum input --placeholder="800" --header="Output width" --value="800")}
+    
+    gum confirm "Convert $(basename "$input_file") to GIF?" && {
+        gum spin --title="Converting to GIF..." -- \
+            ffmpeg -i "$input_file" -vf "fps=$fps,scale=$width:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 "$output_file" -y
+        
+        gum style --foreground "#7CFC00" "✓ Conversion complete! $(du -h "$output_file" | cut -f1)"
+        gum confirm "Open containing folder?" && xdg-open "$(dirname "$output_file")"
+    }
+}
+
+main

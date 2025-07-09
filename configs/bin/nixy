@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Colors
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+CYAN='\033[0;36m'
+RESET='\033[0m'
+
+# Rebuild with beautiful output
+rebuild_system() {
+    echo -e "${CYAN}==> Starting system rebuild...${RESET}"
+    
+    # Store current generation
+    local current_gen=$(readlink -f /nix/var/nix/profiles/system)
+    
+    # Run rebuild with nom
+    if sudo nixos-rebuild switch --flake '&| nom'; then
+        echo -e "\n${GREEN}✓ Rebuild successful!${RESET}"
+        
+        # Show changes with nvd
+        local new_gen=$(readlink -f /nix/var/nix/profiles/system)
+        echo -e "\n${CYAN}==> System changes:${RESET}"
+        
+        if command -v nvd &>/dev/null; then
+            nvd diff "$current_gen" "$new_gen"
+        else
+            nix store diff-closures "$current_gen" "$new_gen" | 
+                sed 's/^-/\x1b[31m-/; s/^+/\x1b[32m+/; s/^@/\x1b[33m@/; s/$/\x1b[0m/'
+        fi
+    else
+        echo -e "\n${RED}✗ Rebuild failed!${RESET}"
+        return 1
+    fi
+}
+
+# Main execution
+rebuild_system
+

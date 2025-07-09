@@ -1,0 +1,249 @@
+#!/usr/bin/env bash
+
+# ==============================================
+# NixOS Containerized Manager
+# Version: 10.8.1
+# ==============================================
+
+# === CONFIG ===
+LOGFILE="$HOME/.nixos-rebuild-logs/$(date +%F-%H%M%S).log"
+HOSTNAME=$(hostname)
+TERMINAL_WIDTH=$(tput cols)
+
+# === ICONS ===
+CURRENT_ICON="󰄾"    # Current generation
+GENERATION_ICON="󰑠" # Old generations
+SWITCH_ICON="󰒓"     # Switch
+BOOT_ICON="󰑮"       # Boot
+ROLLBACK_ICON="󰒍"   # Rollback
+CLEANUP_ICON="󰆴"    # Cleanup
+QUIT_ICON="󰩈"       # Quit
+SUCCESS_ICON="󰄬"    # Success
+ERROR_ICON="󰈸"      # Error
+LIST_ICON="󰙨"       # List Generations
+
+# === STYLING ===
+style_main_container() {
+    gum style --border rounded --margin "1" --padding "1 4" \
+              --border-foreground "#FF79C6" --width $((TERMINAL_WIDTH-4)) \
+              "$@"
+}
+
+style_header() {
+    gum style --border none --margin "0 0 1 0" --padding "0 2" \
+              --foreground "#BD93F9" --width $((TERMINAL_WIDTH-10)) \
+              --align center --bold "$@"
+}
+
+style_generation_box() {
+    local icon="$1"
+    local content="$2"
+    gum style --border rounded --margin "0 0 1 2" --padding "0 2" \
+              --border-foreground "#6272A4" --width $((TERMINAL_WIDTH-14)) \
+              "$icon $content"
+}
+
+style_action_result() {
+    gum style --border rounded --margin "1 2" --padding "1 4" \
+              --border-foreground "$1" --width $((TERMINAL_WIDTH-14)) \
+              "$2"
+}
+
+# === GENERATION DISPLAY ===
+show_generations() {
+    local current_gen=$(readlink -f /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
+    local generations=($(sudo nix-env -p /nix/var/nix/profiles/system --list-generations | awk '{print $1}'))
+
+    style_header "System Generations"
+    for gen in "${generations[@]: -5}"; do  # Show last 5 generations
+        if [[ "$gen" == "$current_gen" ]]; then
+            style_generation_box "$CURRENT_ICON" "$(gum style --foreground "#50FA7B" "$gen (current)")"
+        else
+            style_generation_box "$GENERATION_ICON" "$gen"
+        fi
+    done
+}
+
+# === LIST ALL GENERATIONS ===
+list_all_generations() {
+    local current_gen=$(readlink -f /nix/var/nix/profiles/system | awk -F'-' '{print $2}')
+    local generations=($(sudo nix-env -p /nix/var/nix/profiles/system --list-generations | awk '{print $1}'))
+
+    clear
+    style_main_container "$(
+        style_header "All System Generations"
+        for gen in "${generations[@]}"; do
+            if [[ "$gen" == "$current_gen" ]]; then
+                style_generation_box "$CURRENT_ICON" "$(gum style --foreground "#50FA7B" "$gen (current)")"
+            else
+                style_generation_box "$GENERATION_ICON" "$gen"
+            fi
+        done
+    )"
+    gum confirm "Return to main menu?" || exit 0
+}
+
+# === NH INTEGRATION ===
+nh_switch() {
+    CURRENT_GEN=$(readlink -f /nix/var/nix/profiles/system)
+
+    style_action_result "#FFB86C" "󰚩 Dry-running system switch..."
+    nh os switch
+
+    if gum confirm "Proceed with switch?"; then
+        style_action_result "#8BE9FD" "󰏖 Building system..."
+        if nh os switch | tee "$LOGFILE"; then
+            NEW_GEN=$(readlink -f /nix/var/nix/profiles/system)
+
+            style_action_result "#50FA7B" "$SUCCESS_ICON Switch successful"
+
+            # Generation changes
+            style_action_result "#8BE9FD" "󰓦 Generation changes:"
+            echo # Spacer
+            nvd diff "$CURRENT_GEN" "$NEW_GEN" 2>/dev/null || \
+            nix store diff-closures "$CURRENT_GEN" "$NEW_GEN"
+
+            # Service changes
+            style_action_result "#8BE9FD" "󱑽 Service changes:"
+            journalctl -u --since "5 minutes ago" | grep -i "reloaded\|started\|stopped"
+        else
+            style_action_result "#FF5555" "$ERROR_ICON Switch failed"
+            style_content "Check logs: $LOGFILE"
+            return 1
+        fi
+    fi
+}
+
+nh_boot() {
+    style_action_result "#8BE9FD" "󰑮 Setting boot generation..."
+    if nh os boot | tee "$LOGFILE"; then
+        style_action_result "#50FA7B" "$SUCCESS_ICON Boot generation set"
+    else
+        style_action_result "#FF5555" "$ERROR_ICON Failed to set boot generation"
+    fi
+}
+
+# === SYSTEM MANAGEMENT ===
+rollback_generation() {
+    local generations=($(sudo nix-env -p /nix/var/nix/profiles/system --list-generations | awk '{print $1}'))
+    local target_gen=$(gum choose --header="Select generation to rollback to:" "${generations[@]}")
+    [ -z "$target_gen" ] && return
+
+    if gum confirm "Rollback to generation $target_gen?"; then
+        style_action_result "#8BE9FD" "󰒍 Rolling back..."
+        if sudo nixos-rebuild switch --rollback "$target_gen"; then
+            style_action_result "#50FA7B" "$SUCCESS_ICON Rollback complete"
+        else
+            style_action_result "#FF5555" "$ERROR_ICON Rollback failed"
+        fi
+    fi
+}
+
+cleanup_system() {
+    local keep=$(gum input --placeholder "Number of generations to keep (e.g. 3)")
+    [[ ! "$keep" =~ ^[0-9]+$ ]] && style_action_result "#FF5555" "Invalid number" && return
+
+    if gum confirm "Delete all but last $keep generations?"; then
+        style_action_result "#8BE9FD" "󰆴 Cleaning up..."
+        if nh clean all --keep "$keep"; then
+            style_action_result "#50FA7B" "$SUCCESS_ICON System cleaned"
+        else
+            style_action_result "#FF5555" "$ERROR_ICON Cleanup failed"
+        fi
+    fi
+}
+
+# === MAIN MENU ===
+show_menu() {
+    style_main_container "$(
+        style_header " NixOS System Manager"
+
+        # Host info
+        gum style --margin "0 0 1 2" --padding "0 2" \
+                 "󰟀 $(gum style --foreground "#F1FA8C" "$HOSTNAME")"
+
+        # Generations display
+        show_generations
+
+        # Menu options
+        gum style --margin "1 0 0 0" --padding "0 2" \
+                 "󰚩 Available Actions:"
+
+        gum choose \
+            --cursor="➤ " \
+            --cursor.foreground "#FF79C6" \
+            --selected.foreground "#FF79C6" \
+            --header="" \
+            --limit=6 \
+            "$SWITCH_ICON Switch Generation" \
+            "$BOOT_ICON Boot Generation" \
+            "$ROLLBACK_ICON Rollback" \
+            "$CLEANUP_ICON Cleanup" \
+            "$LIST_ICON List All Generations" \
+            "$QUIT_ICON Quit"
+    )"
+}
+
+# === MAIN FLOW ===
+main_menu() {
+    while true; do
+        clear
+        show_menu
+
+        case "$(gum choose --header=" " \
+                "$SWITCH_ICON Switch" \
+                "$BOOT_ICON Boot" \
+                "$ROLLBACK_ICON Rollback" \
+                "$CLEANUP_ICON Cleanup" \
+                "$LIST_ICON List All" \
+                "$QUIT_ICON Quit")" in
+
+            "$SWITCH_ICON Switch")
+                nh_switch
+                ;;
+            "$BOOT_ICON Boot")
+                nh_boot
+                ;;
+            "$ROLLBACK_ICON Rollback")
+                rollback_generation
+                ;;
+            "$CLEANUP_ICON Cleanup")
+                cleanup_system
+                ;;
+            "$LIST_ICON List All")
+                list_all_generations
+                ;;
+            "$QUIT_ICON Quit")
+                exit 0
+                ;;
+        esac
+
+        gum confirm --affirmative=" Continue " --negative=" Exit " \
+                   --default=true "Manage NixOS?" || exit 0
+    done
+}
+
+# === DEPENDENCY CHECK ===
+check_deps() {
+    local missing=()
+    for cmd in nh gum nvd; do
+        if ! command -v "$cmd" &> /dev/null; then
+            missing+=("$cmd")
+        fi
+    done
+
+    if [ ${#missing[@]} -gt 0 ]; then
+        style_main_container "$(
+            style_header " Missing Dependencies"
+            printf '%s\n' "${missing[@]/#/• }"
+            echo
+            gum style --foreground "#F1FA8C" "Install with:"
+            echo "nix-env -iA nixpkgs.{nh,gum,nvd}"
+        )"
+        exit 1
+    fi
+}
+
+# === EXECUTION ===
+check_deps
+main_menu
