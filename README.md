@@ -1,10 +1,12 @@
-# 💜 Shizuru - NixOS Configuration
+<p align="center">
+    💜 Shizuru - NixOS Configuration
+</p>
 
 <p align="center">
   <img src="./.github/assets/logo/flake.png" width="100px" alt="Shizuru Logo"/>
   <h1 align="center">Shizuru</h1>
   <p align="center">Aesthetic, Modular NixOS Configuration</p>
-  <img src="./.github/assets/pallet/macchiato.png" width="600px" alt="Color Palette"/>
+  <p align="center"><img src="./.github/assets/pallet/macchiato.png" width="600px" alt="Color Palette"/></p>
 </p>
 
 <div align="center">
