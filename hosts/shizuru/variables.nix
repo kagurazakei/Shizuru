@@ -2,8 +2,8 @@
   # Git Configuration ( For Pulling Software Repos )
 
   configDirectory = "/home/antonio/shizuru/";
-  gitUsername = "maotseantonio";
-  gitEmail = "thetzinantonio@gmail.com";
+  gitUsername = "maotsugiri";
+  gitEmail = "maotseugiri@gmail.com";
   extraMonitorSettings = "";
   # Waybar Settings
   clock24h = true;

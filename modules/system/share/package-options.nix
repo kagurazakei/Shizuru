@@ -93,6 +93,7 @@ in {
       pyprland
       libsForQt5.qt5ct
       # kdePackages.full
+      python313Packages.kde-material-you-colors
       qt6ct
       qt6.qtwayland
       qt6Packages.qtstyleplugin-kvantum # kvantum

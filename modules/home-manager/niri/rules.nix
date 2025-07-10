@@ -35,6 +35,7 @@
     "^(org.wezfurlong.wezterm)"
     "^(foot)"
     "^(com.mitchellh.ghostty)"
+    "org.kde.dolphin"
   ];
 
   floatingRules = builtins.map (appId:

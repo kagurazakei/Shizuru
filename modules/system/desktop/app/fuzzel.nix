@@ -21,7 +21,6 @@
         lines = "8";
         letter-spacing = "0.5";
         icons-enabled = "yes";
-        icon-theme = "Papirus-Dark";
         image-size-ratio = "1.0";
         x-margin = "20";
         y-margin = "20";

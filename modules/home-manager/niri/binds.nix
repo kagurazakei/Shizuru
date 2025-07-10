@@ -45,7 +45,7 @@
     "Alt+Space".action = spawn "fuzzel";
     "Mod+Shift+Return".action = spawn "wezterm";
     "Ctrl+Alt+L".action = spawn "hyprlock";
-    "Mod+T".action = spawn "thunar";
+    "Mod+T".action = spawn "dolphin";
     "Mod+O".action = spawn "fuzzel";
     "Mod+I".action = spawn "fuzzel-clip";
     "Mod+U".action = control-center;

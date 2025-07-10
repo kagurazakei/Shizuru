@@ -26,9 +26,9 @@
     };
 
     # Personal packages and cursors
-    shizuruPkgs.url = "github:maotseantonio/shizuruPkgs";
-    kureiji-ollie-cursor.url = "git+https://codeberg.org/maotseantonio/Kureiji-Ollie-Cursors";
-    waifu-cursors.url = "github:maotseantonio/waifu-cursors";
+    shizuruPkgs.url = "git+https://codeberg.org/maotseantonio/shizuruPkgs";
+    kureiji-ollie-cursor.url = "git+https://codeberg.org/maotseantonio/kureiji-ollie-cursors";
+    waifu-cursors.url = "git+https://codeberg.org/maotseantonio/waifu-cursors";
 
     # Modules and utilities
     lix-module = {
@@ -210,7 +210,7 @@
       url = "github:LGFae/swww/v0.10.3";
     };
 
-    sddm-stray.url = "github:maotseantonio/sddm-stray-flakes";
+    sddm-stray.url = "git+https://codeberg.org/maotseantonio/sddm-stray-flakes";
     nix-alien.url = "github:thiagokokada/nix-alien";
     wezterm.url = "github:wezterm/wezterm?dir=nix";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";

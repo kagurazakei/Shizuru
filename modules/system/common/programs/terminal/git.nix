@@ -7,8 +7,8 @@
   hm.programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userName = "maotseantonio";
-    userEmail = "thetzinantonio@gmail.com";
+    userName = "maotsugiri";
+    userEmail = "maotsugiri@gmail.com";
     lfs = {
       enable = true;
       skipSmudge = true;

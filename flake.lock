@@ -3485,17 +3485,17 @@
         "nixpkgs": "nixpkgs_17"
       },
       "locked": {
-        "lastModified": 1750693934,
-        "narHash": "sha256-IXrG0LgO62UXtHsLHTzV03IBVm/gUw1iY0T4NlW67k0=",
+        "lastModified": 1752080475,
+        "narHash": "sha256-LzXB+FwaIsaO76Iv+rcnrNx4YiUpSzLxJvuKU83MMGA=",
         "ref": "refs/heads/main",
-        "rev": "a74edd1054b1fa1334e54276c9163ab69e7293f0",
-        "revCount": 2,
+        "rev": "a68837f6fb2bf30efb12b62f395e9897384cb9db",
+        "revCount": 4,
         "type": "git",
-        "url": "https://codeberg.org/maotseantonio/Kureiji-Ollie-Cursors"
+        "url": "https://codeberg.org/maotseantonio/kureiji-ollie-cursors"
       },
       "original": {
         "type": "git",
-        "url": "https://codeberg.org/maotseantonio/Kureiji-Ollie-Cursors"
+        "url": "https://codeberg.org/maotseantonio/kureiji-ollie-cursors"
       }
     },
     "lib-aggregate": {
@@ -5411,15 +5411,15 @@
       "locked": {
         "lastModified": 1750267777,
         "narHash": "sha256-wAZvhsoFN4biYA9J5Hx+fIevxEMgI1KXCH6Sqe9TRrk=",
-        "owner": "maotseantonio",
-        "repo": "sddm-stray-flakes",
+        "ref": "refs/heads/main",
         "rev": "c49f9a764b3fcf28ba743c6ee4b633414a821606",
-        "type": "github"
+        "revCount": 10,
+        "type": "git",
+        "url": "https://codeberg.org/maotseantonio/sddm-stray-flakes"
       },
       "original": {
-        "owner": "maotseantonio",
-        "repo": "sddm-stray-flakes",
-        "type": "github"
+        "type": "git",
+        "url": "https://codeberg.org/maotseantonio/sddm-stray-flakes"
       }
     },
     "sf-mono-liga-src": {
@@ -5447,15 +5447,15 @@
       "locked": {
         "lastModified": 1752057223,
         "narHash": "sha256-3wUo2Lrez6DCS01LNoK4Nqpd7aXyvLeLbF5xK+UMU0I=",
-        "owner": "maotseantonio",
-        "repo": "shizuruPkgs",
+        "ref": "refs/heads/main",
         "rev": "e1146114117d2843aee410907e938cfa68cbbc3e",
-        "type": "github"
+        "revCount": 16,
+        "type": "git",
+        "url": "https://codeberg.org/maotseantonio/shizuruPkgs"
       },
       "original": {
-        "owner": "maotseantonio",
-        "repo": "shizuruPkgs",
-        "type": "github"
+        "type": "git",
+        "url": "https://codeberg.org/maotseantonio/shizuruPkgs"
       }
     },
     "smfh": {
@@ -6432,17 +6432,17 @@
         "nixpkgs": "nixpkgs_30"
       },
       "locked": {
-        "lastModified": 1751021575,
-        "narHash": "sha256-Mj7FtskGDCb5LTRwyFjs0kpUWo1KMVkQ5lC0WDA+IIE=",
-        "owner": "maotseantonio",
-        "repo": "waifu-cursors",
-        "rev": "ddc5efb35093e257fc19c0436d28020491a9978a",
-        "type": "github"
+        "lastModified": 1751022593,
+        "narHash": "sha256-STgq+bQtIiiWaDGMBRAcCuOvPZ/4qGHBp4nSKVO3UsU=",
+        "ref": "refs/heads/main",
+        "rev": "3a37983a766b8190eb3098555a8d5c8f1f886798",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://codeberg.org/maotseantonio/waifu-cursors"
       },
       "original": {
-        "owner": "maotseantonio",
-        "repo": "waifu-cursors",
-        "type": "github"
+        "type": "git",
+        "url": "https://codeberg.org/maotseantonio/waifu-cursors"
       }
     },
     "walker": {
