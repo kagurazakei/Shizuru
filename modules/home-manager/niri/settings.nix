@@ -45,16 +45,16 @@ in {
         DISPLAY = null; #  DISPLAY = ":0";
       };
       spawn-at-startup = [
-        (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
         (makeCommand "wl-paste --type image --watch cliphist store")
+        (makeCommand "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1")
         (makeCommand "wl-paste --type text --watch cliphist store")
         (makeCommand "wl-paste --watch walker --update-clipboard")
         (makeCommand "swww-daemon")
         (makeCommand "qs")
-        (makeCommand "arrpc")
-        (makeCommand "systemctl --user restart walker.service")
-        (makeCommand "walker --gapplication-service")
         (makeCommand "~/.local/bin/mod-qs")
+        (makeCommand "arrpc")
+        (makeCommand "systemctl --user reset-failed arRPC.service")
+        (makeCommand "walker --gapplication-service")
         (makeCommand "uwsm-app ${wallpaperScript}/bin/niri-wallpaper")
         (makeCommand "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -264,6 +264,20 @@ in {
       hotkey-overlay.skip-at-startup = true;
     };
   };
+
+  systemd.user.services.polkit-gnome = {
+  Unit = {
+    Description = "GNOME Polkit Agent";
+    After = [ "graphical-session.target" ];
+  };
+  Service = {
+    ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    Restart = "on-failure";
+  };
+  Install = {
+    WantedBy = [ "graphical-session.target" ];
+  };
+};
   systemd.user.services.walker = {
     Unit = {
       Description = "walker autostart";

@@ -11,7 +11,11 @@
         libsForQt5.dolphin
         libsForQt5.dolphin-plugins
         libsForQt5.kio-extras
-        kdePackages.ark
+        libsForQt5.ark
+        libsForQt5.ffmpegthumbs
+        libsForQt5.kio
+        libsForQt5.poppler
+        libsForQt5.qt5.qtmultimedia
       ];
     };
 }

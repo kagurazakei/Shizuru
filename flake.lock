@@ -337,15 +337,15 @@
     "ax-shell-config": {
       "flake": false,
       "locked": {
-        "lastModified": 1749231026,
-        "narHash": "sha256-OMVrU+3ouNDpljTaIXKDEGqR3ERIevz/QY653pmmPKI=",
-        "owner": "maotseantonio",
+        "lastModified": 1752148919,
+        "narHash": "sha256-j6vxKmhtUrsQEwNK7VFf/EU1P2lzfM0mcOoVkS9Gypw=",
+        "owner": "kagurazakei",
         "repo": "AX-Shell",
-        "rev": "d9d6ec5c381ebe85923a4625e42e3d43fe8b7430",
+        "rev": "a6ad2421ee45e2ab9eb6929f586adcd76f0ebf3c",
         "type": "github"
       },
       "original": {
-        "owner": "maotseantonio",
+        "owner": "kagurazakei",
         "repo": "AX-Shell",
         "type": "github"
       }
@@ -3551,15 +3551,15 @@
       "locked": {
         "lastModified": 1752080475,
         "narHash": "sha256-LzXB+FwaIsaO76Iv+rcnrNx4YiUpSzLxJvuKU83MMGA=",
-        "ref": "refs/heads/main",
+        "owner": "kagurazakei",
+        "repo": "kureiji-ollie-cursors",
         "rev": "a68837f6fb2bf30efb12b62f395e9897384cb9db",
-        "revCount": 4,
-        "type": "git",
-        "url": "https://codeberg.org/maotseantonio/kureiji-ollie-cursors"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://codeberg.org/maotseantonio/kureiji-ollie-cursors"
+        "owner": "kagurazakei",
+        "repo": "kureiji-ollie-cursors",
+        "type": "github"
       }
     },
     "lib-aggregate": {
@@ -5114,16 +5114,16 @@
     "nvchad-on-steroids": {
       "flake": false,
       "locked": {
-        "lastModified": 1752052803,
-        "narHash": "sha256-t48ci9RtMrj5M5n4U4+mLSJQn8lwzPF58LwxZK0d3zk=",
-        "owner": "maotseantonio",
-        "repo": "nvchad_config",
-        "rev": "ec89ddafcd283e0072f987e2bd67c0870688475e",
+        "lastModified": 1752150188,
+        "narHash": "sha256-6HfnHbxB4IN1XlQnhnQzpxsY2a21cZq9J4HWdg0U/W8=",
+        "owner": "kagurazakei",
+        "repo": "nvchad-on-steroids",
+        "rev": "431fbbb14ff1adae83566a9803bbe31390b96d1c",
         "type": "github"
       },
       "original": {
-        "owner": "maotseantonio",
-        "repo": "nvchad_config",
+        "owner": "kagurazakei",
+        "repo": "nvchad-on-steroids",
         "type": "github"
       }
     },
@@ -5490,11 +5490,11 @@
         "nixpkgs": "nixpkgs_27"
       },
       "locked": {
-        "lastModified": 1750267777,
-        "narHash": "sha256-wAZvhsoFN4biYA9J5Hx+fIevxEMgI1KXCH6Sqe9TRrk=",
+        "lastModified": 1752148212,
+        "narHash": "sha256-IJZ4ggwgO93P3PHWpR7csZMXQlq20Hsk/l+Lm5Gt+f4=",
         "ref": "refs/heads/main",
-        "rev": "c49f9a764b3fcf28ba743c6ee4b633414a821606",
-        "revCount": 10,
+        "rev": "2199ff3713e164b4d07f89a397118fd422e49351",
+        "revCount": 12,
         "type": "git",
         "url": "https://codeberg.org/maotseantonio/sddm-stray-flakes"
       },
@@ -5526,17 +5526,17 @@
         "nixpkgs": "nixpkgs_28"
       },
       "locked": {
-        "lastModified": 1752057223,
-        "narHash": "sha256-3wUo2Lrez6DCS01LNoK4Nqpd7aXyvLeLbF5xK+UMU0I=",
-        "ref": "refs/heads/main",
-        "rev": "e1146114117d2843aee410907e938cfa68cbbc3e",
-        "revCount": 16,
-        "type": "git",
-        "url": "https://codeberg.org/maotseantonio/shizuruPkgs"
+        "lastModified": 1752147130,
+        "narHash": "sha256-fSsIJkwvtE3ovZKK+dUTcQFO04jHdt3nebgZQo1kuks=",
+        "owner": "kagurazakei",
+        "repo": "shizuruPkgs",
+        "rev": "e34b78af6931083b34d9bc3de5232cb4cda260bf",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://codeberg.org/maotseantonio/shizuruPkgs"
+        "owner": "kagurazakei",
+        "repo": "shizuruPkgs",
+        "type": "github"
       }
     },
     "smfh": {
@@ -6528,17 +6528,17 @@
         "nixpkgs": "nixpkgs_31"
       },
       "locked": {
-        "lastModified": 1751022593,
+        "lastModified": 1752146553,
         "narHash": "sha256-STgq+bQtIiiWaDGMBRAcCuOvPZ/4qGHBp4nSKVO3UsU=",
-        "ref": "refs/heads/main",
-        "rev": "3a37983a766b8190eb3098555a8d5c8f1f886798",
-        "revCount": 3,
-        "type": "git",
-        "url": "https://codeberg.org/maotseantonio/waifu-cursors"
+        "owner": "kagurazakei",
+        "repo": "waifu-cursors",
+        "rev": "3a8f97dfa57bd374468d63085c2222d438726a5d",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://codeberg.org/maotseantonio/waifu-cursors"
+        "owner": "kagurazakei",
+        "repo": "waifu-cursors",
+        "type": "github"
       }
     },
     "walker": {

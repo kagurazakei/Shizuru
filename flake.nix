@@ -27,9 +27,9 @@
     };
 
     # Personal packages and cursors
-    shizuruPkgs.url = "github:maotsugiri/shizuruPkgs";
-    kureiji-ollie-cursor.url = "github:maotsugiri/kureiji-ollie-cursors";
-    waifu-cursors.url = "github:maotsugiri/waifu-cursors";
+    shizuruPkgs.url = "github:kagurazakei/shizuruPkgs";
+    kureiji-ollie-cursor.url = "github:kagurazakei/kureiji-ollie-cursors";
+    waifu-cursors.url = "github:kagurazakei/waifu-cursors";
 
     # Modules and utilities
     lix-module = {
@@ -173,12 +173,12 @@
     };
 
     ax-shell-config = {
-      url = "github:maotsugiri/AX-Shell";
+      url = "github:kagurazakei/AX-Shell";
       flake = false;
     };
 
     nvchad-on-steroids = {
-      url = "github:maotsugiri/nvchad-on-steroids";
+      url = "github:kagurazakei/nvchad-on-steroids";
       flake = false;
     };
 
