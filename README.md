@@ -9,10 +9,10 @@
       <p></p>
       <div align="center">
          <a href="https://github.com/Frost-Phoenix/nixos-config/stargazers">
-            <img src="https://img.shields.io/github/stars/maotseantonio/NixOS-Hyprland?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=starship&logoColor=c6a0f6">
+            <img src="https://img.shields.io/github/stars/maotsugiri/Shizuru?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=starship&logoColor=c6a0f6">
          </a>
          <a href="https://github.com/maotseantonio/NixOS-Hyprland/">
-            <img src="https://img.shields.io/github/repo-size/maotseantonio/NixOS-Hyprland?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=github&logoColor=C6A0F6">
+            <img src="https://img.shields.io/github/repo-size/maotsugiri/Shizuru?color=A5ADCB&labelColor=1E1E2E&style=for-the-badge&logo=github&logoColor=C6A0F6">
          </a>
          <a = href="https://nixos.org">
             <img src="https://img.shields.io/badge/NixOS-unstable-blue.svg?style=for-the-badge&labelColor=1E1E2E&logo=NixOS&logoColor=C6A0F6&color=A5ADCB">
