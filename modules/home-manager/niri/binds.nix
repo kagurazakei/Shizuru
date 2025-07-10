@@ -36,11 +36,11 @@
     "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
-    "Mod+D".action = spawn "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
+    "Mod+D".action = spawn "walker";
     "Mod+N".action = qs-lock;
     "Mod+Return".action = spawn "kitty";
     "Mod+E".action = spawn "walker" "-m" "emojis";
-    "Alt+Tab".action = walkern "-m" "windows";
+    "Alt+Tab".action = spawn "walker" "-m" "windows";
     "Mod+Shift+X".action = spawn "ani-cli" "--rofi";
     "Alt+Space".action = spawn "fuzzel";
     "Mod+Shift+Return".action = spawn "wezterm";
@@ -61,7 +61,7 @@
     "Mod+Shift+F".action = expand-column-to-available-width;
     "Mod+Space".action = toggle-window-floating;
     "Mod+W".action = toggle-column-tabbed-display;
-    "Mod+V".action = walkern "-m" "clipboard";
+    "Mod+V".action = spawn "walker" "-m" "clipboard";
     "Mod+Comma".action = consume-window-into-column;
     "Mod+Period".action = expel-window-from-column;
     "Mod+C".action = center-window;

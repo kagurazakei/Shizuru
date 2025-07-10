@@ -264,7 +264,19 @@ in {
       hotkey-overlay.skip-at-startup = true;
     };
   };
-
+  systemd.user.services.walker = {
+    Unit = {
+      Description = "walker autostart";
+      After = "config.wayland.systemd.target";
+      PartOf = "config.wayland.systemd.target";
+    };
+    Install.WantedBy = ["config.wayland.systemd.target"];
+    Service = {
+      Type = "simple";
+      ExecStart = "walker --gapplication-service";
+      Restart = "on-failure";
+    };
+  };
   systemd.user.services.niri-wallpaper = {
     Unit.Description = "Daily Wallpaper Rotation";
     Service = {

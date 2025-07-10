@@ -68,6 +68,7 @@ in {
       gnome-system-monitor
       file-roller
       grim
+      #agenix.packages.x86_64-linux.default
       #protonvpn-gui
       hiddify-app
       #inputs.walker.packages.${pkgs.system}.default

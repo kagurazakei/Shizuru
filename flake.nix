@@ -7,6 +7,7 @@
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     font-flake.url = "github:redyf/font-flake";
+    agenix.url = "github:ryantm/agenix";
     # Fish shell
     fish-flake = {
       url = "github:maotseantonio/fish-flakes";
@@ -26,9 +27,9 @@
     };
 
     # Personal packages and cursors
-    shizuruPkgs.url = "git+https://codeberg.org/maotseantonio/shizuruPkgs";
-    kureiji-ollie-cursor.url = "git+https://codeberg.org/maotseantonio/kureiji-ollie-cursors";
-    waifu-cursors.url = "git+https://codeberg.org/maotseantonio/waifu-cursors";
+    shizuruPkgs.url = "github:maotsugiri/shizuruPkgs";
+    kureiji-ollie-cursor.url = "github:maotsugiri/kureiji-ollie-cursors";
+    waifu-cursors.url = "github:maotsugiri/waifu-cursors";
 
     # Modules and utilities
     lix-module = {
@@ -172,12 +173,12 @@
     };
 
     ax-shell-config = {
-      url = "github:maotseantonio/AX-Shell";
+      url = "github:maotsugiri/AX-Shell";
       flake = false;
     };
 
     nvchad-on-steroids = {
-      url = "github:maotseantonio/nvchad_config";
+      url = "github:maotsugiri/nvchad-on-steroids";
       flake = false;
     };
 
@@ -225,6 +226,7 @@
     home-manager,
     chaotic,
     nur,
+    agenix,
     lix-module,
     quickshell,
     ...
@@ -289,6 +291,7 @@
           inputs.nixos-hardware.nixosModules.huawei-machc-wa
           inputs.nvf.nixosModules.default
           lix-module.nixosModules.default
+          agenix.nixosModules.default
           inputs.maomaowm.nixosModules.maomaowm
           inputs.flake-programs-sqlite.nixosModules.programs-sqlite
           {

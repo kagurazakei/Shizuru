@@ -52,18 +52,6 @@
     VISUAL = "codium";
     BROWSER = "firefox";
   };
-  systemd.user.services.walker = {
-    Unit = {
-      Description = "walker autostart";
-      After = "config.wayland.systemd.target";
-      PartOf = "config.wayland.systemd.target";
-    };
-    Install.WantedBy = ["config.wayland.systemd.target"];
-    Service = {
-      Type = "simple";
-      ExecStart = "${inputs.walker.packages.${pkgs.system}.default}/bin/walker --gapplication-service";
-      Restart = "on-failure";
-    };
-  };
+
   programs.home-manager.enable = true;
 }
