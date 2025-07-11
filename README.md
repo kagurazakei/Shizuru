@@ -145,9 +145,12 @@ This configuration draws inspiration from many amazing NixOS users:
 
 - [Frost-Phoenix/nixos-config](https://github.com/Frost-Phoenix/nixos-config)
 - [nomadics9/NixOS-Flake](https://github.com/nomadics9/NixOS-Flake)
+- [LudovicoPjero/dotfiles](https://github.com/LudovicoPiero/dotfiles)
+- [Ly-sec/nixos](https://github.com/Ly-sec/nixos)
 - [samiulbasirfahim/Flakes](https://github.com/samiulbasirfahim/Flakes)
 - [justinlime/dotfiles](https://github.com/justinlime/dotfiles)
 - [fufexan/dotfiles](https://github.com/fufexan/dotfiles)
+- [NotAShelf/nyx](https://github.com/NotAShelf/nyx)
 - [hjem](https://github.com/feel-co/hjem) & [hjem-rum](https://github.com/snugnug/hjem-rum) for home config
 
 Special thanks to the NixOS community for their incredible work!
