@@ -21,10 +21,9 @@ in {
       inherit inputs username host;
     };
     users.${username} = {
-      imports =
-        if (host == "shizuru")
-        then [./home.nix]
-        else [./home.nix];
+      imports = [
+        ./home.nix
+      ];
       home.username = "${username}";
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "25.05";

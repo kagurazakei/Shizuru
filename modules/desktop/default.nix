@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./app
+    ./hyprland
+    ./niri
+  ];
+}
