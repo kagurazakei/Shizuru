@@ -2,7 +2,7 @@
   # Git Configuration ( For Pulling Software Repos )
 
   configDirectory = "/home/antonio/shizuru/";
-  gitUsername = "maotsugiri";
+  gitUsername = "kagurazakei";
   gitEmail = "maotseugiri@gmail.com";
   extraMonitorSettings = "";
   # Waybar Settings
