@@ -7,7 +7,7 @@
   hm.programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userName = "maotsugiri";
+    userName = "kagurazakei";
     userEmail = "maotsugiri@gmail.com";
     lfs = {
       enable = true;

@@ -29,15 +29,13 @@ in {
     };
     home = {
       packages = with pkgs; [
-        pkgs.wl-clipboard
-        inputs.astal-bar.packages.${pkgs.system}.default
+        #inputs.astal-bar.packages.${pkgs.system}.default
         inputs.astal.packages.${pkgs.system}.default
         wallpaperScript
         gnome-keyring
         wl-clipboard
-        inputs.astal-bar.packages.${pkgs.system}.default
-        inputs.astal.packages.${pkgs.system}.default
-        wallpaperScript
+        #inputs.astal-bar.packages.${pkgs.system}.default
+        #inputs.astal.packages.${pkgs.system}.default
         seatd
         jaq
         eww

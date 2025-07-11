@@ -22,7 +22,7 @@ in {
     environment.systemPackages = [
       pkgs.lyra-cursors
       cursorPkg
-      inputs.hyprddm.packages.${pkgs.system}.default
+      #inputs.hyprddm.packages.${pkgs.system}.default
       inputs.sddm-stray.packages.${pkgs.system}.default
       inputs.waifu-cursors.packages.${pkgs.system}.Reichi-Shinigami
     ];

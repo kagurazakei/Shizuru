@@ -8,13 +8,13 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     font-flake.url = "github:redyf/font-flake";
     agenix.url = "github:ryantm/agenix";
+    sops-nix = {
+        url = "github:mic92/sops-nix";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Fish shell
     fish-flake = {
-      url = "github:maotseantonio/fish-flakes";
-    };
-    custom-nixpkgs = {
-      url = "github:maotseantonio/custom-nixpkgs";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:kagurazakei/fish-flake";
     };
    # izLix module
     izlix = {
@@ -98,11 +98,11 @@
     };
 
     hyprscroller = {
-      url = "github:maotseantonio/hyprscroller";
+      url = "github:cpiber/hyprscroller";
       inputs.hyprland.follows = "hyprland";
     };
 
-    hyprddm.url = "github:maotseantonio/hyprddm";
+    #hyprddm.url = "github:maotseantonio/hyprddm";
 
     # Other tools / DE components
     maomaowm.url = "github:DreamMaoMao/maomaowm";
@@ -126,10 +126,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    astal-bar = {
-      url = "github:maotseantonio/astal-bar";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # astal-bar = {
+    #   url = "github:maotseantonio/astal-bar";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     ags = {
       url = "github:aylur/ags";

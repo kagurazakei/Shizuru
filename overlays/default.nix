@@ -9,7 +9,7 @@
 in [
   inputs.niri.overlays.niri
   inputs.nur.overlays.default
-  inputs.custom-nixpkgs.overlays.default
+  #inputs.custom-nixpkgs.overlays.default
 
   (final: prev: {
     stable = import inputs.nixpkgs-stable {

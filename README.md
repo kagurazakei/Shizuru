@@ -71,33 +71,48 @@
 ## 🗂️ Project Structure
 
 ```text
-.
-├── flake.nix            # Main flake configuration
-├── hosts/               # Per-host configurations
-│   ├── default/        # Default desktop configuration
-│   └── shizuru/        # Shizuru host configuration
-│       ├── config.nix  # Kernel, packages, SCX
-│       ├── hardware.nix # Hardware profile
-│       ├── user.nix    # Shell & user packages
-│       ├── variables.nix # Git info, env vars
-│       ├── hjem.nix    # hjem module
-│       ├── home.nix    # home-manager overlay
-│       └── theme.nix   # Theming config
-└── modules/            # Reusable Nix modules
-    ├── system/        # System-wide modules
-    │   ├── common/    # Bootloader, Plymouth
-    │   ├── desktop/   # Display and WM configs
-    │   ├── options/   # Desktop/laptop options
-    │   └── share/     # Shared modules
-    └── home-manager/ # Home-manager modules
-        ├── ags/      # AGS configurations
-        ├── hana/     # Hana configurations
-        ├── fabric/   # Fabric configurations
-        ├── media/   # Media configurations
-        ├── niri/    # Niri configurations
-        ├── ui/      # UI configurations
-        ├── zellij/  # Zellij configurations
-        └── editors/ # Editor configurations
+modules
+├── common
+│   ├── desktop
+│   │   ├── themes
+│   │   │   ├── default.nix
+│   │   │   ├── gtk.nix
+│   │   │   └── qt.nix
+│   │   ├── audio.nix
+│   │   ├── displaymanager.nix
+│   │   ├── fonts.nix
+│   │   ├── niri.nix
+│   │   ├── notify.nix
+│   │   └── portal.nix
+│   ├── drivers
+│   │   ├── amd.nix
+│   │   ├── intel.nix
+│   │   └── nvidia.nix
+│   ├── programs
+│   │   ├── editors
+│   │   ├── media
+│   │   ├── scripts
+│   │   ├── terminal
+│   │   ├── ui
+│   │   └── wezterm
+│   ├── system
+│   │   ├── bootloader.nix
+│   │   ├── network.nix
+│   │   ├── services.nix
+│   │   └── virtualization.nix
+│   └── default.nix
+├── desktop
+│   ├── app
+│   ├── hyprland
+│   ├── niri
+│   └── default.nix
+├── options
+│   ├── hana.nix
+│   └── shizuru.nix
+├── share
+│   ├── spec-hana.nix
+│   └── package-options.nix
+└── default.nix
 ```
 --- 
 
