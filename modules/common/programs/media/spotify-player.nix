@@ -4,7 +4,7 @@
   ...
 }: let
   catppuccin-spotify-player = pkgs.fetchFromGitHub {
-    owner = "maotseantonio";
+    owner = "kagurazakei";
     repo = "spotify-player";
     rev = "196c23e4a4cb7cbbe0236f6be98052d7a8a55193";
     hash = "sha256-WRxTrAOCMxVKC0goJaBkATMNE0XVGEt/bd8ERAETx94=";

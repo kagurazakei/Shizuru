@@ -6,7 +6,6 @@
   ...
 }: let
   wallpaperScript = pkgs.writeScriptBin "niri-wallpaper" (builtins.readFile ./wallpaperAutoChange.sh);
-
   swww = inputs.swww.packages.${pkgs.system}.swww;
 in {
   hm = {
@@ -53,7 +52,7 @@ in {
       };
     };
 
-systemd.user.services.polkit-gnome = {
+    systemd.user.services.polkit-gnome = {
       Unit = {
         Description = "GNOME Polkit Agent";
         After = ["graphical-session.target"];
