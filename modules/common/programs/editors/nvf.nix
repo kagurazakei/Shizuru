@@ -33,7 +33,7 @@
                 vim.cmd("aunmenu PopUp.-1-")
               end,
               desc = "Remove 'disable mouse' entries from context menu",
-            })
+                    })
           '';
         };
 
@@ -138,7 +138,7 @@
           };
           yazi-nvim.enable = true;
         };
-        
+
         terminal = {
           toggleterm = {
             enable = true;

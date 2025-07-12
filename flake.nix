@@ -9,14 +9,16 @@
     font-flake.url = "github:redyf/font-flake";
     agenix.url = "github:ryantm/agenix";
     sops-nix = {
-        url = "github:mic92/sops-nix";
-        inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
+    alejandra.url = "github:kamadorueda/alejandra/4.0.0";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
     # Fish shell
     fish-flake = {
       url = "github:kagurazakei/fish-flake";
     };
-   # izLix module
+    # izLix module
     izlix = {
       type = "github"; # legacy-style declaration (optional)
       owner = "isabelroses";
@@ -194,9 +196,9 @@
     nixcord.url = "github:kaylorben/nixcord";
     textfox.url = "github:adriankarlen/textfox";
     nh = {
-        url = "github:nix-community/nh/better-env-handling";
-        inputs.nixpkgs.follows = "nixpkgs";
-     };
+      url = "github:nix-community/nh/better-env-handling";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -226,6 +228,7 @@
     home-manager,
     chaotic,
     nur,
+    alejandra,
     agenix,
     lix-module,
     quickshell,
@@ -278,7 +281,7 @@
 
     # NixOS configuration for host 'shizuru'
     nixosConfigurations = {
-    shizuru = nixpkgs.lib.nixosSystem {
+      shizuru = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit system inputs username host chaotic pkgs-master;
         };
