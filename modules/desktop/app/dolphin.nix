@@ -1,21 +1,30 @@
 {
-    inputs,
-    pkgs,
-    config,
-    lib,
-    ...
-}:
-{
-    hj = {
-     packages = with pkgs; [
-        libsForQt5.dolphin
-        libsForQt5.dolphin-plugins
-        libsForQt5.kio-extras
-        libsForQt5.ark
-        libsForQt5.ffmpegthumbs
-        libsForQt5.kio
-        libsForQt5.poppler
-        libsForQt5.qt5.qtmultimedia
+  inputs,
+  pkgs,
+  config,
+  lib,
+  ...
+}: {
+  hj = {
+    packages = with pkgs.kdePackages;
+      [
+        dolphin
+        dolphin-plugins
+        gwenview
+        ark
+        kservice
+        kde-cli-tools
+        ffmpegthumbs
+        kio
+        kio-extras
+        kio-fuse
+        kimageformats
+        kdegraphics-thumbnailers
+      ]
+      ++ [
+        inputs.shizuruPkgs.packages.${pkgs.system}.catppuccin-icons
+        pkgs.candy-icons
+        pkgs.zafiro-icons
       ];
-    };
+  };
 }

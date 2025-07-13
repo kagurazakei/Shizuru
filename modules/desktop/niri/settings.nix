@@ -22,7 +22,6 @@ in {
         QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
         SDL_VIDEODRIVER = "wayland";
         QT_QPA_PLATFORMTHEME = "qt6ct";
-        QT_STYLE_OVERRIDE = "kvantum";
         GTK_THEME = "Catppuccin-Dark";
         ELECTRON_OZONE_PLATFORM_HINT = "auto";
         OZONE_PLATFORM = "wayland";
