@@ -5507,11 +5507,11 @@
         "nixpkgs": "nixpkgs_27"
       },
       "locked": {
-        "lastModified": 1752396403,
-        "narHash": "sha256-dw0/gsJpnK9+aC5vzdNYJd814hGm+9sNjTRKjku3/Yo=",
+        "lastModified": 1752400262,
+        "narHash": "sha256-DQrsiNMVc8DJYpTejp2Zt43Q2F+Uw+rG0njAnPZPhl4=",
         "owner": "kagurazakei",
         "repo": "shizuruPkgs",
-        "rev": "8b2203f96595988c7195b0f0bd1080485f646695",
+        "rev": "88ee506b47a08df16dadd79b3e2a43751990cd93",
         "type": "github"
       },
       "original": {
