@@ -1,11 +1,7 @@
 {
-  pkgs,
   config,
-  host,
-  username,
   options,
   lib,
-  inputs,
   system,
   ...
 }:

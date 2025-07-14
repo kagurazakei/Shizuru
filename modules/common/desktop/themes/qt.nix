@@ -60,6 +60,9 @@ in {
       qt6.qtsvg
       libsForQt5.qtstyleplugin-kvantum
       qt6Packages.qtstyleplugin-kvantum
+      kdePackages.kdialog
+      kdePackages.qtpositioning
+      kdePackages.syntax-highlighting
     ];
     environment.sessionVariables = envVars;
   };

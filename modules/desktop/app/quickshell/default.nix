@@ -1,7 +1,6 @@
 {
   inputs,
   pkgs,
-  config,
   lib,
   ...
 }: let
@@ -39,17 +38,14 @@
     meta.mainProgram = "quickshell";
   };
 in {
-  # Some addition qml module paths needed for qmlls and quickshell
   environment.variables = let
     extraQmlPaths = [
-      # kirigami is wrapped, access the unwrapped version to retrieve binaries/source files
       "${pkgs.kdePackages.kirigami.passthru.unwrapped}/lib/qt-6/qml"
       "${inputs.quickshell.packages.${pkgs.system}.default}/lib/qt-6/qml/"
       "${pkgs.kdePackages.qtbase}/lib/qt-6/qml"
       "${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml"
     ];
   in {
-    # May not need to append here since pretty much everything we need is included
     QML2_IMPORT_PATH = "$QML2_IMPORT_PATH:${lib.strings.concatStringsSep ":" extraQmlPaths}";
   };
 
@@ -60,7 +56,6 @@ in {
     kdePackages.qtstyleplugin-kvantum
     wlsunset
     libsForQt5.qt5.qtgraphicaleffects
-    kdePackages.qt5compat
     kdePackages.qtbase
     kdePackages.qtdeclarative
     kdePackages.qtmultimedia

@@ -41,12 +41,10 @@ in {
         configurationName = "${host}";
         gfxmodeEfi = "2160x1440";
 
-        # Fail-safe enhancements
         forceInstall = true;
         copyKernels = true;
         fsIdentifier = "uuid";
 
-        # Create backup EFI files
         extraInstallCommands = ''
           cp -f /boot/EFI/${host}/grubx64.efi /boot/EFI/${host}/grubx64.bak
           cp -f /boot/EFI/${host}/grubx64.efi /boot/EFI/BOOT/BOOTX64.EFI
@@ -77,7 +75,6 @@ in {
       };
     };
 
-    # Automatic repair service
     systemd.services.grub-maintenance = {
       description = "GRUB fail-safe maintenance";
       wantedBy = ["multi-user.target"];

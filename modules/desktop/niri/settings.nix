@@ -37,10 +37,11 @@ in {
         (makeCommand "wl-paste --type text --watch cliphist store")
         (makeCommand "wl-paste --watch walker --update-clipboard")
         (makeCommand "swww-daemon")
-        (makeCommand "qs")
+        (makeCommand "qs -c verticle")
         (makeCommand "~/.local/bin/mod-qs")
         (makeCommand "arrpc")
         (makeCommand "systemctl --user reset-failed arRPC.service")
+        (makeCommand "systemctl --user reset-failed arrpc.service")
         (makeCommand "walker --gapplication-service")
         (makeCommand "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
         (makeCommand "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -120,7 +121,7 @@ in {
           {proportion = 0.75;}
           {proportion = 1.0;}
         ];
-        default-column-width = {proportion = 0.55;};
+        default-column-width = {proportion = 0.5;};
         always-center-single-column = true;
         gaps = 6;
         struts = {

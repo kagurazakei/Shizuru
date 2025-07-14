@@ -90,7 +90,7 @@
     hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
 
     hyprland-plugins = {
-      url = "github:ItsOhen/hyprland-plugins";
+      url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
 

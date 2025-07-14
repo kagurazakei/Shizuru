@@ -17,12 +17,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    #catppuccin.tty.enable = true;
-    #catppuccin.plymouth.enable = true;
-    #catppuccin.plymouth.flavor = "mocha";
     boot = {
       plymouth.enable = true;
-      plymouth.themePackages = [ inputs.shizuruPkgs.packages.${pkgs.system}.cat-plymouth ];
+      plymouth.themePackages = [inputs.shizuruPkgs.packages.${pkgs.system}.cat-plymouth];
       plymouth.theme = "catppuccin-mocha-mod";
     };
   };

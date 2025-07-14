@@ -11,7 +11,6 @@
   ...
 }: {
   networking.networkmanager.enable = true;
-  #networking.networkmanager.package = pkgs.pkgs-master.networkmanager;
   networking.hostName = "${host}";
   networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
 }
