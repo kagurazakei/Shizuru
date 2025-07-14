@@ -6,7 +6,7 @@
     ./fuzzel.nix
     ./hypridle.nix
     ./mpv.nix
-    ./quickshell
+    # ./quickshell
     ./walker.nix
     ./launcher.nix
     #    ./fabric
