@@ -1,6 +1,7 @@
 {
   imports = [
     ./gtk.nix
-    ./qt-qs.nix
+    ./qt.nix
+    #./qt-qs.nix
   ];
 }
