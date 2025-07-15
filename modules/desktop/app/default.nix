@@ -6,8 +6,6 @@
     ./fuzzel.nix
     ./hypridle.nix
     ./mpv.nix
-    ./walker.nix
-    ./launcher.nix
     ./services
   ];
 }

@@ -18,26 +18,16 @@
     fish-flake = {
       url = "github:kagurazakei/fish-flake";
     };
-    # izLix module
-    izlix = {
-      type = "github"; # legacy-style declaration (optional)
-      owner = "isabelroses";
-      repo = "izlix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
-
     # Personal packages and cursors
     shizuruPkgs.url = "github:kagurazakei/shizuruPkgs";
     kureiji-ollie-cursor.url = "github:kagurazakei/kureiji-ollie-cursors";
-    waifu-cursors.url = "github:kagurazakei/waifu-cursors";
+    waifu-cursors.url = "git+https://codeberg.org/maotseantonio/waifu-cursors";
 
     # Modules and utilities
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # lix-module = {
+    #   url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     flake-programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
@@ -67,17 +57,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     matugen = {
       url = "github:/InioX/Matugen";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    anyrun-fufexan.url = "github:fufexan/anyrun/launch-prefix";
     walker.url = "github:abenz1267/walker";
     yazi.url = "github:sxyazi/yazi";
 
@@ -104,22 +88,13 @@
       inputs.hyprland.follows = "hyprland";
     };
 
-    #hyprddm.url = "github:maotseantonio/hyprddm";
-
-    # Other tools / DE components
-    maomaowm.url = "github:DreamMaoMao/maomaowm";
-    hycov = {
-      url = "github:DreamMaoMao/hycov";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     quickshell = {
-      url = "github:outfoxxed/quickshell";
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -127,11 +102,6 @@
       url = "github:aylur/astal";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # astal-bar = {
-    #   url = "github:maotseantonio/astal-bar";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     ags = {
       url = "github:aylur/ags";
@@ -166,16 +136,10 @@
     stylix = {
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
 
     sf-mono-liga-src = {
       url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
-      flake = false;
-    };
-
-    ax-shell-config = {
-      url = "github:kagurazakei/AX-Shell";
       flake = false;
     };
 
@@ -184,11 +148,8 @@
       flake = false;
     };
 
-    illogical-impulse.url = "github:xBLACKICEx/end-4-dots-hyprland-nixos";
-    illogical-impulse.inputs.nixpkgs.follows = "nixpkgs";
-
     wayland-pipewire-idle-inhibit = {
-      url = "github:rafaelrc7/wayland-pipewire-idle-inhibit";
+      url = "git+https://codeberg.org/maotseantonio/wayland-pipewire-idle-inhibit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -196,7 +157,7 @@
     nixcord.url = "github:kaylorben/nixcord";
     textfox.url = "github:adriankarlen/textfox";
     nh = {
-      url = "github:nix-community/nh/better-env-handling";
+      url = "github:nix-community/nh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -230,7 +191,7 @@
     nur,
     alejandra,
     agenix,
-    lix-module,
+    #lix-module,
     quickshell,
     ...
   }: let
@@ -238,13 +199,17 @@
     host = "shizuru";
     username = "antonio";
 
-    # Import nixpkgs for main and master channels
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
 
     pkgs-master = import nixpkgs-master {
+      inherit system;
+      config.allowUnfree = true;
+    };
+
+    pkgs-stable = import nixpkgs-stable {
       inherit system;
       config.allowUnfree = true;
     };
@@ -288,14 +253,13 @@
         modules = [
           ./hosts/${host}/config.nix
           inputs.chaotic.nixosModules.default
-          inputs.home-manager.nixosModules.home-manager
+          home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
           inputs.catppuccin.nixosModules.catppuccin
           inputs.nixos-hardware.nixosModules.huawei-machc-wa
           inputs.nvf.nixosModules.default
-          lix-module.nixosModules.default
+          #lix-module.nixosModules.default
           agenix.nixosModules.default
-          inputs.maomaowm.nixosModules.maomaowm
           inputs.flake-programs-sqlite.nixosModules.programs-sqlite
           {
             nixpkgs.overlays = import ./overlays {

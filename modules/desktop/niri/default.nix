@@ -67,17 +67,18 @@ in {
     };
     systemd.user.services.walker = {
       Unit = {
-        Description = "walker autostart";
-        After = "config.wayland.systemd.target";
-        PartOf = "config.wayland.systemd.target";
+        Description = "Walker Application Service";
+        After = ["graphical-session.target"];
       };
-      Install.WantedBy = ["config.wayland.systemd.target"];
       Service = {
-        Type = "simple";
-        ExecStart = "walker --gapplication-service";
+        ExecStart = "${pkgs.master.walker}/bin/walker --gapplication-service";
         Restart = "on-failure";
       };
+      Install = {
+        WantedBy = ["graphical-session.target"];
+      };
     };
+
     systemd.user.services.niri-wallpaper = {
       Unit.Description = "Daily Wallpaper Rotation";
       Service = {

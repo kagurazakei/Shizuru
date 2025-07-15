@@ -18,7 +18,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      scx_git.full
+      scx.full
     ];
     services.scx = {
       enable = true;

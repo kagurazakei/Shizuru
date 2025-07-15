@@ -72,6 +72,7 @@ in {
       qcomicbook
       ahoviewer
       imagemagick
+      master.walker
       inxi
       jq
       kitty

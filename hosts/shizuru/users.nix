@@ -49,13 +49,13 @@ in {
         "audio"
       ];
 
-    # define user packages here
-    packages = with pkgs; [
+      # define user packages here
+      packages = with pkgs; [
       ];
     };
   };
-    #security.sudo.wheelNeedsPassword = false;
+  #security.sudo.wheelNeedsPassword = false;
   nix.settings.allowed-users = ["${username}"];
-  environment.shells = with pkgs; [ fish ];
-  environment.systemPackages = with pkgs; [ fzf ];
+  environment.shells = with pkgs; [fish];
+  environment.systemPackages = with pkgs; [fzf];
 }

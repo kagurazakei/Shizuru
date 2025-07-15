@@ -48,6 +48,7 @@
     kdePackages.kirigami
     kdePackages.kirigami-addons
     kdePackages.breeze
+    quickshellPkg
   ];
   qmlPaths = lib.concatStringsSep ":" [
     "${pkgs.kdePackages.kirigami}/lib/qt-6/qml"
