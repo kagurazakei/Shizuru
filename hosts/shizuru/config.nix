@@ -99,7 +99,6 @@ in {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     ZDOTDIR = "$HOME/.config/zsh";
-    NH_FLAKE = "/home/antonio/shizuru";
     NH_OS_FLAKE = "/home/antonio/shizuru";
   };
 

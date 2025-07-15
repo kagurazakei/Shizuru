@@ -10,7 +10,7 @@
     ./hyprland.nix
     ./hyprpanel.nix
   ];
-  hj.rum.programs.hyprland = {
+  hj.rum.desktops.hyprland = {
     enable = true;
     extraConfig = ''
       $configs = $HOME/.config/hypr/configs
@@ -28,14 +28,14 @@
       source= $HOME/.config/hypr/themes/mocha.conf
     '';
   };
-  hj.rum.programs.hyprland = {
+  hj.rum.desktops.hyprland = {
     plugins = [
       #inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
       inputs.hyprscroller.packages.${pkgs.system}.hyprscroller
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
     ];
   };
-  hj.rum.programs.hyprland.settings = {
+  hj.rum.desktops.hyprland.settings = {
     exec-once = [
       #"hyprpanel"
       "uwsm finalize"

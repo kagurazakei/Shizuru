@@ -5,7 +5,7 @@
   inputs,
   ...
 }: {
-  hj.rum.programs.hyprland.settings = {
+  hj.rum.desktops.hyprland.settings = {
     "$mainMod" = "SUPER";
     "$scriptsDir" = "$HOME/.config/hypr/scripts";
     "$configs" = "$HOME/.config/hypr/configs";

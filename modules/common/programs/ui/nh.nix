@@ -21,6 +21,4 @@
     nix-output-monitor
     nvd
   ];
-  environment.variables.NH_FLAKE = "/home/antonio/shizuru/";
-  environment.variables.NH_OS_FLAKE = "/home/antonio/shizuru/";
 }
