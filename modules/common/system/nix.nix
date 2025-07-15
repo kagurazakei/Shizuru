@@ -12,7 +12,6 @@
 }: {
   nix = {
     package = pkgs.master. nixVersions.git;
-    extraOptions = " access-tokens = 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";
     channel.enable = false;
     settings = {
       # separateDebugInfo = true;
