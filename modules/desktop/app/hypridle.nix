@@ -37,7 +37,7 @@ in {
       };
     };
 
-    hj.rum.programs.hyprland.settings.misc = {
+    hj.rum.desktops.hyprland.settings.misc = {
       key_press_enables_dpms = true;
       mouse_move_enables_dpms = true;
     };
