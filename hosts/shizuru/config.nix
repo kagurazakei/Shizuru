@@ -4,6 +4,7 @@
   pkgs,
   host,
   username,
+  self,
   options,
   lib,
   inputs,
@@ -11,6 +12,7 @@
   system,
   ...
 }: let
+  home = "/home/antonio";
   inherit (import ./variables.nix) keyboardLayout;
   python-packages = pkgs.python3.withPackages (
     ps:

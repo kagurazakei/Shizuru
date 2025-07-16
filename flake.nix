@@ -252,7 +252,6 @@
         };
         modules = [
           ./hosts/${host}/config.nix
-          ./secrets/secrets.nix
           inputs.chaotic.nixosModules.default
           home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix

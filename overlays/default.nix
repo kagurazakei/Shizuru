@@ -78,4 +78,19 @@ in [
       });
     });
   })
+
+  (final: prev: {
+    scx_v1_0_12 = (prev.scx or prev.scx_git).overrideAttrs (_: {
+      pname = "scx";
+      version = "1.0.12";
+
+      src = final.fetchFromGitHub {
+        owner = "sched-ext";
+        repo = "scx";
+        rev = "v1.0.12";
+        # ── use the hash Nix prints on the first build ──
+        hash = "sha256-0000000000000000000000000000000000000000000=";
+      };
+    });
+  })
 ]
