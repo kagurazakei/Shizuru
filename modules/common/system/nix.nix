@@ -1,17 +1,23 @@
 {
   pkgs,
   inputs,
-  system,
   config,
-  lib,
-  options,
   username,
-  host,
-  inputs',
   ...
 }: {
+  age.secrets = {
+    github-token = {
+      file = ../../../secrets/github-token.age;
+      owner = config.users.users.${username}.name;
+      group = config.users.users.${username}.group; # Dynamic reference to your group
+      mode = "600";
+    };
+  };
   nix = {
     package = pkgs.master. nixVersions.git;
+    extraOptions = ''
+      access-tokens = github.com=file:${config.age.secrets.github-token.path}
+    '';
     channel.enable = false;
     settings = {
       # separateDebugInfo = true;

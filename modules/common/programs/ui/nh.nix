@@ -1,15 +1,13 @@
 {
   pkgs,
-  config,
-  host,
-  username,
-  options,
   lib,
   inputs,
-  system,
   ...
-}: {
+}: let
+  nh = inputs.nh.packages.${pkgs.system}.default;
+in {
   programs.nh = {
+    package = nh;
     enable = true;
     flake = "/home/antonio/shizuru/";
     clean = {
@@ -21,4 +19,7 @@
     nix-output-monitor
     nvd
   ];
+  environment.sessionVariables = {
+    NH_NO_CHECKS = "1"; # temporary fix for nh fail
+  };
 }

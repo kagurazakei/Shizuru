@@ -17,11 +17,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      scx.full
-    ];
     services.scx = {
       enable = true;
+      package = pkgs.scx_git.rustscheds;
       scheduler = "scx_lavd";
       extraArgs = ["--autopower"];
     };

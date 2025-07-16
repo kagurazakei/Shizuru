@@ -49,7 +49,7 @@ in {
   system.displayManager.enable = true;
   system.greetd.enable = false;
   system.powermanagement.enable = true;
-  system.scheduler.enable = false;
+  system.scheduler.enable = true;
   mine.hypridle.enable = false;
   system.zfs.enable = true;
   system.zram.enable = true;
