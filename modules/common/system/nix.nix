@@ -1,6 +1,9 @@
-{ pkgs
-, inputs
-, ...
+{
+  pkgs,
+  inputs,
+  config,
+  self,
+  ...
 }: {
   nix = {
     package = pkgs.master.nixVersions.git;
@@ -11,8 +14,8 @@
         "nixpkgs-master=${inputs.nixpkgs-master.outPath}"
         "nixpkgs-stable=${inputs.nixpkgs-stable.outPath}"
       ];
-      allowed-users = [ "root" "@wheel" "antonio" ];
-      trusted-users = [ "root" "@wheel" "antonio" "@builders" ];
+      allowed-users = ["root" "@wheel" "antonio"];
+      trusted-users = ["root" "@wheel" "antonio" "@builders"];
       warn-dirty = false;
       auto-optimise-store = true;
       experimental-features = [
