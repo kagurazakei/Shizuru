@@ -1,9 +1,6 @@
-{
-  inputs,
-  pkgs,
-  configs,
-  lib,
-  ...
+{ inputs
+, pkgs
+, ...
 }: {
   imports = [
     inputs.matugen.nixosModules.default

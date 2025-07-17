@@ -1,13 +1,4 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ ...
 }: {
   time.timeZone = "Asia/Yangon";
 

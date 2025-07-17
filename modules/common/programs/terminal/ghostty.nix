@@ -1,11 +1,12 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: let
+{ inputs
+, pkgs
+, ...
+}:
+let
   ghostty = inputs.ghostty.packages.x86_64-linux.default;
-in {
-  home.packages = with pkgs; [ghostty];
+in
+{
+  home.packages = with pkgs; [ ghostty ];
 
   xdg.configFile."ghostty/config".text = ''
     # Font

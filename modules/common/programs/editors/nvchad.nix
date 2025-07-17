@@ -1,8 +1,6 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, inputs
+, ...
 }: {
   hj.packages = with pkgs; [
     inputs.alejandra.packages.${pkgs.system}.default

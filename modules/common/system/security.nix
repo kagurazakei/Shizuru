@@ -1,13 +1,4 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ ...
 }: {
   security.rtkit.enable = true;
   security.polkit.enable = true;

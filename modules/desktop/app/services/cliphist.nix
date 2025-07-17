@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  inputs,
-  ...
+{ ...
 }: {
   hm.services.cliphist = {
     enable = true;

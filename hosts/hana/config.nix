@@ -1,15 +1,12 @@
 # Main default config
-{
-  config,
-  pkgs,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
-}: let
+{ config
+, pkgs
+, lib
+, inputs
+, system
+, ...
+}:
+let
   inherit (import ./variables.nix) keyboardLayout;
   python-packages = pkgs.python3.withPackages (
     ps:
@@ -18,7 +15,8 @@
         pyquery # needed for hyprland-dots Weather script
       ]
   );
-in {
+in
+{
   imports = [
     ./hardware.nix
     ./users.nix
@@ -26,7 +24,7 @@ in {
   ];
 
   nixpkgs.overlays = [
-    (final: prev: {
+    (_final: prev: {
       sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
         pname = "sf-mono-liga-bin";
         version = "dev";

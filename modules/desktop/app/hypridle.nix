@@ -1,12 +1,12 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
+{ lib
+, config
+, ...
+}:
+let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.mine.hypridle;
-in {
+in
+{
   options.mine.hypridle = {
     enable = mkEnableOption "Enable Hypridle service";
   };

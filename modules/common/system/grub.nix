@@ -1,13 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  host,
-  ...
+{ config
+, lib
+, pkgs
+, host
+, ...
 }:
 with lib; let
   cfg = config.system.bootloader-grub;
-in {
+in
+{
   options.system.bootloader-grub = {
     enable = mkEnableOption "Enable fail-safe GRUB bootloader with ZFS support";
   };
@@ -33,11 +33,11 @@ in {
 
       loader.grub = {
         enable = true;
-        devices = ["nodev"];
+        devices = [ "nodev" ];
         efiSupport = true;
         zfsSupport = true;
         memtest86.enable = true;
-        extraGrubInstallArgs = ["--bootloader-id=${host}"];
+        extraGrubInstallArgs = [ "--bootloader-id=${host}" ];
         configurationName = "${host}";
         gfxmodeEfi = "2160x1440";
 
@@ -77,7 +77,7 @@ in {
 
     systemd.services.grub-maintenance = {
       description = "GRUB fail-safe maintenance";
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "oneshot";
         RemainAfterExit = true;

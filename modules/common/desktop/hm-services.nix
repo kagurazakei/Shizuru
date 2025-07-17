@@ -1,9 +1,6 @@
-{
-  inputs,
-  pkgs,
-  configs,
-  lib,
-  ...
+{ inputs
+, pkgs
+, ...
 }: {
   hm = {
     systemd.user.services.walker = {
@@ -12,7 +9,7 @@
         After = "config.wayland.systemd.target";
         PartOf = "config.wayland.systemd.target";
       };
-      Install.WantedBy = ["config.wayland.systemd.target"];
+      Install.WantedBy = [ "config.wayland.systemd.target" ];
       Service = {
         Type = "simple";
         ExecStart = "${inputs.walker.packages.${pkgs.system}.default}/bin/walker --gapplication-service";

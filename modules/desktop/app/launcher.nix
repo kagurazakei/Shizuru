@@ -1,9 +1,5 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
+{ config
+, ...
 }: {
   imports = [
     ./walker.nix
@@ -15,7 +11,7 @@
     config = ../../../configs/walker/config.toml;
     theme = {
       layout = ../../../configs/walker/themes/base16.toml;
-      style =  ../../../configs/walker/themes/base16.css;
+      style = ../../../configs/walker/themes/base16.css;
     };
   };
 }

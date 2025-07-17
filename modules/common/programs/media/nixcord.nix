@@ -1,8 +1,6 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
+{ config
+, inputs
+, ...
 }: {
   hm = {
     imports = [
@@ -27,7 +25,7 @@
       };
       config = {
         frameless = true;
-        enabledThemes = ["tokyo-night-night.theme.css"];
+        enabledThemes = [ "tokyo-night-night.theme.css" ];
         plugins = {
           alwaysTrust.enable = true;
           alwaysAnimate.enable = true;

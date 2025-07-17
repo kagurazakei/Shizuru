@@ -1,14 +1,12 @@
-{
-  config,
-  pkgs,
-  ...
+{ pkgs
+, ...
 }: {
   systemd.services.cleanup-hm-services = {
     description = "Clean up stale Home Manager systemd user services";
-    after = ["nixos-rebuild.service" "nh-apply.service"];
-    wantedBy = ["multi-user.target"];
+    after = [ "nixos-rebuild.service" "nh-apply.service" ];
+    wantedBy = [ "multi-user.target" ];
 
-    path = with pkgs; [systemd gnused findutils coreutils]; # Add required tools
+    path = with pkgs; [ systemd gnused findutils coreutils ]; # Add required tools
 
     serviceConfig = {
       Type = "oneshot";

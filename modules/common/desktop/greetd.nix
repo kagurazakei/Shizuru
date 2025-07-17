@@ -1,17 +1,15 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ pkgs
+, config
+, username
+, options
+, lib
+, system
+, ...
 }:
 with lib; let
   cfg = config.system.greetd;
-in {
+in
+{
   options.system.greetd = {
     enable = mkEnableOption "Enable Greetd Display Manager Services";
   };

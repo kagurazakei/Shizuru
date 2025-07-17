@@ -1,17 +1,13 @@
-{
-  pkgs,
-  inputs,
-  configs,
-  lib,
-  ...
+{ pkgs
+, ...
 }: {
-  hj.packages = with pkgs; [swayidle hypridle];
+  hj.packages = with pkgs; [ swayidle hypridle ];
   hm = {
     systemd.user.services.swayidle = {
       Unit = {
         Description = "Idle management with swayidle";
-        PartOf = ["graphical-session.target"];
-        After = ["graphical-session.target"];
+        PartOf = [ "graphical-session.target" ];
+        After = [ "graphical-session.target" ];
       };
       Service = {
         Environment = "WAYLAND_DISPLAY=wayland-1"; # Change if needed
@@ -25,7 +21,7 @@
         Restart = "always";
       };
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

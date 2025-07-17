@@ -1,8 +1,5 @@
-{
-  pkgs,
-  config,
-  inputs,
-  ...
+{ pkgs
+, ...
 }: {
   hm.programs.git = {
     enable = true;

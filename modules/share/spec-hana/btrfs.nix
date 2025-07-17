@@ -1,13 +1,11 @@
-{
-  config,
-  lib,
-  inputs,
-  username,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.system.btrfs;
-in {
+in
+{
   options.system.btrfs = {
     enable = mkEnableOption "Enable btrfs Modules";
   };
@@ -16,7 +14,7 @@ in {
     services.btrfs.autoScrub = {
       enable = true;
       interval = "monthly";
-      fileSystems = ["/"];
+      fileSystems = [ "/" ];
     };
   };
 }

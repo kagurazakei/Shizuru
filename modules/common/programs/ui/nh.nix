@@ -1,11 +1,11 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  ...
-}: let
+{ pkgs
+, inputs
+, ...
+}:
+let
   nh = inputs.nh.packages.${pkgs.system}.default;
-in {
+in
+{
   programs.nh = {
     package = nh;
     enable = true;

@@ -1,19 +1,16 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ pkgs
+, config
+, options
+, lib
+, inputs
+, system
+, ...
 }:
 with lib; let
   cfg = config.system.displayManager;
-  #sddm-stray = pkgs.callPackage ../../../../pkgs/stray-new.nix { };
   cursorPkg = inputs.kureiji-ollie-cursor.packages.${pkgs.system}.kureiji-ollie-cursor;
-in {
+in
+{
   options.system.displayManager = {
     enable = mkEnableOption "Enable Display Manager Services";
   };
@@ -22,7 +19,6 @@ in {
     environment.systemPackages = [
       pkgs.lyra-cursors
       cursorPkg
-      #inputs.hyprddm.packages.${pkgs.system}.default
       inputs.sddm-stray.packages.${pkgs.system}.default
       inputs.waifu-cursors.packages.${pkgs.system}.Reichi-Shinigami
     ];
@@ -38,11 +34,10 @@ in {
         kdePackages.qtvirtualkeyboard
       ];
       wayland.enable = true;
-      #theme = "sddm-astronaut-theme";
+
       theme = "sddm-theme-stray";
       settings = {
         Theme = {
-          #CursorTheme = "Kureiji-Ollie-v2";
           CursorTheme = "Reichi-Shinigami";
         };
       };

@@ -1,12 +1,8 @@
-{
-  lib,
-  pkgs,
-  config,
-  inputs,
-  ...
+{ pkgs
+, ...
 }: {
   hj = {
-    packages = [pkgs.zathura];
+    packages = [ pkgs.zathura ];
     files = {
       ".config/zathura/zathurarc".text = ''
                               # Open document in fit-width mode by default

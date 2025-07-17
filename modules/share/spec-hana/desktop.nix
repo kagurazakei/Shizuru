@@ -1,13 +1,4 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ ...
 }: {
   imports = [
     ./bootloader.nix

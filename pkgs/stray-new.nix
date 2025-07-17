@@ -1,8 +1,8 @@
-{
-  lib,
-  stdenvNoCC,
-  fetchFromGitHub,
-  kdePackages,
+{ lib
+, stdenvNoCC
+, fetchFromGitHub
+, kdePackages
+,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "sddm-stray";

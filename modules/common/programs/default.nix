@@ -1,7 +1,7 @@
 {
   imports = [
     ./media
-    ./terminal 
+    ./terminal
     ./wezterm
     ./scripts
     ./terminal

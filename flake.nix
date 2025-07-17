@@ -8,6 +8,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     font-flake.url = "github:redyf/font-flake";
     agenix.url = "github:ryantm/agenix";
+    walker.url = "github:abenz1267/walker";
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,7 +29,7 @@
     #   url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-
+    #
     flake-programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,7 +63,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    walker.url = "github:abenz1267/walker";
+    #walker.url = "github:abenz1267/walker";
     yazi.url = "github:sxyazi/yazi";
 
     # Hyprland ecosystem
@@ -181,93 +182,90 @@
     nyxexprs.url = "github:notashelf/nyxexprs";
   };
 
-  outputs = inputs @ {
-    self,
-    nixpkgs,
-    nixpkgs-master,
-    nixpkgs-stable,
-    home-manager,
-    chaotic,
-    nur,
-    alejandra,
-    agenix,
-    #lix-module,
-    quickshell,
-    ...
-  }: let
-    system = "x86_64-linux";
-    host = "shizuru";
-    username = "antonio";
+  outputs =
+    inputs @ { nixpkgs
+    , nixpkgs-master
+    , nixpkgs-stable
+    , home-manager
+    , chaotic
+    , agenix
+    , #lix-module,
+      quickshell
+    , ...
+    }:
+    let
+      system = "x86_64-linux";
+      host = "shizuru";
+      username = "antonio";
 
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
 
-    pkgs-master = import nixpkgs-master {
-      inherit system;
-      config.allowUnfree = true;
-    };
-
-    pkgs-stable = import nixpkgs-stable {
-      inherit system;
-      config.allowUnfree = true;
-    };
-  in {
-    # Development shell for quickshell QML development
-    devShells.${system} = {
-      quickshell = let
-        qs = quickshell.packages.${system}.default.override {
-          withJemalloc = true;
-          withQtSvg = true;
-          withWayland = true;
-          withX11 = false;
-          withPipewire = true;
-          withPam = true;
-          withHyprland = true;
-          withI3 = false;
-        };
-        qtDeps = [
-          qs
-          pkgs.qt6.qtbase
-          pkgs.qt6.qtdeclarative
-        ];
-      in
-        pkgs.mkShell {
-          name = "quickshell-dev";
-          nativeBuildInputs = qtDeps;
-          shellHook = let
-            qmlPath = pkgs.lib.makeSearchPath "lib/qt-6/qml" qtDeps;
-          in ''
-            export QML2_IMPORT_PATH="$QML2_IMPORT_PATH:${qmlPath}"
-          '';
-        };
-    };
-
-    # NixOS configuration for host 'shizuru'
-    nixosConfigurations = {
-      shizuru = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit system inputs username host chaotic pkgs-master;
-        };
-        modules = [
-          ./hosts/${host}/config.nix
-          inputs.chaotic.nixosModules.default
-          home-manager.nixosModules.home-manager
-          inputs.stylix.nixosModules.stylix
-          inputs.catppuccin.nixosModules.catppuccin
-          inputs.nixos-hardware.nixosModules.huawei-machc-wa
-          inputs.nvf.nixosModules.default
-          #lix-module.nixosModules.default
-          agenix.nixosModules.default
-          inputs.flake-programs-sqlite.nixosModules.programs-sqlite
-          {
-            nixpkgs.overlays = import ./overlays {
-              inherit inputs system;
+      pkgs-master = import nixpkgs-master {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in
+    {
+      # Development shell for quickshell QML development
+      devShells.${system} = {
+        quickshell =
+          let
+            qs = quickshell.packages.${system}.default.override {
+              withJemalloc = true;
+              withQtSvg = true;
+              withWayland = true;
+              withX11 = false;
+              withPipewire = true;
+              withPam = true;
+              withHyprland = true;
+              withI3 = false;
             };
-          }
-        ];
+            qtDeps = [
+              qs
+              pkgs.qt6.qtbase
+              pkgs.qt6.qtdeclarative
+            ];
+          in
+          pkgs.mkShell {
+            name = "quickshell-dev";
+            nativeBuildInputs = qtDeps;
+            shellHook =
+              let
+                qmlPath = pkgs.lib.makeSearchPath "lib/qt-6/qml" qtDeps;
+              in
+              ''
+                export QML2_IMPORT_PATH="$QML2_IMPORT_PATH:${qmlPath}"
+              '';
+          };
+      };
+
+      # NixOS configuration for host 'shizuru'
+      nixosConfigurations = {
+        shizuru = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit system inputs username host chaotic pkgs-master;
+          };
+          modules = [
+            ./hosts/${host}/config.nix
+            inputs.chaotic.nixosModules.default
+            home-manager.nixosModules.home-manager
+            inputs.stylix.nixosModules.stylix
+            inputs.catppuccin.nixosModules.catppuccin
+            inputs.nixos-hardware.nixosModules.huawei-machc-wa
+            inputs.nvf.nixosModules.default
+            #lix-module.nixosModules.default
+            agenix.nixosModules.default
+            inputs.flake-programs-sqlite.nixosModules.programs-sqlite
+            {
+              nixpkgs.overlays = import ./overlays {
+                inherit inputs system;
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }

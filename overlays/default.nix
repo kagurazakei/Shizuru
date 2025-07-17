@@ -1,17 +1,19 @@
-{
-  inputs,
-  system,
-}: let
+{ inputs
+, system
+,
+}:
+let
   nixpkgs-master = import inputs.nixpkgs-master {
     inherit system;
     config.allowUnfree = true;
   };
-in [
+in
+[
   inputs.niri.overlays.niri
   inputs.nur.overlays.default
   #inputs.custom-nixpkgs.overlays.default
 
-  (final: prev: {
+  (_final: prev: {
     stable = import inputs.nixpkgs-stable {
       inherit system;
       config.allowUnfree = true;
@@ -19,7 +21,7 @@ in [
     };
     unstable = prev; # Explicit alias for nixos-unstable
     master = nixpkgs-master; # Already defined
-    walker = inputs.walker.packages.${system}.default;
+    # walker = inputs.walker.packages.${system}.default;
     quickshell = inputs.quickshell.packages.${system}.default;
     nvchad = inputs.nvchad4nix.packages.${system}.nvchad;
     zjstatus = inputs.zjstatus.packages.${system}.default;
@@ -62,7 +64,7 @@ in [
           hash = "sha256-ePY+BEpEcAq11+pUMjQ4XG358x3bXFQWwI1UAi+KmLo=";
         };
 
-        nativeBuildInputs = (builtins.filter (p: p != qfinal.qmake) ctprev.nativeBuildInputs) ++ [final.cmake];
+        nativeBuildInputs = (builtins.filter (p: p != qfinal.qmake) ctprev.nativeBuildInputs) ++ [ final.cmake ];
 
         buildInputs =
           ctprev.buildInputs

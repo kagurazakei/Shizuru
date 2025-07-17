@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   #wall-change = pkgs.writeShellScriptBin "wall-change" (builtins.readFile ./scripts/wall-change.sh);
   #wallpaper-picker = pkgs.writeShellScriptBin "wallpaper-picker" (builtins.readFile ./scripts/wallpaper-picker.sh);
   runbg = pkgs.writeShellScriptBin "runbg" (builtins.readFile ./scripts/runbg.sh);
@@ -11,18 +12,15 @@
   toggle_float = pkgs.writeScriptBin "toggle_float" (builtins.readFile ./scripts/toggle_float.sh);
 
   maxfetch = pkgs.writeScriptBin "maxfetch" (builtins.readFile ./scripts/maxfetch.sh);
-#  rxfetch = pkgs.writeScriptBin "rxfetch" (builtins.readFile ./scripts/rxfetch.sh);
+  screenshot = pkgs.writeScriptBin "screenshot" (builtins.readFile ./scripts/screenshot.sh);
   compress = pkgs.writeScriptBin "compress" (builtins.readFile ./scripts/compress.sh);
   extract = pkgs.writeScriptBin "extract" (builtins.readFile ./scripts/extract.sh);
 
   shutdown-script = pkgs.writeScriptBin "shutdown-script" (builtins.readFile ./scripts/shutdown-script.sh);
 
-  show-keybinds = pkgs.writeScriptBin "show-keybinds" (builtins.readFile ./scripts/keybinds.sh);
-
   vm-start = pkgs.writeScriptBin "vm-start" (builtins.readFile ./scripts/vm-start.sh);
 
   ascii = pkgs.writeScriptBin "ascii" (builtins.readFile ./scripts/ascii.sh);
-  cli-convert = pkgs.writeScriptBin "cli-convert" (builtins.readFile ./scripts/cli-convert.sh);
   record = pkgs.writeScriptBin "record" (builtins.readFile ./scripts/record.sh);
   statusbar = pkgs.writeScriptBin "statusbar" (builtins.readFile ./scripts/statusbar);
   apply-config = pkgs.writeScriptBin "apply-config" (builtins.readFile ./scripts/apply-config.sh);
@@ -32,7 +30,8 @@
   niri-edit = pkgs.writeScriptBin "niri-edit" (builtins.readFile ./scripts/niri-edit);
   wlogout-new = pkgs.writeScriptBin "wlogout-new" (builtins.readFile ./scripts/wlogout-new);
   brightness = pkgs.writeScriptBin "brightness" (builtins.readFile ./scripts/brightness);
-in {
+in
+{
   hj.packages = with pkgs; [
     # wall-change
     # wallpaper-picker
@@ -44,7 +43,7 @@ in {
     toggle_waybar
     toggle_float
     maxfetch
-#    rxfetch
+    screenshot
     compress
     extract
     shutdown-script

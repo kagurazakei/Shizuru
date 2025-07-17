@@ -1,24 +1,21 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ pkgs
+, config
+, options
+, lib
+, system
+, ...
 }:
 with lib; let
   cfg = config.system.bootloader-systemd;
-in {
+in
+{
   options.system.bootloader-systemd = {
     enable = mkEnableOption "Enable Bootloader systemd-boot";
   };
 
   config = mkIf cfg.enable {
     boot = {
-    consoleLogLevel = 0;
+      consoleLogLevel = 0;
       loader.efi = {
         canTouchEfiVariables = true;
       };

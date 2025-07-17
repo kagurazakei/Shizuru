@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  config,
-  ...
+{ ...
 }: {
   hm.programs.btop = {
     enable = true;

@@ -1,14 +1,15 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: let
+{ config
+, pkgs
+, inputs
+, ...
+}:
+let
   ax-shell = inputs.ax-shell-config;
   fabric-bar = pkgs.writeScriptBin "fabric-bar" (builtins.readFile ./fabric.sh);
-in {
+in
+{
   hm = {
-    home.activation.setupAx-Shell = config.lib.dag.entryAfter ["writeBoundary"] ''
+    home.activation.setupAx-Shell = config.lib.dag.entryAfter [ "writeBoundary" ] ''
       mkdir -p "$HOME/.config/Ax-Shell/"
       cp -r --no-preserve=all ${ax-shell}/* "$HOME/.config/Ax-Shell"
       chmod -R u+w "$HOME/.config/Ax-Shell"

@@ -1,13 +1,5 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ pkgs
+, ...
 }: {
   stylix.enable = true;
   stylix.autoEnable = false;
@@ -38,11 +30,11 @@
 
       sansSerif = {
         name = "JetBrainsMono Nerd Font";
-        package = pkgs. nerd-fonts.jetbrains-mono;
+        package = pkgs.nerd-fonts.jetbrains-mono;
       };
 
       monospace = {
-        package = pkgs. nerd-fonts.jetbrains-mono;
+        package = pkgs.nerd-fonts.jetbrains-mono;
         name = "JetBrainsMono Nerd Font";
       };
 

@@ -1,9 +1,4 @@
-{
-  pkgs,
-  lib,
-  config,
-  inputs,
-  ...
+{ ...
 }: {
   hj.rum.desktops.hyprland.settings = {
     "$mainMod" = "SUPER";

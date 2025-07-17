@@ -1,7 +1,5 @@
-{
-  inputs,
-  pkgs,
-  ...
+{ pkgs
+, ...
 }: {
   programs.nvf = {
     enable = true;
@@ -176,7 +174,7 @@
   };
   # make indents normal lmfao
   hj = {
-    files.".editorconfig".source = (pkgs.formats.ini {}).generate ".editorconfig" {
+    files.".editorconfig".source = (pkgs.formats.ini { }).generate ".editorconfig" {
       "*" = {
         charset = "utf-8";
         end_of_line = "lf";

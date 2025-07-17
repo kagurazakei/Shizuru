@@ -1,8 +1,7 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
+{ pkgs
+, lib
+, config
+, ...
 }:
 with lib; let
   inherit (config.lib.stylix) colors;
@@ -34,7 +33,8 @@ with lib; let
     	zellij attach -c "$SESSION_TITLE"
     fi
   '';
-in {
+in
+{
   hm.packages = [
     pkgs.tmate
     sesh

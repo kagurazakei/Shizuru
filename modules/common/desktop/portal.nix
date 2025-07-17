@@ -1,13 +1,5 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ pkgs
+, ...
 }: {
   xdg.portal = {
     enable = true;

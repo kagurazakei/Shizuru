@@ -1,13 +1,11 @@
-{
-  config,
-  lib,
-  inputs,
-  username,
-  ...
+{ config
+, lib
+, ...
 }:
 with lib; let
   cfg = config.system.zram;
-in {
+in
+{
   options.system.zram = {
     enable = mkEnableOption "Enable zramSwap Modules";
   };

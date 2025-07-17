@@ -1,18 +1,10 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ pkgs
+, ...
 }: {
   services = {
     xserver = {
       enable = true;
-      excludePackages = [pkgs.xterm];
+      excludePackages = [ pkgs.xterm ];
       desktopManager.xterm.enable = false;
       desktopManager.runXdgAutostartIfNone = true;
       xkb = {

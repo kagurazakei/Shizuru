@@ -1,9 +1,5 @@
-{
-  pkgs,
-  config,
-  inputs,
-  lib,
-  ...
+{ pkgs
+, ...
 }: {
   environment.systemPackages = with pkgs; [
     (ags.overrideAttrs (oldAttrs: {

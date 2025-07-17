@@ -1,24 +1,20 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
+{ config
+, inputs
+, pkgs
+, ...
 }: {
   programs.niri.settings.binds = with config.lib.niri.actions; let
     set-volume = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";
-    brillo = spawn "${pkgs.brillo}/bin/brillo" "-q" "-u" "300000";
     playerctl = spawn "${pkgs.playerctl}/bin/playerctl";
     control-center = spawn "env" "XDG_CURRENT_DESKTOP=gnome" "gnome-control-center";
-    walkern = spawn "${inputs.walker.packages.${pkgs.system}.default}/bin/walker";
     wallPicker = spawn "walker" "-m" "wallpaper";
-    walker-clip = spawn "niri-clip";
     brightness-up = spawn "~/.local/bin/brightness" "--inc";
     brightness-down = spawn "~/.local/bin/brightness" "--dec";
     wlogout-new = spawn "~/.local/bin/wlogout-new";
     # eww-bar = spawn "~/.local/bin/eww-bar";
-    toggle-waybar = spawn "~/.local/bin/toggle-waybar";
     qs-lock = spawn "~/.local/bin/lock-qs";
-  in {
+  in
+  {
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
     "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
 
@@ -33,7 +29,7 @@
     "XF86MonBrightnessUp".action = brightness-up;
     "XF86MonBrightnessDown".action = brightness-down;
 
-    "Print".action.screenshot-screen = {write-to-disk = true;};
+    "Print".action.screenshot-screen = { write-to-disk = true; };
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
     "Mod+D".action = spawn "walker";

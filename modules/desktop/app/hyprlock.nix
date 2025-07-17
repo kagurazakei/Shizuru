@@ -1,8 +1,7 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{ pkgs
+, ...
+}:
+let
   blazinscripts = pkgs.writeShellScriptBin "hyprlock-blazinscripts" ''
     #!/usr/bin/env bash
     # Battery and Music Status Script
@@ -52,7 +51,8 @@
       esac
     fi
   '';
-in {
+in
+{
   hj.rum.programs.hyprlock = {
     enable = true;
     settings = {
@@ -294,7 +294,7 @@ in {
     };
   };
 
-  home.packages = [pkgs.playerctl];
+  home.packages = [ pkgs.playerctl ];
   systemd.user.tmpfiles.rules = [
     "d ${config.home.homeDirectory}/.cache/hyprlock-art 0755 ${config.home.username} ${config.home.username} - -"
   ];

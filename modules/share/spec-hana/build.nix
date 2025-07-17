@@ -1,4 +1,5 @@
-{pkgs ? import <nixpkgs> {}}: let
+{ pkgs ? import <nixpkgs> { } }:
+let
   build = pkgs.writeShellApplication {
     name = "build";
     runtimeInputs = [
@@ -76,4 +77,4 @@
       '';
   };
 in
-  build
+build

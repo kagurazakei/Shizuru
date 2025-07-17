@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{ pkgs
+, ...
+}:
+let
   username = "antonio"; # CHANGE THIS to your username
 
   # 1. NH wrapper with immediate notification
@@ -32,7 +31,8 @@
       "NixOS Rebuild" \
       "System configuration applied successfully!"
   '';
-in {
+in
+{
   # NH wrapper configuration
   # Required packages
   environment.systemPackages = with pkgs; [
@@ -45,9 +45,9 @@ in {
   # Systemd service configuration
   systemd.services.post-rebuild-notify = {
     description = "Notify after NixOS rebuild";
-    after = ["nixos-rebuild.service" "nh-apply.service"];
-    wants = ["nixos-rebuild.service" "nh-apply.service"];
-    wantedBy = ["multi-user.target"];
+    after = [ "nixos-rebuild.service" "nh-apply.service" ];
+    wants = [ "nixos-rebuild.service" "nh-apply.service" ];
+    wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
       Type = "oneshot";
@@ -57,5 +57,5 @@ in {
   };
 
   # Ensure DBUS is properly configured
-  services.dbus.packages = [pkgs.dconf];
+  services.dbus.packages = [ pkgs.dconf ];
 }

@@ -1,15 +1,15 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.fish = {
-    enable = true; 
+    enable = true;
     interactiveShellInit = ''
-        ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
     '';
   };
 
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
-    flags = ["--cmd cd"];
+    flags = [ "--cmd cd" ];
   };
   programs.direnv.enableFishIntegration = true;
   programs.starship = {
@@ -26,9 +26,9 @@
 
   environment.systemPackages = [
     pkgs.fishPlugins.done
-    pkgs.fishPlugins.sponge 
+    pkgs.fishPlugins.sponge
     pkgs.eza
     pkgs.fish-lsp
   ];
- 
+
 }

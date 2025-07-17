@@ -1,11 +1,8 @@
 # Edit this configuration file to define what should be installed on
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ pkgs
+, ...
 }: {
   imports = [
     # Include the results of the hardware scan.
@@ -15,8 +12,8 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.supportedFilesystems = ["zfs"];
-  boot.initrd.supportedFilesystems = ["zfs"];
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.initrd.supportedFilesystems = [ "zfs" ];
   boot.zfs.devNodes = "{$DISK_PATH}";
   #boot.zfs.devNodes = "/dev/disk/by-partuuid";
   networking.hostName = "shizuru"; # Define your hostname.
@@ -45,7 +42,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.antonio = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
@@ -76,8 +73,8 @@
   nix = {
     package = pkgs.lix;
     settings = {
-      allowed-users = ["root" "@wheel" "antonio"];
-      trusted-users = ["root" "@wheel" "antonio" "@builders"];
+      allowed-users = [ "root" "@wheel" "antonio" ];
+      trusted-users = [ "root" "@wheel" "antonio" "@builders" ];
       warn-dirty = false;
       auto-optimise-store = true;
       experimental-features = [

@@ -1,8 +1,7 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{ pkgs
+, ...
+}:
+let
   notifyScript = pkgs.writeShellScriptBin "rebuild-notify" ''
     # Wait for user session to be ready
     USER="antonio"
@@ -30,7 +29,8 @@
       ${pkgs.sound-theme-freedesktop}/bin/canberra-gtk-play -l 0 -d "complete" -i "complete"
     fi
   '';
-in {
+in
+{
   # Enable lingering for the user
   systemd.tmpfiles.rules = [
     "d /run/user/1000 0755 antonio users -" # Replace 1000 with actual UID
@@ -40,8 +40,8 @@ in {
   systemd.user.services.rebuild-notify = {
     unitConfig = {
       Description = "Post-rebuild notification";
-      After = ["graphical-session.target"];
-      Requires = ["graphical-session.target"];
+      After = [ "graphical-session.target" ];
+      Requires = [ "graphical-session.target" ];
     };
 
     serviceConfig = {
@@ -50,7 +50,7 @@ in {
       Restart = "no";
     };
 
-    wantedBy = ["default.target"];
+    wantedBy = [ "default.target" ];
   };
 
   # Trigger notification after rebuild

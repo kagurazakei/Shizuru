@@ -1,9 +1,5 @@
-{
-  lib,
-  config,
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, ...
 }: {
   hj = {
     packages = with pkgs; [

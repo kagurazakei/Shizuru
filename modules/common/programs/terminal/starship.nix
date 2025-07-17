@@ -1,13 +1,10 @@
-{
-  lib,
-  pkgs,
-  config,
-  inputs,
-  ...
-}: let
-  inherit (lib.modules) mkIf;
+{ lib
+, ...
+}:
+let
   inherit (lib.strings) concatStrings;
-in {
+in
+{
   hj.rum.programs.starship = {
     enable = true;
 

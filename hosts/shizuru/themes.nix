@@ -1,8 +1,7 @@
 # theme.nix
-{
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, inputs
+, ...
 }: {
   _module.args.theme = {
     colors = inputs.basix.schemeData.base24.catppuccin-mocha.palette;

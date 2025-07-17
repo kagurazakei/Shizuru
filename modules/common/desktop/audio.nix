@@ -1,13 +1,13 @@
-{
-  config,
-  options,
-  lib,
-  system,
-  ...
+{ config
+, options
+, lib
+, system
+, ...
 }:
 with lib; let
   cfg = config.system.audio;
-in {
+in
+{
   options.system.audio = {
     enable = mkEnableOption "Enable Audio Config";
   };

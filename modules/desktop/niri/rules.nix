@@ -1,22 +1,25 @@
-{...}: let
-  mkMatchRule = {
-    appId,
-    title ? "",
-    openFloating ? false,
-  }: let
-    baseRule = {
-      matches = [
-        {
-          app-id = appId;
-          inherit title;
-        }
-      ];
-    };
-    floatingRule =
-      if openFloating
-      then {open-floating = true;}
-      else {};
-  in
+{ ... }:
+let
+  mkMatchRule =
+    { appId
+    , title ? ""
+    , openFloating ? false
+    ,
+    }:
+    let
+      baseRule = {
+        matches = [
+          {
+            app-id = appId;
+            inherit title;
+          }
+        ];
+      };
+      floatingRule =
+        if openFloating
+        then { open-floating = true; }
+        else { };
+    in
     baseRule // floatingRule;
 
   openFloatingAppIds = [
@@ -38,37 +41,40 @@
     "org.kde.dolphin"
   ];
 
-  floatingRules = builtins.map (appId:
-    mkMatchRule {
-      appId = appId;
-      openFloating = true;
-    })
-  openFloatingAppIds;
+  floatingRules = builtins.map
+    (appId:
+      mkMatchRule {
+        appId = appId;
+        openFloating = true;
+      })
+    openFloatingAppIds;
 
   windowRules = [
     {
-      geometry-corner-radius = let
-        radius = 15.0;
-      in {
-        bottom-left = radius;
-        bottom-right = radius;
-        top-left = radius;
-        top-right = radius;
-      };
+      geometry-corner-radius =
+        let
+          radius = 15.0;
+        in
+        {
+          bottom-left = radius;
+          bottom-right = radius;
+          top-left = radius;
+          top-right = radius;
+        };
       clip-to-geometry = true;
       draw-border-with-background = false;
     }
     {
-      matches = [{app-id = "^niri$";}];
+      matches = [{ app-id = "^niri$"; }];
       opacity = 1.0;
     }
     {
-      matches = [{is-focused = false;}];
+      matches = [{ is-focused = false; }];
       opacity = 0.95;
     }
     {
       matches = [
-        {is-floating = true;}
+        { is-floating = true; }
       ];
       shadow.enable = true;
     }
@@ -97,29 +103,29 @@
       };
     }
     {
-      matches = [{app-id = "org.telegram.desktop";}];
+      matches = [{ app-id = "org.telegram.desktop"; }];
       block-out-from = "screencast";
     }
     {
-      matches = [{app-id = "app.drey.PaperPlane";}];
+      matches = [{ app-id = "app.drey.PaperPlane"; }];
       block-out-from = "screencast";
     }
     {
       matches = [
-        {app-id = "^(zen|firefox|chromium-browser|chrome-.*|zen-.*)$";}
-        {app-id = "^(xdg-desktop-portal-gtk)$";}
+        { app-id = "^(zen|firefox|chromium-browser|chrome-.*|zen-.*)$"; }
+        { app-id = "^(xdg-desktop-portal-gtk)$"; }
       ];
       scroll-factor = 0.85;
     }
     {
       matches = [
-        {app-id = "^(info.febvre.Komikku)$";}
+        { app-id = "^(info.febvre.Komikku)$"; }
       ];
       scroll-factor = 0.1;
     }
     {
       matches = [
-        {app-id = "^(zen|firefox|equibop|chromium-browser|edge|chrome-.*|zen-.*)$";}
+        { app-id = "^(zen|firefox|equibop|chromium-browser|edge|chrome-.*|zen-.*)$"; }
       ];
       open-maximized = false;
     }
@@ -133,8 +139,8 @@
           app-id = "zen-.*$";
           title = "^Picture-in-Picture$";
         }
-        {title = "^Picture in picture$";}
-        {title = "^Discord Popout$";}
+        { title = "^Picture in picture$"; }
+        { title = "^Discord Popout$"; }
       ];
       open-floating = true;
       default-floating-position = {
@@ -145,15 +151,15 @@
     }
     {
       matches = [
-        {app-id = "^(org.wezfurlong.wezterm)$";}
-        {app-id = "^(kitty)$";}
-        {app-id = "^(com.mitchellh.ghostty)$";}
+        { app-id = "^(org.wezfurlong.wezterm)$"; }
+        { app-id = "^(kitty)$"; }
+        { app-id = "^(com.mitchellh.ghostty)$"; }
       ];
       opacity = 0.96;
     }
     {
       matches = [
-        {app-id = "^(dropdown)$";}
+        { app-id = "^(dropdown)$"; }
       ];
       open-floating = true;
       default-floating-position = {
@@ -169,20 +175,21 @@
       };
     }
   ];
-in {
+in
+{
 
-    programs.niri.settings = {
-      window-rules = windowRules ++ floatingRules;
-    };
-    programs.niri.settings.layer-rules = [
-      {
-        matches = [
-          {namespace = "^swww-daemon$";}
-          {namespace = "^wallpaper$";}
-        ];
+  programs.niri.settings = {
+    window-rules = windowRules ++ floatingRules;
+  };
+  programs.niri.settings.layer-rules = [
+    {
+      matches = [
+        { namespace = "^swww-daemon$"; }
+        { namespace = "^wallpaper$"; }
+      ];
 
-        place-within-backdrop = true;
-      }
-    ];
+      place-within-backdrop = true;
+    }
+  ];
 
 }

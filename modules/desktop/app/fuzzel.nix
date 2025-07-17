@@ -1,9 +1,4 @@
-{
-  inputs,
-  config,
-  pkgs,
-  lib,
-  ...
+{ ...
 }: {
   hj.rum.programs.fuzzel = {
     enable = true;

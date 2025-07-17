@@ -1,17 +1,15 @@
-{
-  config,
-  inputs,
-  lib,
-  username,
-  ...
+{ inputs
+, lib
+, username
+, ...
 }: {
   imports = [
     inputs.hjem.nixosModules.default
-    (lib.modules.mkAliasOptionModule ["hj"] ["hjem" "users" "${username}"]) # Stolen from gitlab/fazzi
+    (lib.modules.mkAliasOptionModule [ "hj" ] [ "hjem" "users" "${username}" ]) # Stolen from gitlab/fazzi
   ];
   hjem = {
     clobberByDefault = true;
-    extraModules = [inputs.hjem-rum.hjemModules.default];
+    extraModules = [ inputs.hjem-rum.hjemModules.default ];
 
     users.${username} = {
       enable = true;

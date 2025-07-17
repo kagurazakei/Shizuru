@@ -1,26 +1,27 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   inherit (lib.modules) mkIf;
   inherit (lib.options) mkOption mkEnableOption mkPackageOption;
   inherit (lib.meta) getExe;
   types = lib.types;
-  json = pkgs.formats.json {};
+  json = pkgs.formats.json { };
   cfg = config.rum.programs.hyprpanel;
 
   # Theme file auto-load logic
   themeFile =
     if cfg.themeName != ""
     then builtins.fromJSON (builtins.readFile ./themes/${cfg.themeName}.json)
-    else {};
-in {
+    else { };
+in
+{
   options.rum.programs.hyprpanel = {
     enable = mkEnableOption "HyprPanel status bar";
 
-    package = mkPackageOption pkgs "hyprpanel" {};
+    package = mkPackageOption pkgs "hyprpanel" { };
 
     hyprland.enable = mkEnableOption "Integrate with Hyprland exec-once";
 
@@ -33,7 +34,7 @@ in {
 
     override = mkOption {
       type = json.type;
-      default = {};
+      default = { };
       example = {
         "theme.notification.background" = "#181826";
         "theme.notification.close_button.background" = "#f38ba7";
@@ -47,13 +48,13 @@ in {
 
     settings = mkOption {
       type = json.type;
-      default = {};
+      default = { };
       example = {
         bar.layouts = {
           "0" = {
-            left = ["dashboard" "workspaces" "windowtitle"];
-            middle = ["media"];
-            right = ["volume" "network" "bluetooth" "battery" "systray" "clock" "notifications"];
+            left = [ "dashboard" "workspaces" "windowtitle" ];
+            middle = [ "media" ];
+            right = [ "volume" "network" "bluetooth" "battery" "systray" "clock" "notifications" ];
           };
         };
         theme.bar.scaling = 85;
@@ -87,19 +88,19 @@ in {
   };
 
   config = mkIf cfg.enable {
-    hj.packages = [cfg.package];
+    hj.packages = [ cfg.package ];
 
-    hj.files.".config/hyprpanel/config.json".source = mkIf (cfg.settings != {}) (
+    hj.files.".config/hyprpanel/config.json".source = mkIf (cfg.settings != { }) (
       json.generate "hyprpanel-config.json"
-      (cfg.settings // themeFile // cfg.override)
+        (cfg.settings // themeFile // cfg.override)
     );
 
     hj.rum.programs.hyprland.settings.exec-once =
-      mkIf cfg.hyprland.enable [(getExe cfg.package)];
+      mkIf cfg.hyprland.enable [ (getExe cfg.package) ];
 
     systemd.user.services.hyprpanel = mkIf cfg.systemd.enable {
       description = "HyprPanel status bar for graphical session";
-      wantedBy = ["graphical-session.target"];
+      wantedBy = [ "graphical-session.target" ];
       serviceConfig = {
         ExecStart = "${getExe cfg.package}";
         ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR1 $MAINPID";

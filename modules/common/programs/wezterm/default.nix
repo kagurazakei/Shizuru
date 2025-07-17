@@ -1,9 +1,6 @@
-{
-  lib,
-  config,
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, inputs
+, ...
 }:
 let
   wezterm = inputs.wezterm.packages.${pkgs.system}.default;

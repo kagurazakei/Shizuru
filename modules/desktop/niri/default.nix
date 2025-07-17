@@ -1,13 +1,13 @@
-{
-  inputs,
-  pkgs,
-  lib,
-  config,
-  ...
-}: let
+{ inputs
+, pkgs
+, ...
+}:
+let
   wallpaperScript = pkgs.writeScriptBin "niri-wallpaper" (builtins.readFile ./wallpaperAutoChange.sh);
   swww = inputs.swww.packages.${pkgs.system}.swww;
-in {
+  walker = inputs.walker.packages.${pkgs.system}.default;
+in
+{
   hm = {
     imports = [
       inputs.niri.homeModules.niri
@@ -55,27 +55,27 @@ in {
     systemd.user.services.polkit-gnome = {
       Unit = {
         Description = "GNOME Polkit Agent";
-        After = ["graphical-session.target"];
+        After = [ "graphical-session.target" ];
       };
       Service = {
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
       };
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
     systemd.user.services.walker = {
       Unit = {
         Description = "Walker Application Service";
-        After = ["graphical-session.target"];
+        After = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${pkgs.master.walker}/bin/walker --gapplication-service";
+        ExecStart = "${walker}/bin/walker --gapplication-service";
         Restart = "on-failure";
       };
       Install = {
-        WantedBy = ["graphical-session.target"];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
 
@@ -93,7 +93,7 @@ in {
         OnCalendar = "*-*-* 00:01:00";
         Persistent = true;
       };
-      Install.WantedBy = ["timers.target"];
+      Install.WantedBy = [ "timers.target" ];
     };
     systemd.user.services.wayland-satalite = {
       Unit = {
@@ -101,7 +101,7 @@ in {
         After = " config.wayland.systemd.target";
         PartOf = " config.wayland.systemd.target";
       };
-      Install.WantedBy = ["config.wayland.systemd.target "];
+      Install.WantedBy = [ "config.wayland.systemd.target " ];
       Service = {
         Type = "simple";
         ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";

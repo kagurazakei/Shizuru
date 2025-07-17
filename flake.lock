@@ -5011,11 +5011,11 @@
         "systems": "systems_24"
       },
       "locked": {
-        "lastModified": 1752655476,
-        "narHash": "sha256-jrF4R/f72BhO4A6E9+CdNHk355x9yxXUTfcj3ZZxu4A=",
+        "lastModified": 1752694059,
+        "narHash": "sha256-CFisX09NQ/ImSmqGSa9ZZv1CNj37xBktHx8I7xuoT9w=",
         "owner": "abenz1267",
         "repo": "walker",
-        "rev": "1b3a16b8ae22e4e5efffcea382e825ced851f423",
+        "rev": "3b04295082d1816547254700eea4621e51812a7a",
         "type": "github"
       },
       "original": {

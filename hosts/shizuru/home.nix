@@ -1,12 +1,7 @@
-{
-  config,
-  pkgs,
-  pkgs-master,
-  inputs,
-  options,
-  lib,
-  system,
-  ...
+{ pkgs
+, inputs
+, system
+, ...
 }: {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
@@ -46,9 +41,7 @@
     kdePackages.qtstyleplugin-kvantum
     inputs.ags.packages.${pkgs.system}.agsFull
   ];
-  home.file = {
-
-  };
+  home.file = { };
 
   home.sessionVariables = {
     EDITOR = "nvim";

@@ -1,9 +1,8 @@
-{
-  pkgs,
-  theme,
-  inputs,
-  ...
-}: let
+{ pkgs
+, theme
+, ...
+}:
+let
   inherit (theme) fonts;
 
   fallbackPackages = [
@@ -15,7 +14,8 @@
     "corefonts"
     "vistafonts"
   ];
-in {
+in
+{
   fonts = {
     enableDefaultPackages = false;
     packages = with pkgs;

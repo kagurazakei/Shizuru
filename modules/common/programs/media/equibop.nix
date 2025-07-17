@@ -1,12 +1,8 @@
-{
-  lib,
-  pkgs,
-  config,
-  inputs,
-  ...
+{ pkgs
+, ...
 }: {
   hj = {
-    packages = [pkgs.equibop];
+    packages = [ pkgs.equibop ];
     files = {
       ".config/equibop/settings.json".text = ''
 

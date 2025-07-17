@@ -1,10 +1,9 @@
-{
-  stdenv,
-  requireFile,
-  nerd-font-patcher,
-  python3Packages,
-  monolisa,
-  lib,
+{ stdenv
+, nerd-font-patcher
+, python3Packages
+, monolisa
+, lib
+,
 }:
 stdenv.mkDerivation rec {
   name = "monolisa-nerd";
@@ -14,7 +13,7 @@ stdenv.mkDerivation rec {
   src = monolisa;
 
   nativeBuildInputs =
-    [nerd-font-patcher]
+    [ nerd-font-patcher ]
     ++ (with python3Packages; [
       python
       fontforge

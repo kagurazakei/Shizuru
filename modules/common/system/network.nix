@@ -1,16 +1,8 @@
-{
-  pkgs,
-  pkgs-master,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ host
+, options
+, ...
 }: {
   networking.networkmanager.enable = true;
   networking.hostName = "${host}";
-  networking.timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
+  networking.timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
 }

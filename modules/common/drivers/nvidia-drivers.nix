@@ -1,9 +1,9 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
+{ lib
+, pkgs
+, config
+, ...
+}:
+let
   cfg = config.drivers.nvidia;
 
   gpl_symbols_linux_615_patch = pkgs.fetchpatch {
@@ -20,44 +20,44 @@
     openSha256 = "sha256-DOJw73sjhQoy+5R0GHGnUddE6xaXb/z/Ihq3BKBf+lg=";
     settingsSha256 = "sha256-AIeeDXFEo9VEKCgXnY3QvrW5iWZeIVg4LBCeRtMs5Io=";
     persistencedSha256 = "sha256-Len7Va4HYp5r3wMpAhL4VsPu5S0JOshPFywbO7vYnGo=";
-    patches = [gpl_symbols_linux_615_patch];
+    patches = [ gpl_symbols_linux_615_patch ];
   };
 in
-  with lib; {
-    options.drivers.nvidia.enable = mkEnableOption "Enable NVIDIA Drivers";
+with lib; {
+  options.drivers.nvidia.enable = mkEnableOption "Enable NVIDIA Drivers";
 
-    config = mkIf cfg.enable {
-      boot = {
-        kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
+  config = mkIf cfg.enable {
+    boot = {
+      kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
-        kernelParams = [
-          "nvidia-drm.modeset=1"
-          "nvidia-drm.fbdev=1"
-        ];
-      };
-
-      hardware.graphics = {
-        enable = true;
-        enable32Bit = true;
-        extraPackages = with pkgs; [
-          vaapiVdpau
-          libvdpau
-          libvdpau-va-gl
-          nvidia-vaapi-driver
-          vdpauinfo
-          libva
-          libva-utils
-        ];
-      };
-
-      hardware.nvidia = {
-        modesetting.enable = true;
-        powerManagement.enable = false;
-        powerManagement.finegrained = false;
-        nvidiaPersistenced = false;
-        open = false;
-        nvidiaSettings = true;
-        package = nvidiaPackage;
-      };
+      kernelParams = [
+        "nvidia-drm.modeset=1"
+        "nvidia-drm.fbdev=1"
+      ];
     };
-  }
+
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+        libvdpau
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+        vdpauinfo
+        libva
+        libva-utils
+      ];
+    };
+
+    hardware.nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      nvidiaPersistenced = false;
+      open = false;
+      nvidiaSettings = true;
+      package = nvidiaPackage;
+    };
+  };
+}

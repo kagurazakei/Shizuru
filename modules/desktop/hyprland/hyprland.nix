@@ -1,12 +1,13 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: let
+{ inputs
+, pkgs
+, ...
+}:
+let
   hyprFlake = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
   portalFlake = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-in {
-  imports = [inputs.hyprland.nixosModules.default];
+in
+{
+  imports = [ inputs.hyprland.nixosModules.default ];
   hj.packages = [
     inputs.hyprland-qt-support.packages.${pkgs.system}.default
     pkgs.libsForQt5.qtstyleplugin-kvantum

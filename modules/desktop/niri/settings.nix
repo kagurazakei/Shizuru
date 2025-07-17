@@ -1,13 +1,12 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
-}: let
+{ pkgs
+, ...
+}:
+let
   makeCommand = command: {
-    command = [command];
+    command = [ command ];
   };
-in {
+in
+{
   programs.niri = {
     enable = true;
     package = pkgs.niri-unstable;
@@ -68,7 +67,7 @@ in {
         warp-mouse-to-focus.enable = true;
         workspace-auto-back-and-forth = true;
       };
-      overview = {backdrop-color = "#11121d";}; # Tokyo Night background color
+      overview = { backdrop-color = "#11121d"; }; # Tokyo Night background color
       screenshot-path = "~/Pictures/Screenshots/Screenshot-from-%Y-%m-%d-%H-%M-%S.png";
       outputs = {
         "eDP-1" = {
@@ -116,12 +115,12 @@ in {
           color = "rgba(0, 0, 0, 0.5)"; # Semi-transparent black
         };
         preset-column-widths = [
-          {proportion = 0.33;}
-          {proportion = 0.5;}
-          {proportion = 0.75;}
-          {proportion = 1.0;}
+          { proportion = 0.33; }
+          { proportion = 0.5; }
+          { proportion = 0.75; }
+          { proportion = 1.0; }
         ];
-        default-column-width = {proportion = 0.5;};
+        default-column-width = { proportion = 0.5; };
         always-center-single-column = true;
         gaps = 6;
         struts = {

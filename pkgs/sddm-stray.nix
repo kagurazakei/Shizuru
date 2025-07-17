@@ -1,11 +1,8 @@
-{
-  lib,
-  stdenvNoCC,
-  fetchFromGitHub,
-  formats,
-  kdePackages,
-  theme ? "stray", # default subtheme
-  themeConfig ? null,
+{ lib
+, stdenvNoCC
+, fetchFromGitHub
+, kdePackages
+, # default subtheme
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "sddm-stray-theme";

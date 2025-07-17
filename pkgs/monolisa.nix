@@ -1,8 +1,8 @@
-{
-  stdenv,
-  requireFile,
-  unzip,
-  lib,
+{ stdenv
+, requireFile
+, unzip
+, lib
+,
 }:
 stdenv.mkDerivation rec {
   name = "monolisa";
@@ -19,12 +19,12 @@ stdenv.mkDerivation rec {
       $ nix-hash --flat --base32 --type sha256 /path/to/${name}'';
   };
 
-  buildInputs = [unzip];
+  buildInputs = [ unzip ];
   phases = [
     "unpackPhase"
     "installPhase"
   ];
-  pathsToLink = ["/share/fonts/truetype/"];
+  pathsToLink = [ "/share/fonts/truetype/" ];
   sourceRoot = ".";
 
   installPhase = ''

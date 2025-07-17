@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
+{ ...
 }: {
   rum.programs.hyprpanel = {
     enable = true;
@@ -53,9 +49,9 @@
     settings = {
       bar.layouts = {
         "0" = {
-          left = ["dashboard" "windowtitle" "volume" "cava" "systray"];
-          middle = ["notifications" "workspaces" "updates"];
-          right = ["media" "network" "clock" "bluetooth" "battery" "power"];
+          left = [ "dashboard" "windowtitle" "volume" "cava" "systray" ];
+          middle = [ "notifications" "workspaces" "updates" ];
+          right = [ "media" "network" "clock" "bluetooth" "battery" "power" ];
         };
       };
       bar.customModules.updates.pollingInterval = 1440000;

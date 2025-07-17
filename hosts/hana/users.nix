@@ -1,15 +1,14 @@
-{
-  pkgs,
-  inputs,
-  username,
-  host,
-  system,
-  lib,
-  ...
-}: let
+{ pkgs
+, inputs
+, username
+, host
+, ...
+}:
+let
   inherit (import ./variables.nix) gitUsername;
-in {
-  imports = [inputs.home-manager.nixosModules.home-manager];
+in
+{
+  imports = [ inputs.home-manager.nixosModules.home-manager ];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -20,8 +19,8 @@ in {
     users.${username} = {
       imports =
         if (host == "shizuru")
-        then [../../modules/home-manager]
-        else [../../modules/home-manager/desktop.nix];
+        then [ ../../modules/home-manager ]
+        else [ ../../modules/home-manager/desktop.nix ];
       home.username = "${username}";
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "25.05";
@@ -52,9 +51,9 @@ in {
 
     defaultUserShell = pkgs.fish;
   };
-  nix.settings.allowed-users = ["${username}"];
-  environment.shells = with pkgs; [fish];
-  environment.systemPackages = with pkgs; [fzf];
+  nix.settings.allowed-users = [ "${username}" ];
+  environment.shells = with pkgs; [ fish ];
+  environment.systemPackages = with pkgs; [ fzf ];
   programs.fish.enable = true;
   programs.fish.interactiveShellInit = ''
     ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
@@ -66,7 +65,7 @@ in {
       enableCompletion = false;
       ohMyZsh = {
         enable = false;
-        plugins = ["git"];
+        plugins = [ "git" ];
         theme = "xiong-chiamiov-plus";
       };
 

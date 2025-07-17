@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# NixOS Dead Code Cleaner
+# -----------------------
+# 1. Aggressively removes all dead code (including lambda args)
+# 2. Formats with nixpkgs-fmt
+# 3. Creates backups before any changes
+
+set -eo pipefail
+
+# Configuration
+CONFIG_DIR="${CONFIG_DIR:-/home/antonio/cleanup-shizuru}"
+BACKUP_DIR="/tmp/nixos_config_backups_$(date +%s)"
+DEADNIX_FLAGS="--quiet"  # Remove --no-lambda-arg to clean lambda args too
+
+# Verify dependencies
+verify_deps() {
+    for cmd in deadnix nixpkgs-fmt; do
+        if ! command -v "$cmd" >/dev/null; then
+            echo >&2 "Missing required tool: $cmd"
+            echo >&2 "Install with: nix-shell -p deadnix nixpkgs-fmt"
+            exit 1
+        fi
+    done
+}
+
+# Process a single Nix file
+process_file() {
+    local file="$1"
+    echo "🔍 Analyzing: $file"
+    
+    # Create backup
+    mkdir -p "$BACKUP_DIR"
+    cp "$file" "$BACKUP_DIR/$(basename "$file").bak"
+    
+    # Format first
+    nixpkgs-fmt "$file"
+    
+    # Remove dead code (including lambda args)
+    if deadnix_output=$(deadnix $DEADNIX_FLAGS --fail "$file" 2>&1); then
+        echo "✅ No dead code found"
+    else
+        echo "🧹 Found dead code:"
+        echo "$deadnix_output"
+        deadnix $DEADNIX_FLAGS -e "$file"
+        echo "🚀 Removed dead code"
+    fi
+}
+
+main() {
+    verify_deps
+    echo "📂 Backup directory: $BACKUP_DIR"
+    
+    find "$CONFIG_DIR" -name "*.nix" | while read -r file; do
+        process_file "$file"
+    done
+    
+    echo -e "\n🎉 Cleanup complete!"
+    echo "Original files backed up in: $BACKUP_DIR"
+}
+
+main "$@"
+
+

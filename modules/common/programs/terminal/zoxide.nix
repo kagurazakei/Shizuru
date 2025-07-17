@@ -1,11 +1,7 @@
-{
-  pkgs,
-  inputs,
-  lib,
-  config,
-  ...
+{ pkgs
+, ...
 }: {
   hj = {
-    packages = [pkgs.zoxide];
+    packages = [ pkgs.zoxide ];
   };
 }

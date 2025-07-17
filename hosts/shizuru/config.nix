@@ -1,18 +1,11 @@
 # Main default config
-{
-  config,
-  pkgs,
-  host,
-  username,
-  self,
-  options,
-  lib,
-  inputs,
-  outputs,
-  system,
-  ...
-}: let
-  home = "/home/antonio";
+{ config
+, pkgs
+, lib
+, system
+, ...
+}:
+let
   inherit (import ./variables.nix) keyboardLayout;
   python-packages = pkgs.python3.withPackages (
     ps:
@@ -21,7 +14,8 @@
         pyquery # needed for hyprland-dots Weather script
       ]
   );
-in {
+in
+{
   imports = [
     ./hardware.nix
     ./users.nix
@@ -58,7 +52,7 @@ in {
   catppuccin.tty.enable = true;
 
   # Drivers to load (use "nvidia" and "modesetting" for XWayland fallback)
-  services.xserver.videoDrivers = ["modesetting" "nvidia"];
+  services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
 
   # Nixpkgs and users
   nixpkgs.config.allowUnfree = true;
@@ -66,7 +60,7 @@ in {
   users.mutableUsers = true;
   programs.command-not-found.enable = true;
   nixpkgs.config = {
-    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["joypixels"];
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [ "joypixels" ];
     joypixels.acceptLicense = true;
   };
   # Packages
@@ -82,7 +76,7 @@ in {
       egl-wayland
       master.waybar
     ])
-    ++ [python-packages];
+    ++ [ python-packages ];
 
   # OpenGL config
   hardware.graphics.enable = true;

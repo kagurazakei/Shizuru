@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   # 1. Create a wrapped MPV binary
   wrappedMpv = pkgs.writeShellScriptBin "mpv" ''
     export __NV_PRIME_RENDER_OFFLOAD=0  # Force Intel GPU
@@ -11,9 +12,10 @@
 
   # 2. Create patched desktop file (version-independent)
   mpvWithDesktop =
-    pkgs.runCommand "mpv-with-desktop" {
-      nativeBuildInputs = [pkgs.makeWrapper];
-    } ''
+    pkgs.runCommand "mpv-with-desktop"
+      {
+        nativeBuildInputs = [ pkgs.makeWrapper ];
+      } ''
       mkdir -p $out/bin $out/share/applications
 
       # Create symlink to our wrapper
@@ -30,11 +32,12 @@
         cp -r ${pkgs.mpv}/share/icons $out/share/
       fi
     '';
-in {
-  environment.systemPackages = [mpvWithDesktop];
+in
+{
+  environment.systemPackages = [ mpvWithDesktop ];
   xdg.mime.defaultApplications = {
-    "video/*" = ["mpv.desktop"];
-    "audio/*" = ["mpv.desktop"];
+    "video/*" = [ "mpv.desktop" ];
+    "audio/*" = [ "mpv.desktop" ];
   };
 }
 # Set as default video/audio player

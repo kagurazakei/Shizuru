@@ -1,9 +1,6 @@
-{
-  inputs,
-  pkgs,
-  config,
-  lib,
-  ...
+{ inputs
+, pkgs
+, ...
 }: {
   hj = {
     packages = with pkgs.kdePackages;

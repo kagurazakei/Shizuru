@@ -1,8 +1,6 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
+{ pkgs
+, config
+, ...
 }: {
   programs.zsh.enable = true;
   environment.sessionVariables = {
@@ -59,9 +57,9 @@
       plugins = {
         nix-zsh-completions = {
           source = "${pkgs.nix-zsh-completions}/share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
-          completions = ["${pkgs.nix-zsh-completions}/share/zsh/site-functions"];
+          completions = [ "${pkgs.nix-zsh-completions}/share/zsh/site-functions" ];
         };
-        zsh-completions.completions = ["${pkgs.zsh-completions}/share/zsh/site-functions"];
+        zsh-completions.completions = [ "${pkgs.zsh-completions}/share/zsh/site-functions" ];
         zsh-fzf-tab = {
           source = "${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh";
           config = ''

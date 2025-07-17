@@ -1,53 +1,16 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ pkgs
+, config
+, options
+, lib
+, inputs
+, system
+, ...
 }:
 with lib; let
   swww = inputs.swww.packages.${pkgs.system}.swww;
   cfg = config.system.packages;
-  qsConfig = ../../../configs/quickshell/qml;
-  quickshell = inputs.quickshell.packages.${pkgs.system}.default.override {
-    withWayland = true;
-    withHyprland = true;
-    withQtSvg = true;
-  };
-
-  qsWrapper = pkgs.symlinkJoin rec {
-    name = "qs-wrapper";
-    paths = [pkgs.quickshell];
-
-    buildInputs = [pkgs.makeWrapper];
-
-    qtDeps = with pkgs.kdePackages; [
-      qtbase
-      qtdeclarative
-      qtmultimedia
-      qtstyleplugin-kvantum
-    ];
-    qmlPath = let
-      qt5Path = "${pkgs.libsForQt5.qtstyleplugin-kvantum}/lib/qt-5/qml";
-      qt6Paths = lib.pipe (with pkgs.kdePackages; [qtbase qtdeclarative qtmultimedia]) [
-        (builtins.map (lib: "${lib}/lib/qt-6/qml"))
-      ];
-    in
-      lib.concatStringsSep ":" (qt6Paths ++ [qt5Path]);
-
-    postBuild = ''
-      wrapProgram $out/bin/quickshell \
-        --set QML2_IMPORT_PATH "${qmlPath}" \
-        --add-flags '-p ${qsConfig}'
-    '';
-
-    meta.mainProgram = "quickshell";
-  };
-in {
+in
+{
   options.system.packages = {
     enable = mkEnableOption "Enable Laptop Specific Packages";
   };
@@ -72,7 +35,6 @@ in {
       qcomicbook
       ahoviewer
       imagemagick
-      master.walker
       inxi
       jq
       kitty

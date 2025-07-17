@@ -1,9 +1,5 @@
-{
-  inputs,
-  pkgs,
-  config,
-  lib,
-  ...
+{ inputs
+, ...
 }: {
   hm = {
     imports = [
@@ -17,11 +13,11 @@
         media_minimum_duration = 10;
         idle_inhibitor = "wayland";
         sink_whitelist = [
-          {name = "Starship/Matisse HD Audio Controller Analog Stereo";}
+          { name = "Starship/Matisse HD Audio Controller Analog Stereo"; }
         ];
         node_blacklist = [
-          {name = "spotify";}
-          {app_name = "Music Player Daemon";}
+          { name = "spotify"; }
+          { app_name = "Music Player Daemon"; }
         ];
       };
     };

@@ -1,8 +1,6 @@
-{
-  config,
-  pkgs,
-  inputs,
-  ...
+{ config
+, inputs
+, ...
 }: {
   hm = {
     imports = [

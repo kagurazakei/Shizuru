@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     libnotify
     sound-theme-freedesktop
@@ -9,10 +9,11 @@
     serviceConfig = {
       Type = "oneshot";
       User = "root";
-      ExecStart = let
-        notify = "${pkgs.libnotify}/bin/notify-send";
-        sound = "${pkgs.sound-theme-freedesktop}/bin/canberra-gtk-play";
-      in
+      ExecStart =
+        let
+          notify = "${pkgs.libnotify}/bin/notify-send";
+          sound = "${pkgs.sound-theme-freedesktop}/bin/canberra-gtk-play";
+        in
         pkgs.writeShellScript "rebuild-notify" ''
           if [[ "%I" == *switch* ]]; then
             ${notify} -i nix-snowflake "NixOS Rebuild" "System configuration applied successfully!"
@@ -32,6 +33,6 @@
       RemainAfterExit = true;
       Type = "oneshot";
     };
-    wantedBy = ["default.target"];
+    wantedBy = [ "default.target" ];
   };
 }

@@ -1,17 +1,13 @@
-{
-  pkgs,
-  config,
-  host,
-  username,
-  options,
-  lib,
-  inputs,
-  system,
-  ...
+{ config
+, options
+, lib
+, system
+, ...
 }:
 with lib; let
   cfg = config.system.powermanagement;
-in {
+in
+{
   options.system.powermanagement = {
     enable = mkEnableOption "Enable Powermanagement for Laptop";
   };
