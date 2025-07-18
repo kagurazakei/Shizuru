@@ -23,7 +23,26 @@
     shizuruPkgs.url = "github:kagurazakei/shizuruPkgs";
     kureiji-ollie-cursor.url = "github:kagurazakei/kureiji-ollie-cursors";
     waifu-cursors.url = "git+https://codeberg.org/maotseantonio/waifu-cursors";
+    caelestia = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.quickshell.follows = "quickshell";
+    };
+    caelestia-cli = {
+      url = "github:caelestia-dots/cli";
+    };
+    app2unit = {
+      url = "github:soramanew/app2unit";
+    };
+    izlix = {
+      type = "github";
+      owner = "isabelroses";
+      repo = "izlix";
 
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     # Modules and utilities
     # lix-module = {
     #   url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
@@ -253,7 +272,6 @@
           inputs.nvf.nixosModules.default
           # lix-module.nixosModules.default
           agenix.nixosModules.default
-          inputs.sops-nix.nixosModules.sops
           inputs.flake-programs-sqlite.nixosModules.programs-sqlite
           {
             nixpkgs.overlays = import ./overlays {
@@ -262,6 +280,28 @@
           }
         ];
       };
+    };
+    nixConfig = {
+      extra-substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org" # Keep this last
+        "https://nyx.chaotic.cx"
+        "https://hyprland.cachix.org"
+        "https://yazi.cachix.org"
+        "https://walker-git.cachix.org"
+        "https://walker.cachix.org"
+        "https://catppuccin.cachix.org" # a cache for all catppuccin ports
+      ];
+      extra-trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
+        "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
+        "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
+        "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
+        "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
+      ];
     };
   };
 }

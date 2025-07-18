@@ -1,6 +1,7 @@
 {
   imports = [
     ./ags.nix
+    ./caelestia.nix
     ./cliphist.nix
     ./dolphin.nix
     ./fuzzel.nix

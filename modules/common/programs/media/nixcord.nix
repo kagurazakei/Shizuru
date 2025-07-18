@@ -1,6 +1,7 @@
-{ config
-, inputs
-, ...
+{
+  config,
+  inputs,
+  ...
 }: {
   hm = {
     imports = [
@@ -9,6 +10,7 @@
     services.arrpc.enable = true;
     programs.nixcord = {
       enable = true;
+      discord.enable = false;
       discord.vencord.unstable = false;
       discord.openASAR.enable = false;
       vesktop = {
@@ -25,7 +27,7 @@
       };
       config = {
         frameless = true;
-        enabledThemes = [ "tokyo-night-night.theme.css" ];
+        enabledThemes = ["tokyo-night-night.theme.css"];
         plugins = {
           alwaysTrust.enable = true;
           alwaysAnimate.enable = true;
