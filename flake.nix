@@ -24,7 +24,7 @@
     kureiji-ollie-cursor.url = "github:kagurazakei/kureiji-ollie-cursors";
     waifu-cursors.url = "git+https://codeberg.org/maotseantonio/waifu-cursors";
     caelestia = {
-      url = "github:caelestia-dots/shell";
+      url = "github:kagurazakei/shell";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.quickshell.follows = "quickshell";
     };
