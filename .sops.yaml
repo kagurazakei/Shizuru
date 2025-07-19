@@ -1,4 +1,4 @@
 # .sops.yaml
 creation_rules:
   - path_regex: secrets/access-token.yaml$
-    age: "age1u8wl3dnc6af2l7qggt4p9385zeu3q72jh3k2464vtvtnudx7tcuskf4drt" # Your age public key
+    age: "age1u8wl3dnc6af2l7qggt4p9385zeu3q72jh3k2464vtvtnudx7tcuskf4drt" 

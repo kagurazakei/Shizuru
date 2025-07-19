@@ -1,16 +1,16 @@
-{ pkgs
-, config
-, options
-, lib
-, inputs
-, system
-, ...
+{
+  pkgs,
+  config,
+  options,
+  lib,
+  inputs,
+  system,
+  ...
 }:
 with lib; let
   swww = inputs.swww.packages.${pkgs.system}.swww;
   cfg = config.system.packages;
-in
-{
+in {
   options.system.packages = {
     enable = mkEnableOption "Enable Laptop Specific Packages";
   };
@@ -38,7 +38,6 @@ in
       inxi
       jq
       kitty
-      master.networkmanagerapplet
       nwg-look # requires unstable channel
       nwg-dock-hyprland
       master.pamixer
@@ -62,6 +61,7 @@ in
       power-profiles-daemon
       fd
       master.home-manager
+      master.waypaper
       bluez-tools
       wgpu-utils
       gtk3

@@ -1,11 +1,10 @@
-{ pkgs
-, inputs
-, ...
-}:
-let
-  nh = inputs.nh.packages.${pkgs.system}.default;
-in
 {
+  pkgs,
+  inputs,
+  ...
+}: let
+  nh = inputs.nh.packages.${pkgs.system}.default;
+in {
   programs.nh = {
     package = nh;
     enable = true;
@@ -19,7 +18,4 @@ in
     nix-output-monitor
     nvd
   ];
-  environment.sessionVariables = {
-    NH_NO_CHECKS = "1"; # temporary fix for nh fail
-  };
 }

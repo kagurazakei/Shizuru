@@ -1,7 +1,8 @@
-{ pkgs
-, inputs
-, system
-, ...
+{
+  pkgs,
+  inputs,
+  system,
+  ...
 }: {
   imports = [
     inputs.catppuccin.homeModules.catppuccin
@@ -32,16 +33,12 @@
   catppuccin.btop.enable = false;
   catppuccin.mako.enable = false;
   services.mako.enable = false;
-  services.arrpc = {
-    enable = true;
-    systemdTarget = "graphical-session.target";
-  };
   home.packages = with pkgs; [
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
     inputs.ags.packages.${pkgs.system}.agsFull
   ];
-  home.file = { };
+  home.file = {};
 
   home.sessionVariables = {
     EDITOR = "nvim";

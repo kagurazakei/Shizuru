@@ -1,6 +1,7 @@
-{ pkgs
-, inputs
-, ...
+{
+  pkgs,
+  inputs,
+  ...
 }: {
   imports = [
     ./bind.nix
@@ -39,15 +40,15 @@
       "hyprctl setcursor Kureiji-Ollie-v2 34"
       "wl-paste --type text --watch cliphist store"
       "wl-paste --type image --watch cliphist store"
-      "systemctl --user restart walker"
       "systemctl --user restart cliphist"
       "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
       "dbus-update-activation-environment --all"
-      "uwsm-app caelestia shell"
-    ];
-    bind = [
-      "SUPER, tab, exec, ${pkgs.ags_1}/bin/ags -t 'overview' "
+      "swww-daemon --format xrgb"
+      "arrpc"
+      "uwsm app -t service walker -- --gapplication-service"
+      "uwsm app -t service arrpc"
+      "uwsm-app -- qs -c ii -d"
     ];
   };
 }

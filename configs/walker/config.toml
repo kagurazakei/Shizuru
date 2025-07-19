@@ -1,4 +1,3 @@
-
 app_launch_prefix = "uwsm-app -- "
 close_when_open = true
 as_window = false
@@ -8,7 +7,7 @@ hotreload_theme = true
 locale = ""
 monitor = ""
 terminal_title_flag = ""
-theme = "base16"
+theme = "grid"
 timeout = 0
 
 [activation_mode]
@@ -107,6 +106,7 @@ show_unqualified = false
 switcher_only = true
 typeahead = true
 weight = 5
+theme = "base16"
 
 [builtins.finder]
 concurrency = 8
@@ -228,6 +228,24 @@ theme = "base16_wall"
 switcher_only = false
 refresh = true
 src = "bash -c ~/.config/walker/scripts/wallpaper.sh"
+parser = "kv"
+
+[[plugins]]
+name = "edit"
+placeholder = "Edit"
+theme = "base16"
+switcher_only = false
+refresh = true
+src = "bash -c ~/.config/walker/scripts/edit.sh"
+parser = "kv"
+
+[[plugins]]
+name = "niri"
+placeholder = "Edit Niri"
+theme = "base16"
+switcher_only = false
+refresh = true
+src = "bash -c ~/.config/walker/scripts/niri.sh"
 parser = "kv"
 
 [[plugins]]

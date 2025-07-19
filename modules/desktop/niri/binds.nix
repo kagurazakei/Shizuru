@@ -1,7 +1,8 @@
-{ config
-, inputs
-, pkgs
-, ...
+{
+  config,
+  inputs,
+  pkgs,
+  ...
 }: {
   programs.niri.settings.binds = with config.lib.niri.actions; let
     set-volume = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@";
@@ -13,8 +14,7 @@
     wlogout-new = spawn "~/.local/bin/wlogout-new";
     # eww-bar = spawn "~/.local/bin/eww-bar";
     qs-lock = spawn "~/.local/bin/lock-qs";
-  in
-  {
+  in {
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
     "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
 
@@ -29,7 +29,7 @@
     "XF86MonBrightnessUp".action = brightness-up;
     "XF86MonBrightnessDown".action = brightness-down;
 
-    "Print".action.screenshot-screen = { write-to-disk = true; };
+    "Print".action.screenshot-screen = {write-to-disk = true;};
     "Mod+Shift+Alt+S".action = screenshot-window;
     "Mod+Shift+S".action = screenshot;
     "Mod+D".action = spawn "walker";
@@ -52,7 +52,7 @@
     "Mod+Q".action = close-window;
     "Mod+S".action = switch-preset-column-width;
     "Mod+F".action = maximize-column;
-    "Mod+M".action = spawn "niri-edit";
+    "Mod+M".action = spawn "walker" "-m" "niri";
     "Mod+Shift+Space".action = fullscreen-window;
     "Mod+Shift+F".action = expand-column-to-available-width;
     "Mod+Space".action = toggle-window-floating;

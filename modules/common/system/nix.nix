@@ -4,14 +4,6 @@
   lib,
   ...
 }: {
-  nixpkgs.overlays = lib.mkAfter [
-    (final: prev: {
-      lix = prev.lix.overrideAttrs (_: {
-        separateDebugInfo = false;
-      });
-    })
-  ];
-
   nix = {
     package = pkgs.master.nixVersions.git;
     channel.enable = false;

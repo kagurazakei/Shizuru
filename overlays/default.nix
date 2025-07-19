@@ -1,14 +1,12 @@
-{ inputs
-, system
-,
-}:
-let
+{
+  inputs,
+  system,
+}: let
   nixpkgs-master = import inputs.nixpkgs-master {
     inherit system;
     config.allowUnfree = true;
   };
-in
-[
+in [
   inputs.niri.overlays.niri
   inputs.nur.overlays.default
   #inputs.custom-nixpkgs.overlays.default
@@ -64,7 +62,7 @@ in
           hash = "sha256-ePY+BEpEcAq11+pUMjQ4XG358x3bXFQWwI1UAi+KmLo=";
         };
 
-        nativeBuildInputs = (builtins.filter (p: p != qfinal.qmake) ctprev.nativeBuildInputs) ++ [ final.cmake ];
+        nativeBuildInputs = (builtins.filter (p: p != qfinal.qmake) ctprev.nativeBuildInputs) ++ [final.cmake];
 
         buildInputs =
           ctprev.buildInputs

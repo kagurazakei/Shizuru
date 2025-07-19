@@ -1,9 +1,9 @@
-{ lib
-, pkgs
-, config
-, ...
-}:
-let
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}: let
   inherit
     (lib)
     mkEnableOption
@@ -13,13 +13,12 @@ let
     types
     ;
 
-  cfg = config.myOptions.cliphist;
-in
-{
-  options.myOptions.cliphist = {
+  cfg = config.mine.cliphist;
+in {
+  options.mine.cliphist = {
     enable = mkEnableOption "cliphist service";
 
-    package = mkPackageOption pkgs "cliphist" { };
+    package = mkPackageOption pkgs "cliphist" {};
 
     allowImages = mkOption {
       type = types.bool;
@@ -44,7 +43,7 @@ in
 
     systemdTargets = mkOption {
       type = with types; either (listOf str) str;
-      default = [ "graphical-session.target" ];
+      default = ["graphical-session.target"];
       example = "graphical-session.target";
       description = ''
         The systemd targets that will automatically start the cliphist service.
@@ -59,6 +58,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    hj.packages = [ cfg.package ];
+    hj.packages = [cfg.package];
   };
 }
