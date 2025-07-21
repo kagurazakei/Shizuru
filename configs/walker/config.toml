@@ -266,7 +266,17 @@ keep_sort = true
 recalculate_score = true
 show_icon_when_single = true
 
-  [[plugins.entries]]
+[[plugins.entries]]
+  label = "Edit System Config"
+  icon = "gpaint"
+  exec = "walker -n -m edit"
+
+[[plugins.entries]]
+  label = "Edit Niri Config"
+  icon = "gpaint"
+  exec = "walker -n -m niri"
+
+[[plugins.entries]]
   label = "Change Wallpaper"
   icon = "preferences-desktop-wallpaper"
   exec = "walker -n -m wallpaper"

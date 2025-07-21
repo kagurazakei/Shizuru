@@ -29,7 +29,7 @@ EOF
 
 # Main function to handle menu selection
 main() {
-    choice=$(menu | rofi -i -dmenu -config ~/.config/rofi/config-compact.rasi | cut -d. -f1)
+    choice=$(menu | walker -d | cut -d. -f1)
     
     # Map choices to corresponding files
     case $choice in

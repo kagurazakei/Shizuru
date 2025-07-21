@@ -1,14 +1,14 @@
-{ pkgs
-, config
-, options
-, lib
-, system
-, ...
+{
+  pkgs,
+  config,
+  options,
+  lib,
+  system,
+  ...
 }:
 with lib; let
   cfg = config.system.scheduler;
-in
-{
+in {
   options.system.scheduler = {
     enable = mkEnableOption "Enable Scheduler Options";
   };
@@ -16,9 +16,9 @@ in
   config = mkIf cfg.enable {
     services.scx = {
       enable = true;
-      package = pkgs.scx_git.rustscheds;
+      package = pkgs.scx.rustscheds;
       scheduler = "scx_lavd";
-      extraArgs = [ "--autopower" ];
+      extraArgs = ["--autopower"];
     };
   };
 }

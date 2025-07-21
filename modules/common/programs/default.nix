@@ -9,6 +9,4 @@
     ./matugen
     ./ui
   ];
-  modules.terminal.foot.enable = true;
 }
-

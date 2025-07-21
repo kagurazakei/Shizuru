@@ -96,14 +96,15 @@ in {
       inputs.shizuruPkgs.packages.${pkgs.system}.nitch
       inputs.shizuruPkgs.packages.${pkgs.system}.idle-inhibit
       inputs.shizuruPkgs.packages.${pkgs.system}.rxfetch
+      inputs.fastanime.packages.${pkgs.system}.default
       nurl
       master.yazi
-      #firefox_nightly
+      firedragon
       inputs.hyprsunset.packages.${pkgs.system}.hyprsunset
       master.microfetch
       socat
       hyprpicker
-      inputs.nyxexprs.packages.${pkgs.system}.ani-cli-git
+      master.ani-cli
     ];
   };
 }

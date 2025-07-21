@@ -1,9 +1,6 @@
-# Main default config
 {
-  config,
   pkgs,
   lib,
-  system,
   ...
 }: let
   inherit (import ./variables.nix) keyboardLayout;
@@ -11,7 +8,7 @@
     ps:
       with ps; [
         requests
-        pyquery # needed for hyprland-dots Weather script
+        pyquery
       ]
   );
 in {
@@ -22,48 +19,15 @@ in {
     ./themes.nix
     ../../modules
   ];
-
-  # GPU drivers
-  drivers.intel.enable = true;
-  drivers.nvidia.enable = true;
-  drivers.nvidia-prime = {
-    enable = true;
-    intelBusID = "PCI:0:2:0";
-    nvidiaBusID = "PCI:1:0:0";
-  };
-
-  # System services
-  vm.guest-services.enable = false;
-  local.hardware-clock.enable = true;
-  system.packages.enable = true;
-  system.kernel.enable = true;
-  system.bootloader-systemd.enable = true;
-  system.bootloader-grub.enable = false;
-  system.plymouth.enable = true;
-  system.audio.enable = true;
-  system.displayManager.enable = true;
-  system.greetd.enable = false;
-  system.powermanagement.enable = true;
-  system.scheduler.enable = false;
-  mine.hypridle.enable = false;
-  mine.cliphist.enable = true;
-  system.zfs.enable = true;
-  system.zram.enable = true;
-  catppuccin.tty.enable = true;
-
-  # Drivers to load (use "nvidia" and "modesetting" for XWayland fallback)
   services.xserver.videoDrivers = ["modesetting" "nvidia"];
-
-  # Nixpkgs and users
+  catppuccin.tty.enable = true;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
-  users.mutableUsers = true;
   programs.command-not-found.enable = true;
   nixpkgs.config = {
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["joypixels"];
     joypixels.acceptLicense = true;
   };
-  # Packages
   environment.systemPackages =
     (with pkgs; [
       libva-utils
@@ -77,14 +41,8 @@ in {
       master.waybar
     ])
     ++ [python-packages];
-
-  # OpenGL config
   hardware.graphics.enable = true;
-
-  # Console
   console.keyMap = "${keyboardLayout}";
-
-  # Wayland support for apps like Electron
   environment.sessionVariables = {
     EDITOR = "nvim";
     BROWSER = "firefox";
@@ -97,8 +55,5 @@ in {
     ZDOTDIR = "$HOME/.config/zsh";
     NH_OS_FLAKE = "/home/antonio/shizuru";
   };
-
-  # Removed: all global GPU env vars and kernel modules — handled in `drivers/*.nix`
-
   system.stateVersion = "25.05";
 }

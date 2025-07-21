@@ -2,11 +2,11 @@
   description = "MaotseNyein NixOS-Hyprland";
 
   inputs = {
-    # Core Nixpkgs sources
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     font-flake.url = "github:redyf/font-flake";
+    systems.url = "github:nix-systems/x86_64-linux";
     agenix.url = "github:ryantm/agenix";
     walker.url = "github:abenz1267/walker";
     sops-nix = {
@@ -15,11 +15,10 @@
     };
     alejandra.url = "github:kamadorueda/alejandra/4.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
-    # Fish shell
+    fastanime.url = "github:Benexl/FastAnime";
     fish-flake = {
       url = "github:kagurazakei/fish-flake";
     };
-    # Personal packages and cursors
     shizuruPkgs.url = "github:kagurazakei/shizuruPkgs";
     kureiji-ollie-cursor.url = "github:kagurazakei/kureiji-ollie-cursors";
     waifu-cursors.url = "git+https://codeberg.org/maotseantonio/waifu-cursors";
@@ -81,17 +80,107 @@
       url = "github:/InioX/Matugen";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    #walker.url = "github:abenz1267/walker";
     yazi.url = "github:sxyazi/yazi";
 
-    # Hyprland ecosystem
-    hyprland.url = "github:hyprwm/Hyprland";
+    aquamarine = {
+      url = "github:hyprwm/aquamarine";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        hyprutils.follows = "hyprutils";
+        hyprwayland-scanner.follows = "hyprwayland-scanner";
+      };
+    };
+
+    hyprcursor = {
+      url = "github:hyprwm/hyprcursor";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        hyprlang.follows = "hyprlang";
+      };
+    };
+
+    hyprgraphics = {
+      url = "github:hyprwm/hyprgraphics";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        hyprutils.follows = "hyprutils";
+      };
+    };
+
+    hyprland-protocols = {
+      url = "github:hyprwm/hyprland-protocols";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+    hyprland-qtutils = {
+      url = "github:hyprwm/hyprland-qtutils";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        hyprlang.follows = "hyprlang";
+      };
+    };
+
+    hyprlang = {
+      url = "github:hyprwm/hyprlang";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        hyprutils.follows = "hyprutils";
+      };
+    };
+
+    hyprutils = {
+      url = "github:hyprwm/hyprutils";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+
+    hyprwayland-scanner = {
+      url = "github:hyprwm/hyprwayland-scanner";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+      };
+    };
+    xdph = {
+      url = "github:hyprwm/xdg-desktop-portal-hyprland";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        hyprland-protocols.follows = "hyprland-protocols";
+        hyprlang.follows = "hyprlang";
+        hyprutils.follows = "hyprutils";
+        hyprwayland-scanner.follows = "hyprwayland-scanner";
+      };
+    };
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        systems.follows = "systems";
+        aquamarine.follows = "aquamarine";
+        hyprcursor.follows = "hyprcursor";
+        hyprgraphics.follows = "hyprgraphics";
+        hyprland-protocols.follows = "hyprland-protocols";
+        hyprland-qtutils.follows = "hyprland-qtutils";
+        hyprlang.follows = "hyprlang";
+        hyprutils.follows = "hyprutils";
+        hyprwayland-scanner.follows = "hyprwayland-scanner";
+        xdph.follows = "xdph";
+      };
+    };
     hypridle.url = "github:hyprwm/hypridle";
     hyprlock.url = "github:hyprwm/hyprlock";
     hyprsunset.url = "github:hyprwm/hyprsunset";
     hyprland-qt-support.url = "github:hyprwm/hyprland-qt-support";
-    hyprland-qtutils.url = "github:hyprwm/hyprland-qtutils";
 
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -149,7 +238,6 @@
       inputs.hjem.follows = "hjem";
     };
 
-    # Themes, overlays, fonts
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     catppuccin.url = "github:catppuccin/nix";
@@ -256,7 +344,6 @@
         };
     };
 
-    # NixOS configuration for host 'shizuru'
     nixosConfigurations = {
       shizuru = nixpkgs.lib.nixosSystem {
         specialArgs = {

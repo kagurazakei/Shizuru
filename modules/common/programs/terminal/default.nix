@@ -1,12 +1,13 @@
 {
   imports = [
-    ./git.nix
+    ./btop.nix
     ./cava.nix
-    ./nixy.nix
     ./fhsenv.nix
     ./fish.nix
-    ./btop.nix
     ./foot.nix
+    ./ghostty.nix
+    ./git.nix
+    ./nixy.nix
     ./shell.nix
     ./starship.nix
     ./zathura.nix
