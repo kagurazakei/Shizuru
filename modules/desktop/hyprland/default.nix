@@ -6,6 +6,8 @@
   imports = [
     ./bind.nix
     ./exec.nix
+    ./env.nix
+    ./settings.nix
     ./plugins.nix
     ./hyprland.nix
     ./hyprpanel.nix

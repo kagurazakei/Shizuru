@@ -16,7 +16,7 @@
   };
   sops.secrets."nix-access-token" = {
     sopsFile = ../../../secrets/github.yaml;
-    path = "/home/antonio/.config/nix/access-token.conf";
+    path = "/etc/nix/access-token.conf";
     owner = "antonio";
     mode = "0400";
   };

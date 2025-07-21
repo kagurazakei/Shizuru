@@ -12,7 +12,6 @@
     brightness-up = spawn "~/.local/bin/brightness" "--inc";
     brightness-down = spawn "~/.local/bin/brightness" "--dec";
     wlogout-new = spawn "~/.local/bin/wlogout-new";
-    # eww-bar = spawn "~/.local/bin/eww-bar";
     qs-lock = spawn "~/.local/bin/lock-qs";
   in {
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
