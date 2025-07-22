@@ -13,12 +13,6 @@
     enable = true;
     enableFishIntegration = true;
   };
-  programs.bottom = {
-    enable = true;
-  };
-  programs.zellij = {
-    enable = true;
-  };
   programs.gh = {
     enable = true;
     package = pkgs.gh;
@@ -33,6 +27,8 @@
   catppuccin.enable = true;
   catppuccin.btop.enable = false;
   catppuccin.mako.enable = false;
+  catppuccin.cava.enable = false;
+  catppuccin.kvantum.enable = false;
   services.mako.enable = false;
   home.packages = with pkgs; [
     libsForQt5.qtstyleplugin-kvantum

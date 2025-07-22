@@ -1,0 +1,22 @@
+# Draco Carbon scheme for the Base16 Builder (https://github.com/chriskempson/base16-builder)
+system: "base16"
+name: "Draco Carbon"
+author: "antonio"
+variant: "dark"
+palette:
+  base00: "#0a0a13" # background
+  base01: "#1e1e2e" # inactive tab background
+  base02: "#44475a" # bright black
+  base03: "#6272a4" # inactive tab foreground
+  base04: "#f8f8f2" # foreground subtle
+  base05: "#f8f8f2" # foreground main
+  base06: "#ffffff" # bright white
+  base07: "#bd93f9" # accent (cursor, selection)
+  base08: "#ff5555" # red
+  base09: "#ffb86c" # orange
+  base0A: "#f1fa8c" # yellow
+  base0B: "#50fa7b" # green
+  base0C: "#8be9fd" # cyan
+  base0D: "#bd93f9" # blue
+  base0E: "#ff79c6" # magenta
+  base0F: "#ff6e6e" # bright red

@@ -1,20 +1,26 @@
-{ pkgs
-, ...
+{
+  pkgs,
+  lib,
+  ...
 }: {
-  stylix.enable = true;
-  stylix.autoEnable = false;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-dark.yaml";
+  stylix = {
+    enable = true;
+    autoEnable = false;
+    homeManagerIntegration = {
+      followSystem = true;
+      autoImport = true;
+    };
+  };
+  stylix.base16Scheme = ./themes/oxo-draco.yaml;
   stylix = {
     targets = {
       gtk.enable = true;
+      qt.enable = false;
       nixos-icons.enable = true;
-      #kitty.enable = true;
-      #ghostty.enable = true;
-      #wezterm.enable = true;
     };
   };
   stylix.polarity = "dark";
-  stylix.image = "/home/antonio/Pictures/wallpapers/Catpuccin_carv1.png";
+  stylix.image = "/home/antonio/Pictures/wallpapers/.wallpaper";
   stylix = {
     fonts = {
       sizes = {
