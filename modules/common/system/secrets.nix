@@ -3,7 +3,9 @@
   pkgs,
   config,
   ...
-}: {
+}: let
+  home = "/home/antonio/.config/age";
+in {
   imports = [inputs.sops-nix.nixosModules.sops];
   environment.systemPackages = with pkgs; [
     sops

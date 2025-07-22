@@ -86,7 +86,7 @@
           natural_scroll = false;
         };
         kb_layout = "us,mm";
-        kb_options = "caps:swapescape, grp:alt_shift_toggle";
+        kb_options = "caps:swapescape, grp:alt_shift_toggle, fkeys:basic_13-24";
         repeat_rate = 50;
         repeat_delay = 300;
         sensitivity = 0.2;
