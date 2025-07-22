@@ -1,7 +1,7 @@
 {
   imports = [
     ./equibop.nix
-    # ./nixcord.nix
+    ./nixcord.nix
     ./spicetify.nix
     ./spotify-player.nix
     # ./textfox.nix
