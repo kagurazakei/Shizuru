@@ -20,6 +20,16 @@
     owner = "antonio";
     mode = "0400";
   };
-
-  nix.extraOptions = "!include ${config.sops.secrets."nix-access-token".path}";
+  age.identityPaths = ["/home/antonio/.config/age/keys.txt"];
+  age.secrets = {
+    access-token = {
+      file = ../../../secrets/github.age;
+      path = "/etc/nix/age-token.conf";
+      mode = "0400";
+    };
+  };
+  nix.extraOptions = "
+  !include ${config.sops.secrets."nix-access-token".path}
+  !include ${config.age.secrets."access-token".path}
+  ";
 }

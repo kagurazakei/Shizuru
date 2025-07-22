@@ -9,6 +9,7 @@
     ./env.nix
     ./settings.nix
     ./plugins.nix
+    ./rules.nix
     ./hyprland.nix
     ./hyprpanel.nix
   ];
