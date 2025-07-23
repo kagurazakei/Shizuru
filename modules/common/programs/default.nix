@@ -1,5 +1,6 @@
 {
   imports = [
+    ./kitty
     ./media
     ./terminal
     ./wezterm

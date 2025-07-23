@@ -8,6 +8,7 @@
     ./foot.nix
     ./ghostty.nix
     ./git.nix
+    ./lazygit.nix
     ./nixy.nix
     ./shell.nix
     ./starship.nix

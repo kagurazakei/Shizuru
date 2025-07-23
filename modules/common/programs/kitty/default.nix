@@ -5,7 +5,7 @@
     installPhase = ''
       mkdir -p $out/share/kitty
       cp neighboring_window.py $out/share/kitty/
-      cp passkey.py $out/share/kitty/
+      cp pass_keys.py $out/share/kitty/
       cp relative_resize.py $out/share/kitty/
       cp scroll_mark.py $out/share/kitty/
       cp kitty-open-helper.sh $out/share/kitty/
@@ -15,7 +15,6 @@
 in {
   hj.rum.programs.kitty = {
     enable = true;
-    theme = ./oxo-mocha.conf;
     settings = {
       # All your existing color and appearance settings
       foreground = "#f8f8f2";
@@ -78,9 +77,8 @@ in {
       active_tab_title_template = "none";
       active_tab_font_style = "bold-italic";
       inactive_tab_font_style = "normal";
-
+      notify_on_cmd_finish = "always";
       # Core behavior
-      shell = "fish";
       editor = "nvim";
       allow_remote_control = "yes";
       listen_on = "unix:@mykitty";
@@ -90,6 +88,8 @@ in {
       cursor_trail = 1;
       cursor_trail_decay = "0.1 0.2";
       cursor_trail_start_threshold = 10;
+      cursor_shape = "beam";
+      cursor_beam_thickness = "1.5";
       kitty_mod = "ctrl+shift";
 
       # All your existing keybindings
@@ -171,7 +171,6 @@ in {
       # Protocol handlers using open helper
       "protocol file" = "";
       "mime inode/directory" = "";
-      "action launch --type=os-window ${kitty-scripts}/share/kitty/kitty-open-helper.sh $FILE_PATH";
 
       # Vim-style navigation (with tmux/Vim passthrough)
       "map ctrl+h" = "passkey neighboring_window left ctrl+h nvim";
@@ -188,7 +187,7 @@ in {
       # Scroll marks
       "map ctrl+shift+m" = "scroll_mark";
       "map ctrl+shift+n" = "scroll_mark prev";
-      "map ctrl+shift+k" = "set_mark";
+      "map ctrl+shift+o" = "set_mark";
 
       # Fallback navigation (non-Vim)
       "map ctrl+alt+h" = "neighboring_window left";
@@ -203,5 +202,5 @@ in {
   };
 
   # Ensure xdg-utils is available for the open helper
-  hj.packages = [ pkgs.xdg-utils ];
+  hj.packages = [pkgs.xdg-utils];
 }

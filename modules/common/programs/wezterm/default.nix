@@ -25,7 +25,7 @@ in {
         require("keybinds").apply(c)
         c.window_background_opacity = 1.0
         c.window_background_image = "/home/antonio/Pictures/wallpapers/.wallpaper"
-        c.window_background_image_hsb = { brightness = 0.08 }
+        c.window_background_image_hsb = { brightness = 0.045 }
         if utils.is_linux() or utils.is_darwin() then
         	c.default_prog = { "fish", "--login" }
         elseif utils.is_windows() then
