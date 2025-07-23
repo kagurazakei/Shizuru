@@ -11,9 +11,7 @@
       });
     })
   ];
-
   nix = {
-    package = pkgs.master.lixPackageSets.git.lix;
     channel.enable = false;
     settings = {
       nix-path = [

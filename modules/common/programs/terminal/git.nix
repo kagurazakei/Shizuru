@@ -1,6 +1,4 @@
-{ pkgs
-, ...
-}: {
+{pkgs, ...}: {
   hm.programs.git = {
     enable = true;
     package = pkgs.gitFull;
@@ -12,22 +10,13 @@
     };
 
     extraConfig = {
-      # I don't care about the usage of the term "master"
-      # but main is easier to type, so that's that
       init.defaultBranch = "main";
-
       core = {
-        # set delta as the main pager
         pager = "delta";
-
-        # disable the horrendous GUI password prompt
-        # for Git when SSH authentication fails
         askPass = "";
-
         whitespace = "fix,-indent-with-non-tab,trailing-space,cr-at-eol";
       };
     };
-
     aliases = {
       br = "branch";
       c = "commit -m";

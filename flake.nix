@@ -42,12 +42,14 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    # Modules and utilities
-    # lix-module = {
-    #   url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    #
+    lix-module = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.lix = {
+        url = "git+https://git.lix.systems/lix-project/lix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+    };
     flake-programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -296,7 +298,7 @@
     home-manager,
     chaotic,
     agenix,
-    # lix-module,
+    lix-module,
     quickshell,
     ...
   }: let
@@ -357,7 +359,7 @@
           inputs.catppuccin.nixosModules.catppuccin
           inputs.nixos-hardware.nixosModules.huawei-machc-wa
           inputs.nvf.nixosModules.default
-          # lix-module.nixosModules.default
+          lix-module.nixosModules.default
           agenix.nixosModules.default
           inputs.flake-programs-sqlite.nixosModules.programs-sqlite
           {
@@ -371,12 +373,13 @@
     nixConfig = {
       extra-substituters = [
         "https://nix-community.cachix.org"
-        "https://cache.nixos.org" # Keep this last
+        "https://cache.nixos.org?priority=10" # Keep this last
         "https://nyx.chaotic.cx"
         "https://hyprland.cachix.org"
         "https://yazi.cachix.org"
         "https://walker-git.cachix.org"
         "https://walker.cachix.org"
+        "https://niri.cachix.org"
         "https://catppuccin.cachix.org" # a cache for all catppuccin ports
       ];
       extra-trusted-public-keys = [
@@ -387,6 +390,7 @@
         "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
         "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
         "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
+        "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
         "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
       ];
     };

@@ -2,6 +2,7 @@
   imports = [
     ./bootloader.nix
     ./cachix.nix
+    ./console.nix
     ./grub.nix
     ./kernel.nix
     ./local-hardware-clock.nix

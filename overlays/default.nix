@@ -9,7 +9,6 @@
 in [
   inputs.niri.overlays.niri
   inputs.nur.overlays.default
-  #inputs.custom-nixpkgs.overlays.default
 
   (_final: prev: {
     stable = import inputs.nixpkgs-stable {
@@ -17,9 +16,8 @@ in [
       config.allowUnfree = true;
       config.nvidia.acceptLicense = true;
     };
-    unstable = prev; # Explicit alias for nixos-unstable
-    master = nixpkgs-master; # Already defined
-    # walker = inputs.walker.packages.${system}.default;
+    unstable = prev;
+    master = nixpkgs-master;
     quickshell = inputs.quickshell.packages.${system}.default;
     nvchad = inputs.nvchad4nix.packages.${system}.nvchad;
     zjstatus = inputs.zjstatus.packages.${system}.default;
@@ -51,7 +49,6 @@ in [
     };
   })
 
-  # Add the Qt6 overlay here
   (final: prev: {
     qt6Packages = prev.qt6Packages.overrideScope (qfinal: qprev: {
       qt6ct = qprev.qt6ct.overrideAttrs (ctprev: {
@@ -88,9 +85,19 @@ in [
         owner = "sched-ext";
         repo = "scx";
         rev = "v1.0.12";
-        # ── use the hash Nix prints on the first build ──
         hash = "sha256-0000000000000000000000000000000000000000000=";
       };
+    });
+  })
+
+  (final: prev: {
+    extractpdfmark = prev.extractpdfmark.overrideAttrs (oldAttrs: {
+      nativeBuildInputs = (oldAttrs.nativeBuildInputs or []) ++ [prev.gettext];
+      buildInputs = (oldAttrs.buildInputs or []) ++ [prev.gettext prev.libiconv];
+      preAutoreconf = ''
+        mkdir -p m4
+        cp -r ${prev.gettext}/share/gettext/m4/. m4/
+      '';
     });
   })
 ]

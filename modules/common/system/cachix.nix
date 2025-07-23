@@ -4,13 +4,14 @@
   nix = {
     settings = {
       substituters = [
-        "https://cache.nixos.org" # Keep this last
+        "https://cache.nixos.org?priority=10" # Keep this last
         "https://nyx.chaotic.cx"
         "https://hyprland.cachix.org"
         "https://yazi.cachix.org"
         "https://walker-git.cachix.org"
         "https://walker.cachix.org"
         "https://catppuccin.cachix.org" # a cache for all catppuccin ports
+        "https://niri.cachix.org"
         "https://nix-community.cachix.org"
       ];
       trusted-substituters = [
@@ -21,6 +22,7 @@
         "https://walker-git.cachix.org"
         "https://walker.cachix.org"
         "https://catppuccin.cachix.org" # a cache for all catppuccin ports
+        "https://niri.cachix.org"
         "https://nix-community.cachix.org"
       ];
       trusted-public-keys = [
@@ -31,6 +33,7 @@
         "walker-git.cachix.org-1:vmC0ocfPWh0S/vRAQGtChuiZBTAe4wiKDeyyXM0/7pM="
         "walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="
         "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
+        "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };

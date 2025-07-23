@@ -20,7 +20,7 @@ in {
     ../../modules
   ];
   services.xserver.videoDrivers = ["modesetting" "nvidia"];
-  catppuccin.tty.enable = true;
+  catppuccin.tty.enable = false;
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
   programs.command-not-found.enable = true;
