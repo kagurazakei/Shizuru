@@ -30,6 +30,14 @@ in {
       mode = "0400";
     };
   };
+  age.secrets = {
+    anilist = {
+      file = ../../../secrets/anilist.age;
+      path = "/home/antonio/.config/fastanime/anilist-api.txt";
+      owner = "antonio";
+      mode = "0400";
+    };
+  };
   nix.extraOptions = "
   !include ${config.sops.secrets."nix-access-token".path}
   !include ${config.age.secrets."access-token".path}

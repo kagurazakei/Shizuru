@@ -1,32 +1,34 @@
-{pkgs, ...}: {
-  hj.packages = [pkgs.yazi];
-
-  hj.files = {
-    ".config/yazi/init.lua".source = ./configs/init.lua;
-    ".config/yazi/keymap.toml".source = ./configs/keymap.toml;
-    ".config/yazi/theme.toml".source = ./configs/theme.toml;
-    ".config/yazi/yazi.toml".source = ./configs/yazi.toml;
-  };
-
-  hj.files = {
-    ".config/yazi/flavors/catppuccin-macchiato.yazi".source = ./flavors/catppuccin-macchiato.yazi;
-  };
-
-  hj.files = {
-    ".config/yazi/plugin/allmytoes.yazi".source = ./plugins/allmytoes.yazi;
-    ".config/yazi/plugins/compress.yazi".source = ./plugins/compress.yazi;
-    ".config/yazi/plugins/full-border.yazi".source = ./plugins/full-border.yazi;
-    ".config/yazi/plugins/git.yazi".source = ./plugins/git.yazi;
-    ".config/yazi/plugins/hide-preview.yazi".source = ./plugins/hide-preview.yazi;
-    ".config/yazi/plugins/ouch.yazi".source = ./plugins/ouch.yazi;
-    ".config/yazi/plugins/relative-motions.yazi".source = ./plugins/relative-motions.yazi;
-    ".config/yazi/plugins/rich-preview.yazi".source = ./plugins/rich-preview.yazi;
-    ".config/yazi/plugins/rsync.yazi".source = ./plugins/rsync.yazi;
-    ".config/yazi/plugins/searchjump.yazi".source = ./plugins/searchjump.yazi;
-    ".config/yazi/plugins/smart-enter.yazi".source = ./plugins/smart-enter.yazi;
-    ".config/yazi/plugins/smart-filter.yazi".source = ./plugins/smart-filter.yazi;
-    ".config/yazi/plugins/starship.yazi".source = ./plugins/starship.yazi;
-    ".config/yazi/plugins/yatline-githead.yazi".source = ./plugins/yatline-githead.yazi;
-    ".config/yazi/plugins/yatline.yazi".source = ./plugins/yatline.yazi;
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./keymap.nix
+    ./yazi.nix
+    ./theme.nix
+  ];
+  programs.yazi = {
+    enable = true;
+    package = pkgs.master.yazi;
+    initLua = ./configs/init.lua;
+    plugins = {
+      relative-motions = ./plugins/relative-motions.yazi;
+      rich-preview = ./plugins/rich-preview.yazi;
+      allmytoes = ./plugins/allmytoes.yazi;
+      compress = ./plugins/compress.yazi;
+      full-border = ./plugins/full-border.yazi;
+      git = ./plugins/git.yazi;
+      hide-preview = ./plugins/hide-preview.yazi;
+      ouch = ./plugins/ouch.yazi;
+      yatline = ./plugins/yatline.yazi;
+      yatline-githead = ./plugins/yatline-githead.yazi;
+      rsync = ./plugins/rsync.yazi;
+      searchjump = ./plugins/searchjump.yazi;
+      smart-enter = ./plugins/smart-enter.yazi;
+      smart-filter = ./plugins/smart-filter.yazi;
+      starship = ./plugins/starship.yazi;
+    };
   };
 }
