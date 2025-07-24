@@ -12,8 +12,7 @@ v_align = "fill"
 
 [ui.window.box]
 h_align = "center"
-width = 550
-height = 500
+width = 500
 
 [ui.window.box.bar]
 orientation = "horizontal"
@@ -30,15 +29,15 @@ pixel_size = 24
 theme = ""
 
 [ui.window.box.margins]
-top = 400
+top = 60
 
 [ui.window.box.ai_scroll]
 name = "aiScroll"
 h_align = "fill"
 v_align = "fill"
-max_height = 400
+max_height = 600
 min_width = 500
-height = 400
+height = 600
 width = 500
 
 [ui.window.box.ai_scroll.margins]
@@ -59,25 +58,50 @@ y_align = 0
 wrap = true
 
 [ui.window.box.scroll.list]
+grid = true
 marker_color = "#1BFFE1"
-max_height = 600
-max_width = 600
-min_width = 400
+max_height = 500
+max_width = 500
+min_width = 500
 width = 500
+
+[ui.window.box.scroll.list.item]
+orientation = "vertical"
+v_align = "start"
+width = 200
+h_expand = false
+v_expand = false
+
+[ui.window.box.scroll.list.item.text.label]
+h_align = "center"
+h_expand = false
+v_align = "start"
+
+[ui.window.box.scroll.list.item.text.sub]
+h_align = "center"
+v_align = "start"
 
 [ui.window.box.scroll.list.item.activation_label]
 h_align = "fill"
+overlay = true
 v_align = "fill"
 width = 20
 x_align = 0.5
 y_align = 0.5
 
 [ui.window.box.scroll.list.item.icon]
-pixel_size = 26
+ixel_size = 42
+v_align = "start"
 theme = ""
 
 [ui.window.box.scroll.list.margins]
-top = 8
+top = 32
+
+[ui.window.box.search]
+max_width = 400
+width = 400
+h_expand = false
+h_align = "center"
 
 [ui.window.box.search.prompt]
 name = "prompt"

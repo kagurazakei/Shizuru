@@ -1,7 +1,7 @@
 /* start flavours */
-@define-color base00 #191724;
-@define-color base01 #1f1d2e;
-@define-color base02 #26233a;
+@define-color base00 #0A0A13;
+@define-color base01 #0A0A13;
+@define-color base02 #11121d;
 @define-color base03 #6e6a86;
 @define-color base04 #908caa;
 @define-color base05 #e0def4;
@@ -12,7 +12,7 @@
 @define-color base0A #ebbcba;
 @define-color base0B #31748f;
 @define-color base0C #9ccfd8;
-@define-color base0D #c4a7e7;
+@define-color base0D #eb6f92;
 @define-color base0E #f6c177;
 @define-color base0F #524f67;
 /* end flavours */
@@ -40,25 +40,36 @@ slider,
     all: unset;
 }
 
+#cfgerr {
+  background: #11111b;
+  padding: 8px;
+  font-size: 1.6em;
+}
+
 #window {
     color: @base05;
+    margin-top: 1px;
+    margin-left: 15px;
+    border-radius: 20px;
 }
 
 #box {
-    border-radius: 6px;
+    border-radius: 20px;
     background: @base00;
-    padding: 32px;
+    padding: 22px;
+    margin-top: 5px;
+    margin-left: 5px;
     border: 2px solid @base02;
     box-shadow:
-        0px 1px 1px rgba(0, 0, 0, 0.82),
-        0px 1px 1px rgba(0, 0, 0, 0.82);
+        0px 1px 1px rgba(0, 0, 0, 0.2),
+        0px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 #search {
     background: @base02;
     border: 2px solid @base02;
-    border-radius: 4px;
-    padding: 8px;
+    border-radius: 20px;
+    padding: 15px;
     margin-bottom: 16px;
 }
 
@@ -77,15 +88,13 @@ slider,
 #password,
 #input,
 #typeahead {
-    border-radius: 2px;
+    border-radius: 20px;
 }
 
 #input {
     background: none;
     font-weight: 600;
-}
-
-#password {
+    border-radius: 20px;
 }
 
 #spinner {
@@ -99,7 +108,6 @@ slider,
 
 #input placeholder {
     opacity: 0.5;
-    color: @base05;
 }
 
 #list {
@@ -107,40 +115,26 @@ slider,
 
 child {
     padding: 12px;
-    border-radius: 2px;
+    border-radius: 6px;
 }
 
 child:selected,
 child:hover {
-    background: @base01;
-}
-
-#item {
+    background: @base0D;
+    color: @base00;
 }
 
 #icon {
-}
-
-#text {
+    margin-right: 12px;
 }
 
 #label {
-    font-size: 0px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 #sub {
-    font-size: 0.8em;
-}
-#sub:hover {
-}
-
-#activationlabel {
-}
-
-#bar {
-}
-
-.barentry {
+    font-size: 0.925em;
 }
 
 .activation #activationlabel {

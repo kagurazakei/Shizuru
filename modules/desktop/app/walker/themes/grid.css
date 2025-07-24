@@ -1,10 +1,26 @@
-/* AUTO GENERATED. DO NOT EDIT. CHANGES WILL BE OVERWRITTEN. */
 
-@define-color foreground rgba(255, 255, 255, 0.8);
-@define-color background hsla(240, 12.7%, 13.9%, 0.98);
-@define-color color1 hsl(172, 100%, 25.3%);
-/* AUTO GENERATED. DO NOT EDIT. CHANGES WILL BE OVERWRITTEN. */
+@define-color foreground #f8f8f2;
+@define-color background #0a0a13;
+@define-color cursor     #f8f8f2;
 
+@define-color color0  #0a0a13;   
+@define-color color1  #e06c75;   
+@define-color color2  #98c379;   
+@define-color color3  #e0c989;   
+@define-color color4  #61afef;   
+@define-color color5  #d67ad2;   
+@define-color color6  #56b6c2;   
+@define-color color7  #f8f8f2;   
+
+@define-color color8  #44475a;   
+@define-color color9  #f07178;   
+@define-color color10 #85c87e;   
+@define-color color11 #e6cfa1;   
+@define-color color12 #82aaff;   
+@define-color color13 #e291e9;  
+@define-color color14 #7fdbca;   
+@define-color color15 #ffffff;   
+/* AUTO GENERATED. DO NOT EDIT. CHANGES WILL BE OVERWRITTEN. */
 #window,
 #box,
 #aiScroll,
@@ -40,9 +56,9 @@ slider,
 }
 
 #box {
-  border-radius: 2px;
+  border-radius: 20px;
   background: @background;
-  padding: 32px;
+  padding: 34px 0px 34px 0px;
   border: 1px solid lighter(@background);
   box-shadow:
     0 19px 38px rgba(0, 0, 0, 0.3),
@@ -55,6 +71,7 @@ slider,
     0 1px 2px rgba(0, 0, 0, 0.22);
   background: lighter(@background);
   padding: 8px;
+  border-radius: 20px;
 }
 
 #prompt {
@@ -72,11 +89,12 @@ slider,
 #password,
 #input,
 #typeahead {
-  border-radius: 2px;
+  border-radius: 20px;
 }
 
 #input {
   background: none;
+  border-radius: 20px;
 }
 
 #password {
@@ -100,19 +118,19 @@ slider,
 
 child {
   padding: 8px;
-  border-radius: 2px;
 }
 
-child:selected,
-child:hover {
-  background: alpha(@color1, 0.4);
+child:selected #icon,
+child:hover #icon {
+  background: alpha(@color1, 0.2);
 }
 
 #item {
 }
 
 #icon {
-  margin-right: 8px;
+  padding: 10px;
+  border-radius: 50%;
 }
 
 #text {
@@ -128,6 +146,7 @@ child:hover {
 }
 
 #activationlabel {
+  opacity: 0;
 }
 
 #bar {
@@ -137,6 +156,7 @@ child:hover {
 }
 
 .activation #activationlabel {
+  opacity: 1;
 }
 
 .activation #text,

@@ -11,12 +11,9 @@ h_align = "fill"
 v_align = "fill"
 
 [ui.window.box]
-h_align = "start"
-v_align = "start"
-width = 400
-height = 550
-x_align = 10 
-y_align = 0
+h_align = "center"
+width = 450
+height = 500
 
 [ui.window.box.bar]
 orientation = "horizontal"
@@ -33,15 +30,15 @@ pixel_size = 24
 theme = ""
 
 [ui.window.box.margins]
-top = 53
+top = 70
 
 [ui.window.box.ai_scroll]
 name = "aiScroll"
 h_align = "fill"
 v_align = "fill"
-max_height = 450
-min_width = 400
-height = 450
+max_height = 400
+min_width = 500
+height = 400
 width = 500
 
 [ui.window.box.ai_scroll.margins]
@@ -50,7 +47,7 @@ top = 8
 [ui.window.box.ai_scroll.list]
 name = "aiList"
 orientation = "vertical"
-width = 450
+width = 500
 spacing = 10
 
 [ui.window.box.ai_scroll.list.item]
@@ -63,10 +60,10 @@ wrap = true
 
 [ui.window.box.scroll.list]
 marker_color = "#1BFFE1"
-max_height = 450
-max_width = 400
+max_height = 600
+max_width = 600
 min_width = 400
-width = 400
+width = 500
 
 [ui.window.box.scroll.list.item.activation_label]
 h_align = "fill"
