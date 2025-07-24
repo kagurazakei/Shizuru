@@ -22,7 +22,6 @@ in {
       libinput
       python313Packages.pywayland
       neovide
-      starship
       cliphist
       hyprpanel
       eog
@@ -37,7 +36,6 @@ in {
       imagemagick
       inxi
       jq
-      kitty
       nwg-look # requires unstable channel
       nwg-dock-hyprland
       master.pamixer
@@ -54,7 +52,6 @@ in {
       unzip
       wallust
       wl-clipboard
-      wlogout
       yad
       yt-dlp
       nix-ld
@@ -98,7 +95,6 @@ in {
       inputs.shizuruPkgs.packages.${pkgs.system}.rxfetch
       inputs.fastanime.packages.${pkgs.system}.default
       nurl
-      master.yazi
       firedragon
       inputs.hyprsunset.packages.${pkgs.system}.hyprsunset
       master.microfetch

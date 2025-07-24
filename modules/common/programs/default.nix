@@ -9,6 +9,7 @@
     ./editors
     ./matugen
     ./ui
+    ./yazi
     ./wlogout
   ];
 }

@@ -1,5 +1,6 @@
 {
   imports = [
+    ./atuin.nix
     ./btop.nix
     ./bottom.nix
     ./cava.nix
