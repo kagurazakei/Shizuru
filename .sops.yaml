@@ -1,13 +1,20 @@
 # .sops.yaml
+keys: 
+  - &mao age1u8wl3dnc6af2l7qggt4p9385zeu3q72jh3k2464vtvtnudx7tcuskf4drt
 creation_rules:
   - path_regex: secrets/access-token.yaml$
-    age: "age1u8wl3dnc6af2l7qggt4p9385zeu3q72jh3k2464vtvtnudx7tcuskf4drt" 
-
+    key_groups:
+      - age: 
+        - *mao 
   - path_regex: secrets/github.yaml$
-    age:
-       "age1u8wl3dnc6af2l7qggt4p9385zeu3q72jh3k2464vtvtnudx7tcuskf4drt"
-
+    key_groups:
+      - age: 
+        - *mao    
   - path_regex: secrets/secrets.yaml$
-    age:
-       "age1u8wl3dnc6af2l7qggt4p9385zeu3q72jh3k2464vtvtnudx7tcuskf4drt"
-  
+    key_groups:
+      - age:
+        - *mao 
+  - path_regex: secrets/private.yaml$ 
+    key_groups:
+      - age: 
+        - *mao 

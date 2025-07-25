@@ -3,4 +3,5 @@ let
 in {
   "github.age".publicKeys = [shizuru];
   "anilist.age".publicKeys = [shizuru];
+  "private.age".publicKeys = [shizuru];
 }

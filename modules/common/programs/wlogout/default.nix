@@ -128,38 +128,38 @@ in {
             }
 
             #shutdown {
-                background-image: image(url("./icons/power.png"));
+                background-image: image(url("${./icons/power.png}"));
             }
             #shutdown:hover {
-              background-image: image(url("./icons/power-hover.png"));
+              background-image: image(url("${./icons/power-hover.png}"));
             }
 
             #logout {
-                background-image: image(url("./icons/logout.png"));
+                background-image: image(url("${./icons/logout.png}"));
             }
             #logout:hover {
-              background-image: image(url("./icons/logout-hover.png"));
+              background-image: image(url("${./icons/logout-hover.png}"));
             }
 
             #reboot {
-                background-image: image(url("./icons/restart.png"));
+                background-image: image(url("${./icons/restart.png}"));
             }
             #reboot:hover {
-              background-image: image(url("./icons/restart-hover.png"));
+              background-image: image(url("${./icons/restart-hover.png}"));
             }
 
             #lock {
-                background-image: image(url("./icons/lock.png"));
+                background-image: image(url("${./icons/lock.png}"));
             }
             #lock:hover {
-              background-image: image(url("./icons/lock-hover.png"));
+              background-image: image(url("${./icons/lock-hover.png}"));
             }
 
             #suspend {
-                background-image: image(url("./icons/hibernate.png"));
+                background-image: image(url("${./icons/hibernate.png}"));
             }
             #suspend:hover {
-              background-image: image(url("./icons/hibernate-hover.png"));
+              background-image: image(url("${./icons/hibernate-hover.png}"));
             }
           '';
         };

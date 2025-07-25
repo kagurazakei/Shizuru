@@ -9,7 +9,7 @@
 in [
   inputs.niri.overlays.niri
   inputs.nur.overlays.default
-
+  inputs.rust-overlay.overlays.default
   (_final: prev: {
     stable = import inputs.nixpkgs-stable {
       inherit system;

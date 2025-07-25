@@ -33,14 +33,9 @@
     app2unit = {
       url = "github:soramanew/app2unit";
     };
-    izlix = {
-      type = "github";
-      owner = "isabelroses";
-      repo = "izlix";
-
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     lix-module = {
       url = "git+https://git.lix.systems/lix-project/nixos-module";
@@ -294,7 +289,7 @@
   outputs = inputs @ {
     nixpkgs,
     nixpkgs-master,
-    nixpkgs-stable,
+    rust-overlay,
     home-manager,
     chaotic,
     agenix,

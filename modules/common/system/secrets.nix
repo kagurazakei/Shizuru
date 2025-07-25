@@ -17,11 +17,18 @@ in {
     age.keyFile = "/home/antonio/.config/sops/age/keys.txt";
   };
   sops.secrets."nix-access-token" = {
-    sopsFile = ../../../secrets/github.yaml;
+    sopsFile = ../../../secrets/access-token.yaml;
     path = "/etc/nix/access-token.conf";
     owner = "antonio";
     mode = "0400";
   };
+  sops.secrets."recovery-key" = {
+    sopsFile = ../../../secrets/private.yaml;
+    path = "/home/antonio/.config/git/access.txt";
+    owner = "antonio";
+    mode = "0400";
+  };
+
   age.identityPaths = ["/home/antonio/.config/age/keys.txt"];
   age.secrets = {
     access-token = {
@@ -34,6 +41,14 @@ in {
     anilist = {
       file = ../../../secrets/anilist.age;
       path = "/home/antonio/.config/fastanime/anilist-api.txt";
+      owner = "antonio";
+      mode = "0400";
+    };
+  };
+  age.secrets = {
+    private = {
+      file = ../../../secrets/private.age;
+      path = "/home/antonio/.config/keys/github-sops.txt";
       owner = "antonio";
       mode = "0400";
     };
