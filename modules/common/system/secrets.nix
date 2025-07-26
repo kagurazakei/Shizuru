@@ -30,22 +30,19 @@ in {
   };
 
   age.identityPaths = ["/home/antonio/.config/age/keys.txt"];
+
   age.secrets = {
     access-token = {
       file = ../../../secrets/github.age;
       path = "/etc/nix/age-token.conf";
       mode = "0400";
     };
-  };
-  age.secrets = {
     anilist = {
       file = ../../../secrets/anilist.age;
       path = "/home/antonio/.config/fastanime/anilist-api.txt";
       owner = "antonio";
       mode = "0400";
     };
-  };
-  age.secrets = {
     private = {
       file = ../../../secrets/private.age;
       path = "/home/antonio/.config/keys/github-sops.txt";

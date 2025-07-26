@@ -61,6 +61,7 @@ fullscreen() {
 }
 
 area() {
+    countdown "$2"
     output_file="$DIR/Screenshot_${DATE}_Area.png"
     grim -g "$(slurp)" - | tee "$output_file" | wl-copy
     wl-paste | cliphist store

@@ -10,6 +10,7 @@
     ./ghostty.nix
     ./git.nix
     ./lazygit.nix
+    ./lutgen.nix
     ./nixy.nix
     ./shell.nix
     ./starship.nix
