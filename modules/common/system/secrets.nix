@@ -6,7 +6,10 @@
 }: let
   home = "/home/antonio/.config/age";
 in {
-  imports = [inputs.sops-nix.nixosModules.sops];
+  imports = [
+    inputs.sops-nix.nixosModules.sops
+    ./ssh.nix
+  ];
   environment.systemPackages = with pkgs; [
     sops
     age
@@ -27,6 +30,36 @@ in {
     path = "/home/antonio/.config/git/access.txt";
     owner = "antonio";
     mode = "0400";
+  };
+
+  sops.secrets = {
+    "age-private" = {
+      sopsFile = ../../../secrets/secrets.yaml;
+      path = "/home/antonio/.config/keys/keys.txt";
+      owner = "antonio";
+      mode = "0400";
+    };
+    "gpg-key" = {
+      sopsFile = ../../../secrets/secrets.yaml;
+      path = "/home/antonio/.config/keys/gpg-key.txt";
+      owner = "antonio";
+      mode = "0400";
+    };
+    "github-ssh" = {
+      sopsFile = ../../../secrets/access-token.yaml;
+      owner = "antonio";
+      mode = "0400";
+    };
+    "codeberg-ssh" = {
+      sopsFile = ../../../secrets/access-token.yaml;
+      owner = "antonio";
+      mode = "0400";
+    };
+    "gitlab-ssh" = {
+      sopsFile = ../../../secrets/access-token.yaml;
+      owner = "antonio";
+      mode = "0400";
+    };
   };
 
   age.identityPaths = ["/home/antonio/.config/age/keys.txt"];

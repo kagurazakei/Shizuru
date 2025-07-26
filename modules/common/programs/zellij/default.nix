@@ -1,7 +1,8 @@
-{ pkgs
-, lib
-, config
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  ...
 }:
 with lib; let
   inherit (config.lib.stylix) colors;
@@ -33,16 +34,16 @@ with lib; let
     	zellij attach -c "$SESSION_TITLE"
     fi
   '';
-in
-{
-  hm.packages = [
+in {
+  hj.packages = [
     pkgs.tmate
     sesh
+    pkgs.zellij
     pkgs.zjstatus
   ];
 
-  xdg.configFile."zellij/config.kdl".source = ./config.kdl;
-  xdg.configFile."zellij/layouts/default.kdl".text = ''
+  hj.files."zellij/config.kdl".source = ./config.kdl;
+  hj.files."zellij/layouts/default.kdl".text = ''
     layout {
         swap_tiled_layout name="vertical" {
             tab max_panes=5 {
@@ -197,17 +198,4 @@ in
         }
     }
   '';
-
-  hm.programs.zellij = {
-    enable = true;
-    # package = zellij-wrapped;
-    # settings = {
-    #   default_mode = "normal";
-    #   default_shell = "fish";
-    #   simplified_ui = true;
-    #   pane_frames = false;
-    #   theme = "catppuccin-mocha";
-    #   copy_on_select = true;
-    # };
-  };
 }

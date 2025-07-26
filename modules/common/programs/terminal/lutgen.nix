@@ -1,7 +1,7 @@
 {pkgs, ...}: let
   makeWrapper = name: args:
     pkgs.writeShellScriptBin name ''
-      exec ${pkgs.master.lutgen}/bin/lutgen apply ${args} -p --preserve
+      exec ${pkgs.master.lutgen}/bin/lutgen apply ${args} --preserve -p tokyo-mod
     '';
 in {
   hj = {

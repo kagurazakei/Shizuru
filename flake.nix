@@ -37,14 +37,14 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.lix = {
-        url = "git+https://git.lix.systems/lix-project/lix";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-    };
+    # lix-module = {
+    #   url = "git+https://git.lix.systems/lix-project/nixos-module";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   inputs.lix = {
+    #     url = "git+https://git.lix.systems/lix-project/lix";
+    #     inputs.nixpkgs.follows = "nixpkgs";
+    #   };
+    # };
     flake-programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -284,6 +284,7 @@
     wezterm.url = "github:wezterm/wezterm?dir=nix";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nyxexprs.url = "github:notashelf/nyxexprs";
+    zjstatus.url = "github:dj95/zjstatus";
   };
 
   outputs = inputs @ {
@@ -293,8 +294,8 @@
     home-manager,
     chaotic,
     agenix,
-    lix-module,
     quickshell,
+    zjstatus,
     ...
   }: let
     system = "x86_64-linux";
@@ -354,7 +355,6 @@
           inputs.catppuccin.nixosModules.catppuccin
           inputs.nixos-hardware.nixosModules.huawei-machc-wa
           inputs.nvf.nixosModules.default
-          lix-module.nixosModules.default
           agenix.nixosModules.default
           inputs.flake-programs-sqlite.nixosModules.programs-sqlite
           {

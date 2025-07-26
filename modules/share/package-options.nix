@@ -101,6 +101,7 @@ in {
       socat
       hyprpicker
       master.ani-cli
+      zellij
     ];
   };
 }

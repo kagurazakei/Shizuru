@@ -1,10 +1,8 @@
-{ pkgs
-, ...
-}: {
+{pkgs, ...}: {
   services = {
     xserver = {
       enable = true;
-      excludePackages = [ pkgs.xterm ];
+      excludePackages = [pkgs.xterm];
       desktopManager.xterm.enable = false;
       desktopManager.runXdgAutostartIfNone = true;
       xkb = {
@@ -19,6 +17,7 @@
     };
 
     gvfs.enable = true;
+    udisks2.enable = true;
     tumbler.enable = true;
     udev.enable = true;
     envfs.enable = true;
