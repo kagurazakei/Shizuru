@@ -3,13 +3,11 @@
   pkgs,
   config,
   ...
-}: let
-  home = "/home/antonio/.config/age";
-in {
+}: {
   imports = [
     inputs.sops-nix.nixosModules.sops
-    ./ssh.nix
     inputs.private-key.nixosModules.default
+    ./ssh.nix
   ];
   environment.systemPackages = with pkgs; [
     sops
