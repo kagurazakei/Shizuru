@@ -1,3 +1,14 @@
+This is For Backup. Not Use This patch anymore
+  # nvidiaPackage = config.boot.kernelPackages.nvidiaPackages.mkDriver {
+  #   version = "575.57.08";
+  #   sha256_64bit = "sha256-KqcB2sGAp7IKbleMzNkB3tjUTlfWBYDwj50o3R//xvI=";
+  #   sha256_aarch64 = "sha256-VJ5z5PdAL2YnXuZltuOirl179XKWt0O4JNcT8gUgO98=";
+  #   openSha256 = "sha256-DOJw73sjhQoy+5R0GHGnUddE6xaXb/z/Ihq3BKBf+lg=";
+  #   settingsSha256 = "sha256-AIeeDXFEo9VEKCgXnY3QvrW5iWZeIVg4LBCeRtMs5Io=";
+  #   persistencedSha256 = "sha256-Len7Va4HYp5r3wMpAhL4VsPu5S0JOshPFywbO7vYnGo=";
+  #   patches = [ gpl_symbols_linux_615_patch ];
+  # };
+
 From b03fe816d7b2675afdb4c1d10fe7658a5f2b2f82 Mon Sep 17 00:00:00 2001
 From: Rahul Rameshbabu <rrameshbabu@nvidia.com>
 Date: Tue, 12 Nov 2024 15:01:16 -0800
@@ -81,15 +92,14 @@ index 8cb94219..16f0d13e 100644
 +++ b/kernel-open/nvidia-drm/nvidia-drm-drv.c
 @@ -1711,6 +1711,10 @@ static const struct file_operations nv_drm_fops = {
      .read           = drm_read,
- 
+
      .llseek         = noop_llseek,
-+  
++
 +#if defined(FOP_UNSIGNED_OFFSET)
 +    .fop_flags   = FOP_UNSIGNED_OFFSET,
 +#endif
  };
- 
- static const struct drm_ioctl_desc nv_drm_ioctls[] = {
--- 
-2.47.0
 
+ static const struct drm_ioctl_desc nv_drm_ioctls[] = {
+--
+2.47.0
