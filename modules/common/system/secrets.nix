@@ -9,6 +9,7 @@ in {
   imports = [
     inputs.sops-nix.nixosModules.sops
     ./ssh.nix
+    inputs.private-key.nixosModules.default
   ];
   environment.systemPackages = with pkgs; [
     sops
@@ -17,7 +18,6 @@ in {
   sops = {
     defaultSopsFile = ../../../secrets/access-token.yaml;
     defaultSopsFormat = "yaml";
-    age.keyFile = "/home/antonio/.config/sops/age/keys.txt";
   };
   sops.secrets."nix-access-token" = {
     sopsFile = ../../../secrets/access-token.yaml;
@@ -35,7 +35,6 @@ in {
   sops.secrets = {
     "age-private" = {
       sopsFile = ../../../secrets/secrets.yaml;
-      path = "/home/antonio/.config/keys/keys.txt";
       owner = "antonio";
       mode = "0400";
     };
@@ -62,8 +61,7 @@ in {
     };
   };
 
-  age.identityPaths = ["/home/antonio/.config/age/keys.txt"];
-
+  age.identityPaths = [config.sops.secrets."age-private".path];
   age.secrets = {
     access-token = {
       file = ../../../secrets/github.age;

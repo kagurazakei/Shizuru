@@ -9,6 +9,7 @@
     systems.url = "github:nix-systems/x86_64-linux";
     agenix.url = "github:ryantm/agenix";
     walker.url = "github:abenz1267/walker";
+    private-key.url = "git+ssh://git@codeberg.org/maotseantonio/secrets.git";
     sops-nix = {
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";

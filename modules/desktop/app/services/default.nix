@@ -1,5 +1,6 @@
 {
   imports = [
+    ./arRPC.nix
     ./arrpc.nix
     ./cliphist.nix
     ./niri-wallpaper.nix
