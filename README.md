@@ -116,6 +116,11 @@ modules
 ```
 --- 
 
+```text 
+If you want to use this config, firstly you need to do is the comment out the flake input url for my private-key. Dont miss this part!!! IF YOU DO NOT COMMENT OUT THIS INPUT YOU WILL FACING THE BUILD FAIL ERROR.
+```
+
+---
 ## 🛠️ Components
 
 | Category            | Components                                                                 |

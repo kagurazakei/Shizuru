@@ -580,15 +580,16 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1753401922,
-        "narHash": "sha256-1kyFvtARB6lyowYCC8WiXL2YnbjhjQklANJGBjuPwos=",
+        "lastModified": 1753355881,
+        "narHash": "sha256-YMV3+tA8ZK7wfodH03IvGEbVWgWuU/bHGFlfHU9i3NA=",
         "owner": "Benexl",
         "repo": "FastAnime",
-        "rev": "dbf96afea72f5c0f369ce4c515a060596a46a89f",
+        "rev": "06506fb47fc07d4dec570e2f730e2b51a3387064",
         "type": "github"
       },
       "original": {
         "owner": "Benexl",
+        "ref": "v2.9.9",
         "repo": "FastAnime",
         "type": "github"
       }

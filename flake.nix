@@ -16,7 +16,7 @@
     };
     alejandra.url = "github:kamadorueda/alejandra/4.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
-    fastanime.url = "github:Benexl/FastAnime";
+    fastanime.url = "github:Benexl/FastAnime/v2.9.9";
     fish-flake = {
       url = "github:kagurazakei/fish-flake";
     };

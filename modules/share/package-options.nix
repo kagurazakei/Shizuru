@@ -93,7 +93,7 @@ in {
       inputs.shizuruPkgs.packages.${pkgs.system}.nitch
       inputs.shizuruPkgs.packages.${pkgs.system}.idle-inhibit
       inputs.shizuruPkgs.packages.${pkgs.system}.rxfetch
-      #inputs.fastanime.packages.${pkgs.system}.default
+      inputs.fastanime.packages.${pkgs.system}.default
       nurl
       firedragon
       inputs.hyprsunset.packages.${pkgs.system}.hyprsunset
