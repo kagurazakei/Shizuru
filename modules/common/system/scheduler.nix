@@ -3,7 +3,6 @@
   config,
   options,
   lib,
-  system,
   ...
 }:
 with lib; let
@@ -16,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     services.scx = {
       enable = true;
-      package = pkgs.scx.rustscheds;
+      package = pkgs.scx_git.full;
       scheduler = "scx_lavd";
       extraArgs = ["--autopower"];
     };

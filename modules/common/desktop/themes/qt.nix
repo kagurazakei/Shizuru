@@ -1,13 +1,12 @@
-{ pkgs
-, lib
-, inputs
-, ...
-}:
-let
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}: let
   envVars = {
     QT_STYLE_OVERRIDE = "kvantum";
     QT_QPA_PLATFORMTHEME = "qt6ct";
-    ZDOTDIR = "$HOME/.config/zsh";
     PATH = "$HOME/.local/bin:$PATH";
   };
 
@@ -24,8 +23,8 @@ let
 
   qtUserPackages = with pkgs; [
     (master.catppuccin-kde.override {
-      flavour = [ "mocha" ];
-      accents = [ "green" ];
+      flavour = ["mocha"];
+      accents = ["green"];
     })
     master.darkly
     master.darkly-qt5
@@ -67,7 +66,7 @@ let
           hash = "sha256-ePY+BEpEcAq11+pUMjQ4XG358x3bXFQWwI1UAi+KmLo=";
         };
 
-        nativeBuildInputs = (lib.lists.remove qfinal.qmake old.nativeBuildInputs) ++ [ final.cmake ];
+        nativeBuildInputs = (lib.lists.remove qfinal.qmake old.nativeBuildInputs) ++ [final.cmake];
 
         buildInputs =
           old.buildInputs
@@ -84,16 +83,15 @@ let
       });
     });
   };
-in
-{
+in {
   qt.enable = true;
   environment = {
-    variables = envVars // { QML2_IMPORT_PATH = qmlPaths; };
+    variables = envVars // {QML2_IMPORT_PATH = qmlPaths;};
     sessionVariables = envVars;
     systemPackages = qtSystemPackages;
   };
 
-  nixpkgs.overlays = [ qt6ctOverlay ];
+  nixpkgs.overlays = [qt6ctOverlay];
   hj = {
     packages = qtUserPackages;
   };

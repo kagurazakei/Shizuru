@@ -6,7 +6,6 @@
     ./greetd.nix
     ./niri.nix
     ./hm-clean.nix
-    #./hm-services.nix
     #./notify.nix
     ./portal.nix
     ./stylix.nix

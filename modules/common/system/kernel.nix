@@ -13,29 +13,8 @@ in {
 
   config = mkIf cfg.enable {
     boot = {
-      # Use CachyOS kernel with patched v4l2loopback
-      kernelPackages = let
-        apply = _: prevModules: {
-          v4l2loopback =
-            if strings.hasPrefix "0.13.2" prevModules.v4l2loopback.version
-            then
-              prevModules.v4l2loopback.overrideAttrs
-              (_: rec {
-                version = "0.15.0";
-                src = pkgs.fetchFromGitHub {
-                  owner = "umlaeute";
-                  repo = "v4l2loopback";
-                  rev = "v${version}";
-                  hash = "sha256-fa3f8GDoQTkPppAysrkA7kHuU5z2P2pqI8dKhuKYh04=";
-                };
-              })
-            else prevModules.v4l2loopback;
-        };
-      in
-        pkgs.linuxPackages_cachyos.extend apply;
-
+      kernelPackages = pkgs.linuxPackages_cachyos;
       consoleLogLevel = 0;
-
       kernelParams = [
         "quiet"
         "splash"
