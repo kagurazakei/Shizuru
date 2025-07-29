@@ -14,17 +14,17 @@
     age
   ];
   sops = {
-    defaultSopsFile = ../../../secrets/access-token.yaml;
+    defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
   };
   sops.secrets."nix-access-token" = {
-    sopsFile = ../../../secrets/access-token.yaml;
+    sopsFile = ../../../secrets/secrets.yaml;
     path = "/etc/nix/access-token.conf";
     owner = "antonio";
     mode = "0400";
   };
   sops.secrets."recovery-key" = {
-    sopsFile = ../../../secrets/private.yaml;
+    sopsFile = ../../../secrets/secrets.yaml;
     path = "/home/antonio/.config/git/access.txt";
     owner = "antonio";
     mode = "0400";
@@ -43,17 +43,17 @@
       mode = "0400";
     };
     "github-ssh" = {
-      sopsFile = ../../../secrets/access-token.yaml;
+      sopsFile = ../../../secrets/secrets.yaml;
       owner = "antonio";
       mode = "0400";
     };
     "codeberg-ssh" = {
-      sopsFile = ../../../secrets/access-token.yaml;
+      sopsFile = ../../../secrets/secrets.yaml;
       owner = "antonio";
       mode = "0400";
     };
     "gitlab-ssh" = {
-      sopsFile = ../../../secrets/access-token.yaml;
+      sopsFile = ../../../secrets/secrets.yaml;
       owner = "antonio";
       mode = "0400";
     };
