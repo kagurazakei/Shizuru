@@ -11,7 +11,6 @@
     wallPicker = spawn "walker" "-m" "wallpaper";
     brightness-up = spawn "~/.local/bin/brightness" "--inc";
     brightness-down = spawn "~/.local/bin/brightness" "--dec";
-    wlogout-new = spawn "~/.local/bin/wlogout-new";
     qs-lock = spawn "~/.local/bin/lock-qs";
   in {
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
@@ -45,8 +44,8 @@
     "Mod+I".action = spawn "fuzzel-clip";
     "Mod+U".action = control-center;
     "Mod+R".action = wallPicker;
-    "Mod+X".action = spawn "fuzzel-emoji";
-    "Mod+Backspace".action = wlogout-new;
+    "Mod+X".action = spawn "nwg-bar";
+    "Mod+Backspace".action = spawn "wlogout";
     "Mod+B".action = spawn "eww-bar";
     "Mod+Q".action = close-window;
     "Mod+S".action = switch-preset-column-width;

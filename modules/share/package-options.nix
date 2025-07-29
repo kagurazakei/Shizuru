@@ -101,6 +101,7 @@ in {
       socat
       hyprpicker
       master.ani-cli
+      inputs.zen-browser.packages.${pkgs.system}.default
       zellij
     ];
   };

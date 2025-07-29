@@ -48,7 +48,7 @@ in {
     BROWSER = "firefox";
     TERMINAL = "wezterm";
     VISUAL = "vscodium";
-    GSK_RENDERER = "gl";
+    GSK_RENDERER = "opengl";
     NIXPKGS_ALLOW_UNFREE = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";

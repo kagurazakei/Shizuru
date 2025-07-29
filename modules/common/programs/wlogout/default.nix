@@ -19,6 +19,9 @@
       -c 30
   '';
 in {
+  imports = [
+    ./wleave.nix
+  ];
   options.mine.wlogout.enable = lib.mkEnableOption "wlogout";
   config = lib.mkIf config.mine.wlogout.enable {
     hj = {
@@ -65,41 +68,14 @@ in {
           '';
         };
 
-        ".config/wlogout/colors.css" = {
-          text = ''
-
-            @define-color foreground #F4DCE3;
-            @define-color background rgba(19,19,22,0.25);
-            @define-color cursor #F4DCE3;
-
-            @define-color color0 #3B3B3E;
-            @define-color color1 #0E0D18;
-            @define-color color2 #17141F;
-            @define-color color3 #513B47;
-            @define-color color4 #4C4D5D;
-            @define-color color5 #815B68;
-            @define-color color6 #A77582;
-            @define-color color7 #E7C5CE;
-            @define-color color8 #A18A90;
-            @define-color color9 #121220;
-            @define-color color10 #1F1B29;
-            @define-color color11 #6C4E5E;
-            @define-color color12 #66677C;
-            @define-color color13 #AC798A;
-            @define-color color14 #DF9CAE;
-            @define-color color15 #E7C5CE;
-          '';
-        };
-
         ".config/wlogout/style.css" = {
           text = ''
-            @import './colors.css';
-
+            @import '${./colors.css}';
             window {
                 font-family: JetBrainsMono Nerd Font;
                 font-size: 16pt;
                 color: @foreground; /* text */
-                background-color: rgba(30, 30, 46, 0.2);
+                background-color: rgba(30, 30, 46, 0.8);
             }
 
             button {
@@ -112,6 +88,7 @@ in {
                 box-shadow: 0 0 10px 2px transparent;
                 border-radius: 36px;
                 margin: 10px;
+                border: 4px solid #69ff94;
             }
 
             button:focus {

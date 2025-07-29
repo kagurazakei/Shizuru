@@ -16,7 +16,7 @@
     };
     alejandra.url = "github:kamadorueda/alejandra/4.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
-    fastanime.url = "github:Benexl/FastAnime/v2.9.9";
+    fastanime.url = "github:Benexl/FastAnime";
     fish-flake = {
       url = "github:kagurazakei/fish-flake";
     };
@@ -286,6 +286,10 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nyxexprs.url = "github:notashelf/nyxexprs";
     zjstatus.url = "github:dj95/zjstatus";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
