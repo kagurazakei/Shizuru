@@ -1,124 +1,126 @@
-{ lib
-, ...
-}:
-let
+{lib, ...}: let
   inherit (lib.strings) concatStrings;
-in
-{
+in {
   hj.rum.programs.starship = {
     enable = true;
-
+    integrations = {
+      fish.enable = true;
+    };
     settings = {
-      format = lib.concatStrings [
-        "$hostname"
-        "$directory"
-        "$localip"
-        "$shlvl"
-        "$singularity"
-        "$kubernetes"
-        "$vcsh"
-        "$hg_branch"
-        "$docker_context"
-        "$package"
-        "$custom"
-        "$sudo"
-        "$fill"
-        "$git_branch"
-        "$git_status"
-        "$git_commit"
-        "$cmd_duration"
-        "$jobs"
-        "$battery"
-        "$time"
-        "$status"
-        "$os"
-        "$container"
-        "$shell"
-        "$line_break"
-        "$character"
-      ];
-
       add_newline = true;
 
-      hostname = {
-        format = "[ $ssh_symbol$hostname ](bold bg:#24273a fg:#E8E3E3)";
+      username = {
+        show_always = true;
+        style_user = "fg:green";
+        style_root = "fg:green";
         disabled = false;
       };
 
-      directory = {
-        format = "[ $path ]($style)[   ](bg:#8caaee fg:#24273a)";
-        style = "bg:#24273a fg:#E8E3E3 bold";
-      };
-
-      cmd_duration = {
-        format = "[ $duration ]($style)[ 󱑂  ](bg:#ca9ee6 fg:#24273a)";
+      os = {
+        style = "bold blue";
+        disabled = false;
+        symbols = {
+          Alpaquita = " ";
+          Alpine = " ";
+          Amazon = " ";
+          Android = " ";
+          Arch = "  ";
+          Artix = " ";
+          CentOS = " ";
+          Debian = " ";
+          DragonFly = " ";
+          Emscripten = " ";
+          EndeavourOS = " ";
+          Fedora = " ";
+          FreeBSD = " ";
+          Garuda = "󰛓 ";
+          Gentoo = " ";
+          HardenedBSD = "󰞌 ";
+          Illumos = "󰈸 ";
+          Linux = " ";
+          Mabox = " ";
+          Macos = " ";
+          Manjaro = " ";
+          Mariner = " ";
+          MidnightBSD = " ";
+          Mint = " ";
+          NetBSD = " ";
+          NixOS = " ";
+          OpenBSD = "󰈺 ";
+          openSUSE = " ";
+          OracleLinux = "󰌷 ";
+          Pop = " ";
+          Raspbian = " ";
+          Redhat = " ";
+          RedHatEnterprise = " ";
+          Redox = "󰀘 ";
+          Solus = "󰠳 ";
+          SUSE = " ";
+          Ubuntu = " ";
+          Unknown = " ";
+          Windows = "󰍲 ";
+        };
       };
 
       character = {
-        success_symbol = "[ •   ](#8caaee bold)";
-        error_symbol = "[ •  󰅙 ](#e78284 bold)";
+        success_symbol = "[󰔰 ](bold green)";
+        error_symbol = "[󰞇 ](bold red)";
       };
 
-      git_branch = {
-        format = "[ $branch ]($style) [  ](bg:#81C19B fg:#24273a)";
-        style = "bg:#24273a fg:#E8E3E3";
-        symbol = " ";
-      };
-      git_status = {
-        format = "[ $all_status$ahead_behind ]($style) [  ](bg:#8caaee fg:#24273a)";
-        style = "bg:#24273a fg:#E8E3E3";
-        conflicted = "=";
+      shell = {
+        zsh_indicator = "psh";
+        style = "italic fg:purple";
+        disabled = false;
       };
 
-      battery = {
-        format = "[ $symbol$percentage ](bold fg:#a6e3a1)";
-        full_symbol = "󰁹 ";
-        charging_symbol = "󰂄 ";
-        discharging_symbol = "󰂃 ";
-        display = [
-          {
-            threshold = 10;
-            style = "bold fg:#e78284";
-          }
-          {
-            threshold = 30;
-            style = "bold fg:#ef9f76";
-          }
-          {
-            threshold = 100;
-            style = "bold fg:#a6e3a1";
-          }
-        ];
+      status = {
+        symbol = " ";
+        not_executable_symbol = " ";
+        not_found_symbol = "󰈞 ";
+        disabled = false;
       };
 
-      aws = {
-        format = "[$symbol]($style)";
-        symbol = " ";
-        style = "bold yellow";
+      aws.symbol = "  ";
+      buf.symbol = " ";
+      c.symbol = " ";
+      conda.symbol = " ";
+      dart.symbol = " ";
+      directory = {
+        read_only = " 󰌾";
+        home_symbol = " ";
+        substitutions = {
+          "Documents" = "󰈙 ";
+          "Downloads" = " ";
+          "Music" = " ";
+          "Pictures" = " ";
+        };
       };
-
-      python = {
-        format = "[$symbol]($style)";
-        symbol = " ";
-        style = "bold yellow";
-      };
-
-      nodejs = {
-        format = "[$symbol]($style)";
-        symbol = " ";
-        style = "bold green";
-      };
-
-      c.disabled = true;
-      cmake.disabled = true;
-      haskell.disabled = true;
-      ruby.disabled = true;
-      rust.disabled = true;
-      perl.disabled = true;
-      package.disabled = true;
-      lua.disabled = true;
-      java.disabled = true;
-      golang.disabled = true;
+      docker_context.symbol = " ";
+      elixir.symbol = " ";
+      elm.symbol = " ";
+      fossil_branch.symbol = " ";
+      git_branch.symbol = " ";
+      golang.symbol = " ";
+      guix_shell.symbol = " ";
+      haskell.symbol = " ";
+      haxe.symbol = " ";
+      hg_branch.symbol = " ";
+      hostname.ssh_symbol = " ";
+      java.symbol = " ";
+      julia.symbol = " ";
+      lua.symbol = " ";
+      memory_usage.symbol = "󰍛 ";
+      meson.symbol = "󰔷 ";
+      nim.symbol = "󰆥 ";
+      nix_shell.symbol = " ";
+      nodejs.symbol = " ";
+      package.symbol = "󰏗 ";
+      pijul_channel.symbol = " ";
+      python.symbol = " ";
+      rlang.symbol = "󰟔 ";
+      ruby.symbol = " ";
+      rust.symbol = " ";
+      scala.symbol = " ";
     };
   };
 }

@@ -13,7 +13,7 @@
     ./lutgen.nix
     ./nixy.nix
     ./shell.nix
-    ./starship2.nix
+    ./starship.nix
     ./zathura.nix
     ./zoxide.nix
   ];
