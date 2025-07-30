@@ -4237,11 +4237,11 @@
     },
     "private-key": {
       "locked": {
-        "lastModified": 1753599800,
-        "narHash": "sha256-H5cO+n6YL99Pm4/QSS9RuT7ekSlr8XgplMtivwg4qHc=",
+        "lastModified": 1753875920,
+        "narHash": "sha256-2+cdcKM76BPj0UOZT5D97dTtKlUT6qaLn2FKDJnfchY=",
         "ref": "refs/heads/main",
-        "rev": "5a52563855837ea873ac8ca1b20da7425068f7cf",
-        "revCount": 5,
+        "rev": "c0a349d0007e6caabacb44944ba79ebe92d6c03b",
+        "revCount": 8,
         "type": "git",
         "url": "ssh://git@codeberg.org/maotseantonio/secrets.git"
       },

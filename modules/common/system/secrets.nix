@@ -34,8 +34,7 @@
 
     "age-private" = {
       sopsFile = ../../../secrets/secrets.yaml;
-      path = "/home/antonio/.config/keys/agenix.txt";
-      owner = "antonio";
+      owner = "root";
       mode = "0400";
     };
     "gpg-key" = {
@@ -59,21 +58,21 @@
       owner = "antonio";
       mode = "0400";
     };
+    "root-access-token" = {
+      sopsFile = ../../../secrets/secrets.yaml;
+      mode = "0400";
+      path = "/etc/nix/root-access.conf";
+    };
+    "anilist" = {
+      sopsFile = ../../../secrets/secrets.yaml;
+      owner = "antonio";
+      mode = "0400";
+      path = "/home/antonio/.config/fastanime/anilist.txt";
+    };
   };
 
   age.identityPaths = [config.sops.secrets."age-private".path];
   age.secrets = {
-    access-token = {
-      file = ../../../secrets/github.age;
-      path = "/etc/nix/age-token.conf";
-      mode = "0400";
-    };
-    anilist = {
-      file = ../../../secrets/anilist.age;
-      path = "/home/antonio/.config/fastanime/anilist-api.txt";
-      owner = "antonio";
-      mode = "0400";
-    };
     private = {
       file = ../../../secrets/private.age;
       path = "/home/antonio/.config/keys/github-sops.txt";
@@ -83,6 +82,6 @@
   };
   nix.extraOptions = "
   !include ${config.sops.secrets."nix-access-token".path}
-  !include ${config.age.secrets."access-token".path}
+  !include ${config.sops.secrets."root-access-token".path}
   ";
 }
