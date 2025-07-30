@@ -17,22 +17,24 @@
     defaultSopsFile = ../../../secrets/secrets.yaml;
     defaultSopsFormat = "yaml";
   };
-  sops.secrets."nix-access-token" = {
-    sopsFile = ../../../secrets/secrets.yaml;
-    path = "/etc/nix/access-token.conf";
-    owner = "antonio";
-    mode = "0400";
-  };
-  sops.secrets."recovery-key" = {
-    sopsFile = ../../../secrets/secrets.yaml;
-    path = "/home/antonio/.config/git/access.txt";
-    owner = "antonio";
-    mode = "0400";
-  };
 
   sops.secrets = {
+    "nix-access-token" = {
+      sopsFile = ../../../secrets/secrets.yaml;
+      path = "/etc/nix/access-token.conf";
+      owner = "antonio";
+      mode = "0400";
+    };
+    "recovery-key" = {
+      sopsFile = ../../../secrets/secrets.yaml;
+      path = "/home/antonio/.config/git/access.txt";
+      owner = "antonio";
+      mode = "0400";
+    };
+
     "age-private" = {
       sopsFile = ../../../secrets/secrets.yaml;
+      path = "/home/antonio/.config/keys/agenix.txt";
       owner = "antonio";
       mode = "0400";
     };
