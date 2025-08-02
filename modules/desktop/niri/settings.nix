@@ -24,7 +24,8 @@ in {
         ELECTRON_ENABLE_HARDWARE_ACCELERATION = "1";
         XDG_SESSION_TYPE = "wayland";
         XDG_CURRENT_DESKTOP = "niri";
-        DISPLAY = null; #  DISPLAY = ":0";
+        #DISPLAY = null;
+        DISPLAY = ":0";
       };
       spawn-at-startup = [
         (makeCommand "wl-paste --type image --watch cliphist store")
