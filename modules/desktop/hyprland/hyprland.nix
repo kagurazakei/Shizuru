@@ -1,13 +1,12 @@
-{ inputs
-, pkgs
-, ...
-}:
-let
+{
+  inputs,
+  pkgs,
+  ...
+}: let
   hyprFlake = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
   portalFlake = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-in
-{
-  imports = [ inputs.hyprland.nixosModules.default ];
+in {
+  imports = [inputs.hyprland.nixosModules.default];
   hj.packages = [
     inputs.hyprland-qt-support.packages.${pkgs.system}.default
     pkgs.libsForQt5.qtstyleplugin-kvantum
@@ -35,14 +34,14 @@ in
     firefox.enable = true;
     git.enable = true;
     nm-applet.indicator = true;
-    thunar.enable = true;
-    thunar.plugins = with pkgs.xfce; [
-      exo
-      mousepad
-      thunar-archive-plugin
-      thunar-volman
-      tumbler
-    ];
+    # thunar.enable = true;
+    # thunar.plugins = with pkgs.xfce; [
+    #   exo
+    #   mousepad
+    #   thunar-archive-plugin
+    #   thunar-volman
+    #   tumbler
+    # ];
 
     virt-manager.enable = false;
 

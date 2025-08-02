@@ -1,9 +1,5 @@
 {
   imports = [
-    # ../common/desktop
-    # ../common/system
-    # ../common/drivers
-    # ../common/programs
     ../common
     ../desktop
     ../share/package-options.nix

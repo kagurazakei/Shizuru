@@ -42,14 +42,14 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # lix-module = {
-    #   url = "git+https://git.lix.systems/lix-project/nixos-module";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.lix = {
-    #     url = "git+https://git.lix.systems/lix-project/lix";
-    #     inputs.nixpkgs.follows = "nixpkgs";
-    #   };
-    # };
+    lix-module = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.lix = {
+        url = "git+https://git.lix.systems/lix-project/lix";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
+    };
     flake-programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -304,7 +304,7 @@
     chaotic,
     agenix,
     quickshell,
-    zjstatus,
+    lix-module,
     ...
   }: let
     system = "x86_64-linux";
@@ -365,6 +365,7 @@
           inputs.nixos-hardware.nixosModules.huawei-machc-wa
           inputs.nvf.nixosModules.default
           agenix.nixosModules.default
+          lix-module.nixosModules.default
           inputs.flake-programs-sqlite.nixosModules.programs-sqlite
           {
             nixpkgs.overlays = import ./overlays {
