@@ -26,7 +26,6 @@ in {
     };
     home = {
       packages = with pkgs; [
-        inputs.astal.packages.${pkgs.system}.default
         wallpaperScript
         gnome-keyring
         wl-clipboard

@@ -71,7 +71,7 @@
     };
   };
 
-  age.identityPaths = [config.sops.secrets."age-private".path];
+  age.identityPaths = ["/var/lib/secrets/age/keys.txt"];
   age.secrets = {
     private = {
       file = ../../../secrets/private.age;

@@ -20,6 +20,10 @@
     fish-flake = {
       url = "github:kagurazakei/fish-flake";
     };
+    silentSDDM = {
+      url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     shizuruPkgs.url = "github:kagurazakei/shizuruPkgs";
     kureiji-ollie-cursor.url = "github:kagurazakei/kureiji-ollie-cursors";
     waifu-cursors.url = "git+https://codeberg.org/maotseantonio/waifu-cursors";
@@ -263,7 +267,7 @@
     nixcord.url = "github:kaylorben/nixcord";
     textfox.url = "github:adriankarlen/textfox";
     nh = {
-      url = "github:nix-community/nh";
+      url = "github:nix-community/nh/6487dafbbde60bdf4e1568fc7c7419daf327c032";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {

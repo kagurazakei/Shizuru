@@ -17,7 +17,6 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      ags_1
       brightnessctl # for brightness control
       libinput
       python313Packages.pywayland
@@ -39,7 +38,6 @@ in {
       nwg-look # requires unstable channel
       nwg-dock-hyprland
       master.pamixer
-      master.gitui
       pavucontrol
       playerctl
       polkit_gnome
@@ -82,8 +80,8 @@ in {
       libqalculate
       dbus-glib
       gtkmm4
-      master.komikku
-      master.mangayomi
+      komikku
+      #master.mangayomi
       mangal
       mangareader
       master.tmux
@@ -95,7 +93,6 @@ in {
       inputs.shizuruPkgs.packages.${pkgs.system}.rxfetch
       inputs.fastanime.packages.${pkgs.system}.default
       nurl
-      firedragon
       inputs.hyprsunset.packages.${pkgs.system}.hyprsunset
       master.microfetch
       socat

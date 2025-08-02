@@ -1,6 +1,5 @@
 {...}: {
   imports = [
-    ./dolphin.nix
     ./qtct.nix
   ];
   hj.files = {
