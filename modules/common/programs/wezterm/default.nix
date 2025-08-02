@@ -10,7 +10,7 @@
   bar = import ./bar.nix {inherit wezterm;};
 in {
   hj = {
-    packages = [wezterm];
+    packages = [pkgs.wezterm];
     files = {
       ".config/wezterm/wezterm.lua".text = ''
         local utils = require("utils")

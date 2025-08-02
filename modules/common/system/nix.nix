@@ -13,7 +13,7 @@
   ];
   nix = {
     channel.enable = false;
-    package = pkgs.lixPackageSets.git.lix;
+    package = pkgs.lixPackageSets.latest.lix;
     settings = {
       nix-path = [
         "nixpkgs=${inputs.nixpkgs.outPath}"
