@@ -35,7 +35,9 @@
     "^(foot)"
     "^(mpv)"
     "^(com.mitchellh.ghostty)"
-    "org.kde.dolphin"
+    "^(org.kde.dolphin)"
+    "^(org.Waytrogen.Waytrogen)"
+    "^(waypaper)"
   ];
 
   floatingRules =

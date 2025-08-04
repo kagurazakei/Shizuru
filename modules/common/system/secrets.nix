@@ -35,6 +35,7 @@
     "age-private" = {
       sopsFile = ../../../secrets/secrets.yaml;
       owner = "root";
+      path = "/etc/agenix/private.txt";
       mode = "0400";
     };
     "gpg-key" = {
@@ -71,11 +72,10 @@
     };
   };
 
-  age.identityPaths = ["/var/lib/secrets/age/keys.txt"];
+  age.identityPaths = ["/etc/agenix/keys.txt"];
   age.secrets = {
     private = {
       file = ../../../secrets/private.age;
-      path = "/home/antonio/.config/keys/github-sops.txt";
       owner = "antonio";
       mode = "0400";
     };

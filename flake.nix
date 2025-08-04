@@ -43,10 +43,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=main&rev=4d4c2b8f0a801c91ce5b717c77fe3a17efa1402f";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.lix = {
-        url = "git+https://git.lix.systems/lix-project/lix";
+        url = "git+https://git.lix.systems/lix-project/lix?ref=main&rev=cad6118e20a520b7536879d951ab6c3228b3e111";
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };

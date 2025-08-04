@@ -81,7 +81,7 @@ in {
       dbus-glib
       gtkmm4
       komikku
-      #master.mangayomi
+      mangayomi
       mangal
       mangareader
       master.tmux

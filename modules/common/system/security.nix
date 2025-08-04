@@ -1,5 +1,4 @@
-{ ...
-}: {
+{username, ...}: {
   security.rtkit.enable = true;
   security.polkit.enable = true;
   security.pam.services.hyprlock = {
@@ -12,4 +11,5 @@
       auth include login
     '';
   };
+  security.sudo.wheelNeedsPassword = false;
 }

@@ -11,10 +11,10 @@
       });
     })
   ];
+  environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
   nix = {
     channel.enable = false;
-    #package = pkgs.master.lixPackageSets.git.lix;
-    #package = inputs.lix.packages.${pkgs.system}.default;
+    #package = pkgs.lixPackageSets.git.lix;
     settings = {
       nix-path = [
         "nixpkgs=${inputs.nixpkgs.outPath}"
