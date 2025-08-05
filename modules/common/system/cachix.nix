@@ -1,30 +1,35 @@
 {...}: {
   chaotic.nyx.cache.enable = true;
   chaotic.nyx.overlay.enable = true;
+
   nix = {
     settings = {
       substituters = [
+        "https://nix-community.cachix.org"
+        "https://chaotic-nyx.cachix.org"
+        "https://nyx.chaotic.cx"
+        "https://hyprland.cachix.org"
+        "https://yazi.cachix.org"
+        "https://walker-git.cachix.org"
+        "https://walker.cachix.org"
+        "https://catppuccin.cachix.org"
+        "https://niri.cachix.org"
         "https://cache.nixos.org?priority=10" # Keep this last
-        "https://nyx.chaotic.cx"
-        "https://hyprland.cachix.org"
-        "https://yazi.cachix.org"
-        "https://walker-git.cachix.org"
-        "https://walker.cachix.org"
-        "https://catppuccin.cachix.org" # a cache for all catppuccin ports
-        "https://niri.cachix.org"
-        "https://nix-community.cachix.org"
       ];
+
       trusted-substituters = [
-        "https://cache.nixos.org" # Keep this last
+        "https://nix-community.cachix.org"
+        "https://chaotic-nyx.cachix.org"
         "https://nyx.chaotic.cx"
         "https://hyprland.cachix.org"
         "https://yazi.cachix.org"
         "https://walker-git.cachix.org"
         "https://walker.cachix.org"
-        "https://catppuccin.cachix.org" # a cache for all catppuccin ports
+        "https://catppuccin.cachix.org"
         "https://niri.cachix.org"
-        "https://nix-community.cachix.org"
+        "https://cache.nixos.org"
       ];
+
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
         "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
@@ -36,6 +41,18 @@
         "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
+
+      connect-timeout = 5;
+      log-lines = 25;
+      fallback = true;
+      warn-dirty = false;
     };
+
+    extraOptions = ''
+      min-free = ${toString (1024 * 1024 * 1024)}
+      max-free = ${toString (5 * 1024 * 1024 * 1024)}
+    '';
   };
+
+  environment.variables.NIX_REMOTE = "daemon";
 }

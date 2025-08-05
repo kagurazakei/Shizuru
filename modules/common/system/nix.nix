@@ -14,7 +14,7 @@
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
   nix = {
     channel.enable = false;
-    #package = pkgs.lixPackageSets.git.lix;
+    # package = pkgs.lixPackageSets.git.lix;
     settings = {
       nix-path = [
         "nixpkgs=${inputs.nixpkgs.outPath}"
