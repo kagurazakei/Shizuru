@@ -354,11 +354,11 @@
     nixosConfigurations = {
       shizuru = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit system inputs username host chaotic pkgs-master;
+          inherit system inputs username host pkgs-master;
         };
         modules = [
           ./hosts/${host}/config.nix
-          inputs.chaotic.nixosModules.default
+          chaotic.nixosModules.default
           home-manager.nixosModules.home-manager
           inputs.stylix.nixosModules.stylix
           inputs.catppuccin.nixosModules.catppuccin

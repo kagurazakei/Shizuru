@@ -24,6 +24,7 @@ in {
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
   programs.command-not-found.enable = true;
+  chaotic.mesa-git.enable = true;
   nixpkgs.config = {
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["joypixels"];
     joypixels.acceptLicense = true;
@@ -36,7 +37,7 @@ in {
       intel-vaapi-driver
       vaapiVdpau
       vaapi-intel-hybrid
-      mesa
+      #mesa_git
       egl-wayland
       master.waybar
     ])

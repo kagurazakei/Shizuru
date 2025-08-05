@@ -5,12 +5,12 @@ import "root:/Core" as Core
 // Main control panel coordinator - handles recording and system actions
 Item {
     id: controlPanelContainer
-    
+
     required property var shell
     property bool isRecording: false
     property int currentTab: 0 // 0=main, 1=calendar, 2=clipboard, 3=notifications, 4=wallpapers, 5=music, 6=settings
     property var tabIcons: ["widgets", "calendar_month", "content_paste", "notifications", "wallpaper", "music_note", "settings"]
-    
+
     property bool isShown: false
     property var recordingProcess: null
 
@@ -30,10 +30,9 @@ Item {
 
         var filename = hours + "-" + minutes + "-" + day + "-" + month + "-" + year + ".mp4"
         var outputPath = Data.Settings.videoPath + filename
-        var command = "gpu-screen-recorder -w portal -f 60 -a default_output -o " + outputPath
-
+        var command = "screen-record"
         var qmlString = 'import Quickshell.Io; Process { command: ["sh", "-c", "' + command + '"]; running: true }'
-        
+
         try {
             recordingProcess = Qt.createQmlObject(qmlString, controlPanelContainer)
             isRecording = true
@@ -41,11 +40,11 @@ Item {
             console.error("Failed to start recording:", e)
         }
     }
-    
+
     // Stop recording with cleanup
     onStopRecordingRequested: {
         if (recordingProcess && isRecording) {
-            var stopQmlString = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -SIGINT -f \'gpu-screen-recorder.*portal\'"]; running: true; onExited: function() { destroy() } }'
+            var stopQmlString = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -SIGINT -f \'gpu-screen-recorder.*screen\'"]; running: true; onExited: function() { destroy() } }'
 
             try {
                 var stopProcess = Qt.createQmlObject(stopQmlString, controlPanelContainer)
@@ -58,7 +57,7 @@ Item {
                         recordingProcess = null
                     }
 
-                    var forceKillQml = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -9 -f \'gpu-screen-recorder.*portal\' 2>/dev/null || true"]; running: true; onExited: function() { destroy() } }'
+                    var forceKillQml = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -9 -f \'gpu-screen-recorder.*screen\' 2>/dev/null || true"]; running: true; onExited: function() { destroy() } }'
                     var forceKillProcess = Qt.createQmlObject(forceKillQml, controlPanelContainer)
 
                     cleanupTimer.destroy()
@@ -69,7 +68,7 @@ Item {
         }
         isRecording = false
     }
-    
+
     // System action routing
     onSystemActionRequested: function(action) {
         switch(action) {
@@ -84,7 +83,7 @@ Item {
                 break
         }
     }
-    
+
     onPerformanceActionRequested: function(action) {
         console.log("Performance action requested:", action)
     }
@@ -92,25 +91,25 @@ Item {
     // Control panel window component
     ControlPanelWindow {
         id: controlPanelWindow
-        
+
         // Pass through properties
         shell: controlPanelContainer.shell
         isRecording: controlPanelContainer.isRecording
         currentTab: controlPanelContainer.currentTab
         tabIcons: controlPanelContainer.tabIcons
         isShown: controlPanelContainer.isShown
-        
+
         // Bind state changes back to parent
         onCurrentTabChanged: controlPanelContainer.currentTab = currentTab
         onIsShownChanged: controlPanelContainer.isShown = isShown
-        
+
         // Forward signals
         onRecordingRequested: controlPanelContainer.recordingRequested()
         onStopRecordingRequested: controlPanelContainer.stopRecordingRequested()
         onSystemActionRequested: function(action) { controlPanelContainer.systemActionRequested(action) }
         onPerformanceActionRequested: function(action) { controlPanelContainer.performanceActionRequested(action) }
     }
-    
+
     // Clean up processes on destruction
     Component.onDestruction: {
         if (recordingProcess) {
@@ -124,7 +123,7 @@ Item {
             }
             recordingProcess = null
         }
-        
+
         // Force kill any remaining gpu-screen-recorder processes
         var forceCleanupCmd = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -9 -f gpu-screen-recorder 2>/dev/null || true"]; running: true; onExited: function() { destroy() } }'
         try {

@@ -46,7 +46,8 @@ in
           vaapiVdpau
           intel-compute-runtime
           libvdpau-va-gl
-          mesa
+          libvdpau
+          #          mesa_git
         ];
       };
     };

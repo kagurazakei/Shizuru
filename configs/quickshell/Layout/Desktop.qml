@@ -13,18 +13,18 @@ import "root:/Widgets/ControlPanel" as ControlPanel
 // Desktop with borders and UI widgets
 Scope {
     id: desktop
-    
+
     property var shell
     property var notificationService
-    
+
     // Wallpaper layer - one per screen
-    Variants {
-        model: Quickshell.screens
-        Core.Wallpaper {
-            required property var modelData
-            screen: modelData
-        }
-    }
+    // Variants {
+    //     model: Quickshell.screens
+    //     Core.Wallpaper {
+    //         required property var modelData
+    //         screen: modelData
+    //     }
+    // }
 
     // Desktop UI layer per screen
     Variants {
@@ -33,12 +33,12 @@ Scope {
         PanelWindow {
             required property var modelData
             screen: modelData
-            
+
             implicitWidth: Screen.width
             implicitHeight: Screen.height
             color: "transparent"
             exclusiveZone: 0
-            
+
             WlrLayershell.namespace: "quickshell-desktop"
 
             // Interactive mask for workspace indicator only
@@ -79,7 +79,7 @@ Scope {
             }
 
             // Widget shadows (positioned behind border for proper layering)
-            
+
             // Workspace indicator shadow
             Rectangle {
                 id: workspaceShadow
@@ -91,7 +91,7 @@ Scope {
                 color: "black"
                 radius: 16
                 z: -10  // Behind border
-                
+
                 layer.enabled: true
                 layer.effect: DropShadow {
                     transparentBorder: true
@@ -115,7 +115,7 @@ Scope {
                     spread: 0.1 + (workspaceIndicator.effectsActive && Data.Settings.workspaceGlowEnabled ? Math.sin(workspaceIndicator.masterProgress * Math.PI) * 0.1 : 0)
                 }
             }
-            
+
             // Clock widget shadow
             Rectangle {
                 id: clockShadow
@@ -130,7 +130,7 @@ Scope {
                 bottomLeftRadius: 0
                 bottomRightRadius: 0
                 z: -10  // Behind border
-                
+
                 layer.enabled: true
                 layer.effect: DropShadow {
                     transparentBorder: true
@@ -184,22 +184,22 @@ Scope {
                                     break
                                 }
                             }
-                            
+
                             // Calculate position accounting for Column centering and pill sizes
                             let cumulativeHeight = 0
                             for (let i = 0; i < focusedIndex; i++) {
                                 const ws = workspaceIndicator.workspaces.get(i)
                                 cumulativeHeight += (ws && ws.isFocused ? 36 : 22) + 6  // pill height + spacing
                             }
-                            
+
                             // Current pill height
                             const currentWs = workspaceIndicator.workspaces.get(focusedIndex)
                             const currentPillHeight = (currentWs && currentWs.isFocused ? 36 : 22)
-                            
+
                             // Column is centered, so start from center and calculate offset
                             const columnHeight = parent.height - 24  // Total available height minus padding
                             const columnTop = 12  // Top padding
-                            
+
                             return columnTop + cumulativeHeight + currentPillHeight / 2 - height / 2
                         }
                         width: 20 + waveOverlay.progress * 30
@@ -224,22 +224,22 @@ Scope {
                                     break
                                 }
                             }
-                            
+
                             // Calculate position accounting for Column centering and pill sizes
                             let cumulativeHeight = 0
                             for (let i = 0; i < focusedIndex; i++) {
                                 const ws = workspaceIndicator.workspaces.get(i)
                                 cumulativeHeight += (ws && ws.isFocused ? 36 : 22) + 6  // pill height + spacing
                             }
-                            
+
                             // Current pill height
                             const currentWs = workspaceIndicator.workspaces.get(focusedIndex)
                             const currentPillHeight = (currentWs && currentWs.isFocused ? 36 : 22)
-                            
+
                             // Column is centered, so start from center and calculate offset
                             const columnHeight = parent.height - 24  // Total available height minus padding
                             const columnTop = 12  // Top padding
-                            
+
                             return columnTop + cumulativeHeight + currentPillHeight / 2 - height / 2
                         }
                         width: 18 + waveOverlay.progress * 45
@@ -281,7 +281,7 @@ Scope {
                 shell: desktop.shell
                 notificationServer: desktop.notificationService ? desktop.notificationService.notificationServer : null
                 z: 15
-                
+
                 Component.onCompleted: {
                     let targetScreen = Quickshell.primaryScreen || Quickshell.screens[0]
                     if (modelData === targetScreen) {
@@ -315,4 +315,4 @@ Scope {
             // Screen changes handled by Variants automatically
         }
     }
-} 
+}
