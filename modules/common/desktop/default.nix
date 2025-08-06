@@ -6,8 +6,8 @@
     ./greetd.nix
     ./niri.nix
     ./hm-clean.nix
-    #./notify.nix
     ./portal.nix
+    ./xdg.nix
     ./stylix.nix
     ./themes
   ];

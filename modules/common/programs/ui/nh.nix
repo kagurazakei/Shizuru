@@ -11,11 +11,11 @@ in {
     flake = "/home/antonio/shizuru/";
     clean = {
       enable = true;
-      extraArgs = "--keep-since 3d --keep 3";
+      extraArgs = "--keep-since 14d --keep 3";
     };
   };
   environment.systemPackages = with pkgs; [
     nix-output-monitor
-    nvd
+    dix
   ];
 }

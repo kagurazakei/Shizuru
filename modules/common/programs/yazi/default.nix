@@ -9,9 +9,9 @@
     ./yazi.nix
     ./theme.nix
   ];
+
   programs.yazi = {
     enable = true;
-    package = pkgs.master.yazi;
     initLua = ./configs/init.lua;
     plugins = {
       relative-motions = ./plugins/relative-motions.yazi;

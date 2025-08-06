@@ -1,6 +1,4 @@
-{ pkgs
-, ...
-}: {
+{pkgs, ...}: {
   programs.nvf = {
     enable = true;
     settings = {
@@ -55,11 +53,9 @@
           enableFormat = true;
           enableTreesitter = true;
           enableExtraDiagnostics = true;
-
           nix.enable = true;
           nix.lsp.package = pkgs.nil;
           markdown.enable = true;
-
           bash.enable = true;
           clang.enable = true;
           css.enable = true;
@@ -77,7 +73,6 @@
           nvim-web-devicons.enable = true;
           nvim-cursorline.enable = true;
           fidget-nvim.enable = true;
-
           highlight-undo.enable = true;
           indent-blankline.enable = true;
         };
@@ -97,7 +92,6 @@
         };
 
         autopairs.nvim-autopairs.enable = true;
-
         autocomplete.nvim-cmp.enable = true;
         snippets.luasnip.enable = true;
 
@@ -174,7 +168,7 @@
   };
   # make indents normal lmfao
   hj = {
-    files.".editorconfig".source = (pkgs.formats.ini { }).generate ".editorconfig" {
+    files.".editorconfig".source = (pkgs.formats.ini {}).generate ".editorconfig" {
       "*" = {
         charset = "utf-8";
         end_of_line = "lf";

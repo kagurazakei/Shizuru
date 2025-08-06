@@ -11,5 +11,15 @@
       auth include login
     '';
   };
-  security.sudo.wheelNeedsPassword = false;
+  security = {
+    sudo = {
+      enable = true;
+      wheelNeedsPassword = false;
+      extraConfig = ''
+        Defaults pwfeedback
+        Defaults env_keep += "EDITOR PATH DISPLAY"
+        Defaults passprompt = "[sudo 󱅞 ]: "
+      '';
+    };
+  };
 }

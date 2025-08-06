@@ -300,6 +300,7 @@
     nixpkgs,
     nixpkgs-master,
     rust-overlay,
+    yazi,
     home-manager,
     chaotic,
     agenix,
@@ -375,6 +376,7 @@
         ];
       };
     };
+    nixpkgs.overlays = [yazi.overlays.default];
     nixConfig = {
       extra-substituters = [
         "https://nix-community.cachix.org"

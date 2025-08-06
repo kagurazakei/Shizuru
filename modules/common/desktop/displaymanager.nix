@@ -1,17 +1,15 @@
 {
   pkgs,
   config,
-  options,
   lib,
   inputs,
-  system,
   ...
 }:
 with lib; let
   cfg = config.system.displayManager;
   cursorPkg = inputs.kureiji-ollie-cursor.packages.${pkgs.system}.kureiji-ollie-cursor;
   sddm-theme = inputs.silentSDDM.packages.${pkgs.system}.default.override {
-    theme = "silvia";
+    theme = "rei";
   };
 in {
   options.system.displayManager = {
@@ -53,6 +51,21 @@ in {
       };
     };
     programs.uwsm.enable = true;
+    xdg.terminal-exec = {
+      enable = true;
+      settings = {
+        Hyprland = ["kittty.desktop"];
+        Niri = ["kitty.desktop"];
+      };
+    };
+    environment = {
+      systemPackages = [inputs.app2unit.packages.${pkgs.system}.default];
+      sessionVariables = {
+        UWSM_SILENT_START = 1;
+        APP2UNIT_SLICES = "a=app-graphical.slice b=background-graphical.slice s=session-graphical.slice";
+        APP2UNIT_TYPE = "scope";
+      };
+    };
     programs.uwsm.waylandCompositors = {
       hyprland = {
         prettyName = "Hyprland";

@@ -1,11 +1,11 @@
-{ pkgs
-, ...
-}: {
+{pkgs, ...}: {
   xdg.portal = {
     enable = true;
-    wlr.enable = false;
+    wlr.enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+      pkgs.xdg-desktop-portal-termfilechooser
     ];
     configPackages = [
       pkgs.xdg-desktop-portal-gtk
