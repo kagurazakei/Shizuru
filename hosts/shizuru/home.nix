@@ -23,7 +23,6 @@
   programs.htop = {
     enable = true;
   };
-
   catppuccin.enable = true;
   catppuccin.btop.enable = false;
   catppuccin.mako.enable = false;

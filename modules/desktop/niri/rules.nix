@@ -158,11 +158,12 @@
     {
       matches = [
         {app-id = "^(dropdown)$";}
+        {app-id = "^file_chooser$";}
       ];
       open-floating = true;
       default-floating-position = {
-        x = 0;
-        y = 0;
+        x = 10;
+        y = 10;
         relative-to = "top";
       };
       default-window-height = {

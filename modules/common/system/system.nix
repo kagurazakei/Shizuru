@@ -1,8 +1,9 @@
-{ pkgs
-, config
-, inputs
-, system
-, ...
+{
+  pkgs,
+  config,
+  inputs,
+  system,
+  ...
 }: {
   system.autoUpgrade = {
     enable = true;
@@ -18,14 +19,13 @@
     enable = true;
     xdgOpenUsePortal = true;
     config = {
-      common.default = [ "gtk" ];
       hyprland.default = [
         "gtk"
         "hyprland"
       ];
     };
 
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
   environment.systemPackages = with pkgs; [
     wget
