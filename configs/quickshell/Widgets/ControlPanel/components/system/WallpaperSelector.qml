@@ -4,14 +4,12 @@ import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 import "root:/Data" as Data
 
-// Wallpaper selector grid
 Item {
     id: root
 
     property bool isVisible: false
     signal visibilityChanged(bool visible)
 
-    // Use all space provided by parent
     anchors.fill: parent
     visible: isVisible
     enabled: visible
@@ -19,8 +17,8 @@ Item {
 
     property bool containsMouse: wallpaperSelectorMouseArea.containsMouse || scrollView.containsMouse
     property bool menuJustOpened: false
+    property int currentIndex: -1
 
-    // Hover state management for auto-hide functionality
     onContainsMouseChanged: {
         if (containsMouse) {
             hideTimer.stop()
@@ -35,7 +33,93 @@ Item {
             hideTimer.stop()
             Qt.callLater(function() {
                 menuJustOpened = false
+                if (wallpaperGrid.count > 0) {
+                    currentIndex = Data.WallpaperManager.wallpaperList.indexOf(Data.WallpaperManager.currentWallpaper)
+                    if (currentIndex < 0) currentIndex = 0
+                    wallpaperGrid.positionViewAtIndex(currentIndex, GridView.Contain)
+                }
             })
+        }
+    }
+
+    // Enhanced keyboard navigation with animation
+    Keys.onPressed: {
+        if (!visible) return
+
+        var prevIndex = currentIndex
+
+        switch (event.key) {
+            case Qt.Key_Left:
+                if (currentIndex > 0) {
+                    currentIndex--
+                    animateSelection(prevIndex, currentIndex)
+                    wallpaperGrid.positionViewAtIndex(currentIndex, GridView.Contain)
+                }
+                event.accepted = true
+                break
+            case Qt.Key_Right:
+                if (currentIndex < wallpaperGrid.count - 1) {
+                    currentIndex++
+                    animateSelection(prevIndex, currentIndex)
+                    wallpaperGrid.positionViewAtIndex(currentIndex, GridView.Contain)
+                }
+                event.accepted = true
+                break
+            case Qt.Key_Up:
+                var newIndex = currentIndex - Math.floor(wallpaperGrid.width / wallpaperGrid.cellWidth)
+                if (newIndex >= 0) {
+                    currentIndex = newIndex
+                    animateSelection(prevIndex, currentIndex)
+                    wallpaperGrid.positionViewAtIndex(currentIndex, GridView.Contain)
+                }
+                event.accepted = true
+                break
+            case Qt.Key_Down:
+                var newIndex = currentIndex + Math.floor(wallpaperGrid.width / wallpaperGrid.cellWidth)
+                if (newIndex < wallpaperGrid.count) {
+                    currentIndex = newIndex
+                    animateSelection(prevIndex, currentIndex)
+                    wallpaperGrid.positionViewAtIndex(currentIndex, GridView.Contain)
+                }
+                event.accepted = true
+                break
+            case Qt.Key_Return:
+            case Qt.Key_Enter:
+                if (currentIndex >= 0 && currentIndex < wallpaperGrid.count) {
+                    Data.WallpaperManager.setWallpaper(Data.WallpaperManager.wallpaperList[currentIndex])
+                }
+                event.accepted = true
+                break
+        }
+    }
+
+    function animateSelection(prevIndex, newIndex) {
+        // Reset previous item scale
+        if (prevIndex >= 0) {
+            var prevItem = wallpaperGrid.itemAtIndex(prevIndex)
+            if (prevItem) {
+                prevItem.children[0].scale = 1.0
+            }
+        }
+
+        // Animate new selection
+        if (newIndex >= 0) {
+            var newItem = wallpaperGrid.itemAtIndex(newIndex)
+            if (newItem) {
+                newItem.children[0].scale = 1.08
+                selectionResetTimer.restart()
+            }
+        }
+    }
+
+    Timer {
+        id: selectionResetTimer
+        interval: 300
+        onTriggered: {
+            if (currentIndex >= 0) {
+                var item = wallpaperGrid.itemAtIndex(currentIndex)
+                if (item) item.children[0].scale = 1.05
+            }
         }
     }
 
@@ -43,15 +127,18 @@ Item {
         id: wallpaperSelectorMouseArea
         anchors.fill: parent
         hoverEnabled: true
-        preventStealing: false
+        preventStealing: true
         propagateComposedEvents: true
     }
 
-    // Scrollable wallpaper grid with memory-conscious loading
     ScrollView {
         id: scrollView
         anchors.fill: parent
         clip: true
+
+        ScrollBar.vertical.policy: ScrollBar.AsNeeded
+        ScrollBar.vertical.interactive: true
+        ScrollBar.vertical.minimumSize: 0.4
 
         property bool containsMouse: gridMouseArea.containsMouse
 
@@ -65,10 +152,10 @@ Item {
         GridView {
             id: wallpaperGrid
             anchors.fill: parent
-            cellWidth: parent.width / 2 - 8 // 2-column layout with spacing
-            cellHeight: cellWidth * 0.6 // Wallpaper aspect ratio
+            cellWidth: parent.width / 3 - 5
+            cellHeight: cellWidth * 0.8
             model: Data.WallpaperManager.wallpaperList
-            cacheBuffer: 0  // Memory optimization - no cache buffer
+            cacheBuffer: 0
             leftMargin: 4
             rightMargin: 4
             topMargin: 4
@@ -83,13 +170,25 @@ Item {
                     anchors.fill: parent
                     anchors.margins: 4
                     color: Qt.darker(Data.ThemeManager.bgColor, 1.2)
-                    radius: 20
+                    radius: 10
+                    scale: index === root.currentIndex ? 1.05 : 1.0
 
                     Behavior on scale {
-                        NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
+                        NumberAnimation {
+                            duration: 150
+                            easing.type: Easing.OutBack
+                            easing.overshoot: 1.2
+                        }
                     }
 
-                    // Wallpaper preview image with viewport-based loading
+                    Rectangle {
+                        visible: index === root.currentIndex && root.activeFocus
+                        anchors.fill: parent
+                        radius: parent.radius
+                        color: Data.ThemeManager.accentColor
+                        opacity: 0.3
+                    }
+
                     Image {
                         id: wallpaperImage
                         anchors.fill: parent
@@ -97,26 +196,14 @@ Item {
                         source: modelData
                         fillMode: Image.PreserveAspectCrop
                         asynchronous: true
-                        cache: false  // Memory optimization - no image caching
-                        sourceSize.width: Math.min(width, 150)  // Reduced resolution for memory
+                        cache: false
+                        sourceSize.width: Math.min(width, 150)
                         sourceSize.height: Math.min(height, 90)
-                        
-                        // Only load when visible in viewport - major memory optimization
+
                         visible: parent.parent.y >= wallpaperGrid.contentY - parent.parent.height &&
                                 parent.parent.y <= wallpaperGrid.contentY + wallpaperGrid.height
-                        
-                        // Layer effects disabled for memory savings
-                        // layer.enabled: true
-                        // layer.effect: OpacityMask {
-                        //     maskSource: Rectangle {
-                        //         width: wallpaperImage.width
-                        //         height: wallpaperImage.height
-                        //         radius: 18
-                        //     }
-                        // }
                     }
 
-                    // Current wallpaper selection indicator
                     Rectangle {
                         visible: modelData === Data.WallpaperManager.currentWallpaper
                         anchors.fill: parent
@@ -126,15 +213,21 @@ Item {
                         border.width: 2
                     }
 
-                    // Hover and click handling
                     MouseArea {
                         anchors.fill: parent
                         hoverEnabled: true
-                        onEntered: wallpaperItem.scale = 1.05
-                        onExited: wallpaperItem.scale = 1.0
+                        onEntered: {
+                            wallpaperItem.scale = 1.05
+                            root.currentIndex = index
+                        }
+                        onExited: {
+                            if (root.currentIndex === index && !root.activeFocus) {
+                                wallpaperItem.scale = 1.0
+                            }
+                        }
                         onClicked: {
                             Data.WallpaperManager.setWallpaper(modelData)
-                            // Stays in wallpaper tab after selection
+                            root.currentIndex = index
                         }
                     }
                 }
@@ -143,7 +236,7 @@ Item {
     }
 
     Component.onCompleted: {
-        // Use lazy loading to only load wallpapers when this component is actually used
         Data.WallpaperManager.ensureWallpapersLoaded()
+        forceActiveFocus()
     }
-} 
+}

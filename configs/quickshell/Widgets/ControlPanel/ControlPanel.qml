@@ -30,21 +30,32 @@ Item {
 
         var filename = hours + "-" + minutes + "-" + day + "-" + month + "-" + year + ".mp4"
         var outputPath = Data.Settings.videoPath + filename
-        var command = "screen-record"
+        var command = "gpu-screen-recorder -w screen -f 60 -a default_output -o " + outputPath
+
         var qmlString = 'import Quickshell.Io; Process { command: ["sh", "-c", "' + command + '"]; running: true }'
 
         try {
             recordingProcess = Qt.createQmlObject(qmlString, controlPanelContainer)
             isRecording = true
+
+            // Notify start
+            Qt.createQmlObject(
+                'import Quickshell.Io; Process { command: ["sh", "-c", "notify-send -u normal -i media-record \'🎥 Screen Recording\' \'Started recording to ' + outputPath + '\'"]; running: true; onExited: destroy() }',
+                controlPanelContainer
+            )
         } catch (e) {
             console.error("Failed to start recording:", e)
+            Qt.createQmlObject(
+                'import Quickshell.Io; Process { command: ["sh", "-c", "notify-send -u critical -i dialog-error \'⚠️ Screen Recording\' \'Failed to start recording\'"]; running: true; onExited: destroy() }',
+                controlPanelContainer
+            )
         }
     }
 
-    // Stop recording with cleanup
+    // Stop recording with notification and cleanup
     onStopRecordingRequested: {
         if (recordingProcess && isRecording) {
-            var stopQmlString = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -SIGINT -f \'gpu-screen-recorder.*screen\'"]; running: true; onExited: function() { destroy() } }'
+            var stopQmlString = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -SIGINT -f \\"gpu-screen-recorder.*screen\\""]; running: true; onExited: destroy() }'
 
             try {
                 var stopProcess = Qt.createQmlObject(stopQmlString, controlPanelContainer)
@@ -57,13 +68,23 @@ Item {
                         recordingProcess = null
                     }
 
-                    var forceKillQml = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -9 -f \'gpu-screen-recorder.*screen\' 2>/dev/null || true"]; running: true; onExited: function() { destroy() } }'
-                    var forceKillProcess = Qt.createQmlObject(forceKillQml, controlPanelContainer)
+                    var forceKillQml = 'import Quickshell.Io; Process { command: ["sh", "-c", "pkill -9 -f \\"gpu-screen-recorder.*screen\\" 2>/dev/null || true"]; running: true; onExited: destroy() }'
+                    Qt.createQmlObject(forceKillQml, controlPanelContainer)
+
+                    // Notify stop
+                    Qt.createQmlObject(
+                        'import Quickshell.Io; Process { command: ["sh", "-c", "notify-send -u normal -i media-playback-stop \'✅ Screen Recording\' \'Recording stopped\'"]; running: true; onExited: destroy() }',
+                        controlPanelContainer
+                    )
 
                     cleanupTimer.destroy()
                 })
             } catch (e) {
                 console.error("Failed to stop recording:", e)
+                Qt.createQmlObject(
+                    'import Quickshell.Io; Process { command: ["sh", "-c", "notify-send -u critical -i dialog-error \'⚠️ Screen Recording\' \'Failed to stop recording\'"]; running: true; onExited: destroy() }',
+                    controlPanelContainer
+                )
             }
         }
         isRecording = false
@@ -73,7 +94,8 @@ Item {
     onSystemActionRequested: function(action) {
         switch(action) {
             case "lock":
-                Core.ProcessManager.lock()
+            //            Core.ProcessManager.lock()
+             Qt.createQmlObject('import Quickshell.Io; Process { command: ["sh", "-c", "~/.local/bin/lock-qs"]; running: true; onExited: destroy() }', controlPanelContainer)
                 break
             case "reboot":
                 Core.ProcessManager.reboot()

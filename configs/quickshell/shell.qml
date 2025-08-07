@@ -63,11 +63,11 @@ ShellRoot {
 
     Component.onCompleted: {
         weatherService.loadWeather()
-        
+
         // Connect MatugenService to the Matugen theme
         Data.ThemeManager.matugen.setMatugenService(matugenService)
         console.log("MatugenService connected to Matugen theme")
-        
+
         // Register service with MatugenManager for global access
         Data.MatugenManager.setService(matugenService)
     }
@@ -102,11 +102,11 @@ ShellRoot {
                 const removeCount = notificationHistory.count - maxHistoryItems
                 notificationHistory.remove(maxHistoryItems, removeCount)
             }
-            
+
             gc()
         }
     }
-    
+
     // Aggressive memory cleanup every 10 minutes
     Timer {
         interval: 600000
@@ -118,7 +118,7 @@ ShellRoot {
                 const removeCount = notificationHistory.count - Math.floor(maxHistoryItems * 0.7)
                 notificationHistory.remove(Math.floor(maxHistoryItems * 0.7), removeCount)
             }
-            
+
             // Force garbage collection
             gc()
             Qt.callLater(gc)

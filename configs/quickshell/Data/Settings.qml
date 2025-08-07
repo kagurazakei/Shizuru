@@ -26,11 +26,11 @@ Singleton {
                     settings.isDarkTheme = content.isDarkTheme ?? true
                     settings.currentTheme = content.currentTheme ?? (content.isDarkTheme !== false ? "oxocarbon_dark" : "oxocarbon_light")
                     settings.useCustomAccent = content.useCustomAccent ?? false
-                    settings.avatarSource = content.avatarSource ?? "https://cdn.discordapp.com/avatars/158005126638993408/de403b05fd7f74bb17e01a9b066a30fa?size=64"
+                    settings.avatarSource = content.avatarSource ?? "/home/antonio/.face"
                     settings.weatherLocation = content.weatherLocation ?? "Dinslaken"
                     settings.useFahrenheit = content.useFahrenheit ?? false
                     settings.displayTime = content.displayTime ?? 6000
-                    settings.videoPath = content.videoPath ?? "/home/antonio/Videos/"
+                    settings.videoPath = content.videoPath ?? "~/Videos/"
                     settings.wallpaperDirectory = content.wallpaperDirectory ?? "/home/antonio/Pictures/wallpapers/"
                     settings.lastWallpaperPath = content.lastWallpaperPath ?? ""
                     settings.customDarkAccent = content.customDarkAccent ?? "#be95ff"
@@ -58,7 +58,7 @@ Singleton {
     }
 
     // User-configurable settings
-    property string avatarSource: "https://cdn.discordapp.com/avatars/158005126638993408/de403b05fd7f74bb17e01a9b066a30fa?size=64"
+    property string avatarSource: "/home/antonio/.face"
     property bool isDarkTheme: true  // Keep for backwards compatibility
     property string currentTheme: "oxocarbon_dark"  // New theme system
     property bool useCustomAccent: false  // Whether to use custom accent colors
@@ -72,11 +72,11 @@ Singleton {
     property string lastWallpaperPath: ""
     property string customDarkAccent: "#be95ff"
     property string customLightAccent: "#8a3ffc"
-    
+
     // Music Player settings
     property bool autoSwitchPlayer: true
     property bool alwaysShowPlayerDropdown: true
-    
+
     // Night Light settings
     property bool nightLightEnabled: false
     property real nightLightWarmth: 0.4
@@ -122,7 +122,7 @@ Singleton {
         }
         return false
     }
-    
+
     function removeIgnoredApp(appName) {
         var index = ignoredApps.indexOf(appName)
         if (index > -1) {

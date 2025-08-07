@@ -53,4 +53,5 @@ Column {
     }
 
     Component.onCompleted: Hyprland.refreshWorkspaces()
+
 }

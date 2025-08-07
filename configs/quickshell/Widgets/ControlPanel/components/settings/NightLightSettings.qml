@@ -324,6 +324,7 @@ Item {
                         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
                         y: startTimeButton.y - height - 10
                         x: startTimeButton.x
+                        dim: false
                         
                         background: Rectangle {
                             color: Data.ThemeManager.bgColor
@@ -448,6 +449,7 @@ Item {
                         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
                         y: endTimeButton.y - height - 10
                         x: endTimeButton.x
+                        dim: false
                         
                         background: Rectangle {
                             color: Data.ThemeManager.bgColor

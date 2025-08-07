@@ -9,7 +9,7 @@ import "root:/Core" as Core
 import "root:/Widgets" as Widgets
 import "root:/Widgets/Notifications" as Notifications
 import "root:/Widgets/ControlPanel" as ControlPanel
-
+import "root:/Services" as Services
 // Desktop with borders and UI widgets
 Scope {
     id: desktop
@@ -18,13 +18,13 @@ Scope {
     property var notificationService
 
     // Wallpaper layer - one per screen
-    // Variants {
-    //     model: Quickshell.screens
-    //     Core.Wallpaper {
-    //         required property var modelData
-    //         screen: modelData
-    //     }
-    // }
+    Variants {
+        model: Quickshell.screens
+        Core.Wallpaper {
+            required property var modelData
+            screen: modelData
+        }
+    }
 
     // Desktop UI layer per screen
     Variants {
@@ -66,8 +66,8 @@ Scope {
             }
 
             // Volume OSD at right border (primary screen only)
-            System.VolumeOSD {
-                id: volumeOsd
+            System.OSD {
+                id: osd
                 shell: desktop.shell
                 visible: modelData === Quickshell.primaryScreen
                 anchors {
@@ -254,7 +254,7 @@ Scope {
                 }
             }
 
-            // Clock at bottom-left corner
+              // Clock at bottom-left corner
             Widgets.Clock {
                 id: clockWidget
                 anchors {
@@ -262,9 +262,9 @@ Scope {
                     left: parent.left
                     bottomMargin: Data.Settings.borderWidth
                     leftMargin: Data.Settings.borderWidth
-                }
-                z: 10
-            }
+                  }
+                  z: 10
+             }
 
             // Notification popups (primary screen only)
             Notifications.Notification {

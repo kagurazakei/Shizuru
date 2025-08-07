@@ -1,11 +1,10 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   #wall-change = pkgs.writeShellScriptBin "wall-change" (builtins.readFile ./scripts/wall-change.sh);
   #wallpaper-picker = pkgs.writeShellScriptBin "wallpaper-picker" (builtins.readFile ./scripts/wallpaper-picker.sh);
   runbg = pkgs.writeShellScriptBin "runbg" (builtins.readFile ./scripts/runbg.sh);
   music = pkgs.writeShellScriptBin "music" (builtins.readFile ./scripts/music.sh);
   lofi = pkgs.writeScriptBin "lofi" (builtins.readFile ./scripts/lofi.sh);
-
+  lysec-bar = pkgs.writeShellScriptBin "lysec-bar" (builtins.readFile ./scripts/lysec-bar.sh);
   toggle_blur = pkgs.writeScriptBin "toggle_blur" (builtins.readFile ./scripts/toggle_blur.sh);
   toggle_oppacity = pkgs.writeScriptBin "toggle_oppacity" (builtins.readFile ./scripts/toggle_oppacity.sh);
   toggle_waybar = pkgs.writeScriptBin "toggle_waybar" (builtins.readFile ./scripts/toggle_waybar.sh);
@@ -30,14 +29,14 @@ let
   niri-edit = pkgs.writeScriptBin "niri-edit" (builtins.readFile ./scripts/niri-edit);
   wlogout-new = pkgs.writeScriptBin "wlogout-new" (builtins.readFile ./scripts/wlogout-new);
   brightness = pkgs.writeScriptBin "brightness" (builtins.readFile ./scripts/brightness);
-in
-{
+in {
   hj.packages = with pkgs; [
     # wall-change
     # wallpaper-picker
     runbg
     music
     lofi
+    lysec-bar
     toggle_blur
     toggle_oppacity
     toggle_waybar

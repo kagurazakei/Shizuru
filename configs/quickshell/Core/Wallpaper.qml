@@ -44,4 +44,4 @@ PanelWindow {
             visible: wallpaperImage.status !== Image.Ready || !wallpaperImage.source
         }
     }
-} 
+}

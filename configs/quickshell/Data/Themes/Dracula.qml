@@ -5,8 +5,8 @@ QtObject {
     readonly property var dark: ({
         name: "Dracula",
         type: "dark",
-        base00: "#0A0A14",    // Background
-        base01: "#11121d",    // Current line
+        base00: "#0A0A13",    // Background
+        base01: "#0A0A0A",    // Current line
         base02: "#565761",    // Selection
         base03: "#6272a4",    // Comment
         base04: "#6272a4",    // Dark foreground

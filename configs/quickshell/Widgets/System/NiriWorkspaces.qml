@@ -7,37 +7,38 @@ import Quickshell.Io
 import "root:/Data" as Data
 import "root:/Core" as Core
 
+
 // Niri workspace indicator
 Rectangle {
     id: root
-    
+
     property ListModel workspaces: ListModel {}
     property int currentWorkspace: -1
     property bool isDestroying: false
-    
+
     // Signal for workspace change bursts
     signal workspaceChanged(int workspaceId, color accentColor)
-    
+
     // MASTER ANIMATION CONTROLLER - drives Desktop overlay burst effect
     property real masterProgress: 0.0
     property bool effectsActive: false
     property color effectColor: Data.ThemeManager.accent
-    
+
     // Single master animation that controls Desktop overlay burst
     function triggerUnifiedWave() {
         effectColor = Data.ThemeManager.accent
         masterAnimation.restart()
     }
-    
+
     SequentialAnimation {
         id: masterAnimation
-        
+
         PropertyAction {
             target: root
             property: "effectsActive"
             value: true
         }
-        
+
         NumberAnimation {
             target: root
             property: "masterProgress"
@@ -46,24 +47,24 @@ Rectangle {
             duration: 1000
             easing.type: Easing.OutQuint
         }
-        
+
         PropertyAction {
             target: root
             property: "effectsActive"
             value: false
         }
-        
+
         PropertyAction {
             target: root
             property: "masterProgress"
             value: 0.0
         }
     }
-    
+
     color: Data.ThemeManager.bgColor
     width: 32
     height: workspaceColumn.implicitHeight + 24
-    
+
     // Smooth height animation
     Behavior on height {
         NumberAnimation {
@@ -71,13 +72,13 @@ Rectangle {
             easing.type: Easing.OutCubic
         }
     }
-    
+
     // Right-side rounded corners
     topRightRadius: width / 2
     bottomRightRadius: width / 2
     topLeftRadius: 0
     bottomLeftRadius: 0
-    
+
     // Wave effects overlay - unified animation system (DISABLED - using Desktop overlay)
     Item {
         id: waveEffects
@@ -85,13 +86,13 @@ Rectangle {
         visible: false  // Disabled in favor of unified overlay
         z: 2
     }
-    
+
     // Niri event stream listener
     Process {
         id: niriProcess
         command: ["niri", "msg", "event-stream"]
         running: true
-        
+
         stdout: SplitParser {
             onRead: data => {
                 const lines = data.split('\n');
@@ -102,7 +103,7 @@ Rectangle {
                 }
             }
         }
-        
+
         onExited: {
             // Auto-restart on failure to maintain workspace sync (but not during destruction)
             if (exitCode !== 0 && !root.isDestroying) {
@@ -110,7 +111,7 @@ Rectangle {
             }
         }
     }
-    
+
     // Parse Niri event stream messages
     function parseNiriEvent(line) {
         try {
@@ -121,7 +122,7 @@ Rectangle {
                     const previousWorkspace = root.currentWorkspace;
                     root.currentWorkspace = workspaceId;
                     updateWorkspaceFocus(workspaceId);
-                    
+
                     // Trigger burst effect if workspace actually changed
                     if (previousWorkspace !== workspaceId && previousWorkspace !== -1) {
                         root.triggerUnifiedWave();
@@ -138,7 +139,7 @@ Rectangle {
             console.log("Error parsing niri event:", e);
         }
     }
-    
+
     // Update workspace focus states
     function updateWorkspaceFocus(focusedWorkspaceId) {
         for (let i = 0; i < root.workspaces.count; i++) {
@@ -146,7 +147,7 @@ Rectangle {
             const wasFocused = workspace.isFocused;
             const isFocused = workspace.id === focusedWorkspaceId;
             const isActive = workspace.id === focusedWorkspaceId;
-            
+
             // Only update changed properties to trigger animations
             if (wasFocused !== isFocused) {
                 root.workspaces.setProperty(i, "isFocused", isFocused);
@@ -154,7 +155,7 @@ Rectangle {
             }
         }
     }
-    
+
     // Parse workspace data from Niri's Rust-style output format
     function parseWorkspaceList(data) {
         try {
@@ -162,9 +163,9 @@ Rectangle {
             if (!workspaceMatches) {
                 return;
             }
-            
+
             const newWorkspaces = [];
-            
+
             for (const match of workspaceMatches) {
                 const idMatch = match.match(/id: (\d+)/);
                 const idxMatch = match.match(/idx: (\d+)/);
@@ -173,7 +174,7 @@ Rectangle {
                 const isActiveMatch = match.match(/is_active: (true|false)/);
                 const isFocusedMatch = match.match(/is_focused: (true|false)/);
                 const isUrgentMatch = match.match(/is_urgent: (true|false)/);
-                
+
                 if (idMatch && idxMatch && outputMatch) {
                     const workspace = {
                         id: parseInt(idMatch[1]),
@@ -184,15 +185,15 @@ Rectangle {
                         isFocused: isFocusedMatch ? isFocusedMatch[1] === "true" : false,
                         isUrgent: isUrgentMatch ? isUrgentMatch[1] === "true" : false
                     };
-                    
+
                     newWorkspaces.push(workspace);
-                    
+
                     if (workspace.isFocused) {
                         root.currentWorkspace = workspace.id;
                     }
                 }
             }
-            
+
             // Sort by index and update model
             newWorkspaces.sort((a, b) => a.idx - b.idx);
             root.workspaces.clear();
@@ -201,25 +202,25 @@ Rectangle {
             console.log("Error parsing workspace list:", e);
         }
     }
-    
+
     // Vertical workspace indicator pills
     Column {
         id: workspaceColumn
         anchors.centerIn: parent
         spacing: 8
-        
+
         Repeater {
             model: root.workspaces
-            
+
             Rectangle {
                 id: workspacePill
-                
+
                 // Dynamic sizing based on focus state
-                width: model.isFocused ? 11 : 11
+                width: model.isFocused ? 12 : 12
                 height: model.isFocused ? 55 : 45
-                radius: 2
+                radius: 3.5
                 scale: model.isFocused ? 1.0 : 0.9
-                
+
                 // Material Design 3 inspired colors
                 color: {
                     if (model.isFocused) {
@@ -233,7 +234,7 @@ Rectangle {
                     }
                     return Qt.rgba(Data.ThemeManager.primaryText.r, Data.ThemeManager.primaryText.g, Data.ThemeManager.primaryText.b, 0.4);
                 }
-                
+
                 // Workspace pill burst overlay (DISABLED - using unified overlay)
                 Rectangle {
                     id: pillBurst
@@ -246,7 +247,7 @@ Rectangle {
                     visible: false
                     z: -1
                 }
-                
+
                 // Subtle pulse for inactive pills during workspace changes
                 Rectangle {
                     id: inactivePillPulse
@@ -256,7 +257,7 @@ Rectangle {
                     opacity: {
                         // Only pulse inactive pills during effects
                         if (model.isFocused || !root.effectsActive) return 0
-                        
+
                         // More subtle pulse that peaks mid-animation
                         if (root.masterProgress < 0.3) {
                             return (root.masterProgress / 0.3) * 0.15
@@ -268,7 +269,7 @@ Rectangle {
                     }
                     z: -0.5  // Behind the pill content but visible
                 }
-                
+
                 // Enhanced corner shadows for burst effect (DISABLED - using unified overlay)
                 Rectangle {
                     id: cornerBurst
@@ -283,7 +284,7 @@ Rectangle {
                     visible: false
                     z: 1
                 }
-                
+
                 // Elevation shadow
                 Rectangle {
                     anchors.fill: parent
@@ -295,22 +296,22 @@ Rectangle {
                     color: Qt.rgba(0, 0, 0, model.isFocused ? 0.15 : 0)
                     z: -1
                     visible: model.isFocused
-                    
+
                     Behavior on color { ColorAnimation { duration: 200 } }
                 }
-                
+
                 // Smooth Material Design transitions
-                Behavior on width { 
-                    NumberAnimation { 
+                Behavior on width {
+                    NumberAnimation {
                         duration: 300
-                        easing.type: Easing.OutCubic 
-                    } 
+                        easing.type: Easing.OutCubic
+                    }
                 }
-                Behavior on height { 
-                    NumberAnimation { 
+                Behavior on height {
+                    NumberAnimation {
                         duration: 300
-                        easing.type: Easing.OutCubic 
-                    } 
+                        easing.type: Easing.OutCubic
+                    }
                 }
                 Behavior on scale {
                     NumberAnimation {
@@ -318,12 +319,12 @@ Rectangle {
                         easing.type: Easing.OutCubic
                     }
                 }
-                Behavior on color { 
-                    ColorAnimation { 
-                        duration: 200 
-                    } 
+                Behavior on color {
+                    ColorAnimation {
+                        duration: 200
+                    }
                 }
-                
+
                 // Workspace number text
                 Text {
                     anchors.centerIn: parent
@@ -333,11 +334,11 @@ Rectangle {
                     font.bold: model.isFocused
                     font.family: "JetBrainsMono Nerd Font, sans-serif"
                     visible: model.isFocused || model.isActive
-                    
+
                     Behavior on font.pixelSize { NumberAnimation { duration: 200 } }
                     Behavior on color { ColorAnimation { duration: 200 } }
                 }
-                
+
                 MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true
@@ -346,14 +347,14 @@ Rectangle {
                         switchProcess.command = ["niri", "msg", "action", "focus-workspace", model.idx.toString()];
                         switchProcess.running = true;
                     }
-                    
+
                     // Hover feedback
                     onEntered: {
                         if (!model.isFocused) {
                             workspacePill.color = Qt.rgba(Data.ThemeManager.primaryText.r, Data.ThemeManager.primaryText.g, Data.ThemeManager.primaryText.b, 0.6);
                         }
                     }
-                    
+
                     onExited: {
                         // Reset to normal color
                         if (!model.isFocused) {
@@ -370,7 +371,7 @@ Rectangle {
             }
         }
     }
-    
+
     // Workspace switching command process
     Process {
         id: switchProcess
@@ -382,13 +383,13 @@ Rectangle {
             }
         }
     }
-    
+
     // Border integration corners
     Core.Corners {
         id: topLeftCorner
         position: "topleft"
         size: 1.3
-        fillColor: Data.ThemeManager.bgColor 
+        fillColor: Data.ThemeManager.bgColor
         offsetX: -41
         offsetY: -25
     }
@@ -427,11 +428,11 @@ Rectangle {
         layer.enabled: true
         layer.samples: 4
     }
-    
+
     // Clean up processes on destruction
     Component.onDestruction: {
         root.isDestroying = true
-        
+
         if (niriProcess.running) {
             niriProcess.running = false
         }
@@ -439,4 +440,4 @@ Rectangle {
             switchProcess.running = false
         }
     }
-} 
+}

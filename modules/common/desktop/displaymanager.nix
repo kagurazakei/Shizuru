@@ -21,6 +21,7 @@ in {
       sddm-theme
       sddm-theme.test
       pkgs.lyra-cursors
+      inputs.app2unit.packages.${pkgs.system}.default
       cursorPkg
       inputs.sddm-stray.packages.${pkgs.system}.default
       inputs.waifu-cursors.packages.${pkgs.system}.Reichi-Shinigami
@@ -59,7 +60,6 @@ in {
       };
     };
     environment = {
-      systemPackages = [inputs.app2unit.packages.${pkgs.system}.default];
       sessionVariables = {
         UWSM_SILENT_START = 1;
         APP2UNIT_SLICES = "a=app-graphical.slice b=background-graphical.slice s=session-graphical.slice";
