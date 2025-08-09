@@ -24,7 +24,6 @@ in {
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allowBroken = true;
   programs.command-not-found.enable = true;
-  chaotic.mesa-git.enable = true;
   nixpkgs.config = {
     allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["joypixels"];
     joypixels.acceptLicense = true;

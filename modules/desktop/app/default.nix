@@ -3,9 +3,9 @@
     #./ags.nix
     ./caelestia.nix
     ./cliphist.nix
-    ./fuzzel.nix
     ./hypridle.nix
     ./mpv.nix
+    ./fuzzel
     ./kde
     ./kvantum
     ./qtct

@@ -53,12 +53,15 @@
           rounding_power = 2.0;
           blur = {
             enabled = true;
-            size = 3;
-            passes = 2;
+            size = 6;
+            passes = 3;
+            noise = 0.0;
+            contrast = 1.0;
             new_optimizations = true;
             ignore_opacity = true;
             xray = false;
-            vibrancy = 0.1696;
+            vibrancy = 0.2696;
+            vibrancy_darkness = 0.3;
           };
         }
         {
@@ -159,8 +162,6 @@
 
       bind = $mainMod, mouse:272, movewindow
       bind = ALT, mouse:272, togglefloating
-      bind = Ctrl+Shift, Space, exec, $dockbottom
-      bind = Ctrl+Alt, Space, exec, pkill -f nwg-dock-hyprland
     '';
   };
 }

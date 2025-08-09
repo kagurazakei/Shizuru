@@ -267,7 +267,7 @@
     nixcord.url = "github:kaylorben/nixcord";
     textfox.url = "github:adriankarlen/textfox";
     nh = {
-      url = "github:nix-community/nh/6487dafbbde60bdf4e1568fc7c7419daf327c032";
+      url = "github:nix-community/nh";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {

@@ -32,7 +32,6 @@
     "^(discord)"
     "^(spotify)"
     "^(hiddify)"
-    "^(foot)"
     "^(mpv)"
     "^(com.mitchellh.ghostty)"
     "^(org.kde.dolphin)"

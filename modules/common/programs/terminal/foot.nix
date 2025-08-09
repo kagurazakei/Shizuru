@@ -1,18 +1,19 @@
-{ lib, config, ... }:
-let
-  cfg = config.modules.terminal.foot;
-in
 {
+  lib,
+  config,
+  ...
+}: let
+  cfg = config.modules.terminal.foot;
+in {
   options.modules.terminal.foot.enable = lib.mkEnableOption "Enable foot module";
 
   config = lib.mkIf cfg.enable {
-
     hj.rum.programs.foot = {
       enable = true;
       settings = {
         main = {
           term = "foot";
-          font = "IoshelfkaMono Nerd Font:size=14";
+          font = "IoshelfkaMono Nerd Font:size=15";
           include = "/home/antonio/.config/foot/catppuccin-mocha.ini";
         };
         mouse = {
