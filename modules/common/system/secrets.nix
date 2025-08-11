@@ -72,7 +72,7 @@
     };
   };
 
-  age.identityPaths = ["/etc/agenix/keys.txt"];
+  age.identityPaths = [config.sops.secrets."age-private".path];
   age.secrets = {
     private = {
       file = ../../../secrets/private.age;
