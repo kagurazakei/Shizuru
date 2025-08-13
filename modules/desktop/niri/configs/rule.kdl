@@ -1,0 +1,147 @@
+window-rule {
+    draw-border-with-background false
+    geometry-corner-radius 15.000000 15.000000 15.000000 15.000000
+    clip-to-geometry true
+}
+window-rule {
+    match app-id="^niri$"
+    opacity 1.000000
+}
+window-rule {
+    match is-focused=false
+    opacity 0.950000
+}
+window-rule {
+    match is-floating=true
+    shadow { on; }
+}
+window-rule {
+    match is-window-cast-target=true
+    border { inactive-color "#a9b1d600 "; }
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#a9b1d600 "
+    }
+    shadow { color "#f38ba800 "; }
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#a9b1d600"
+    }
+}
+window-rule {
+    match app-id="org.telegram.desktop"
+    block-out-from "screencast"
+}
+window-rule {
+    match app-id="app.drey.PaperPlane"
+    block-out-from "screencast"
+}
+window-rule {
+    match app-id="^(zen|firefox|chromium-browser|chrome-.*|zen-.*)$"
+    match app-id="^(xdg-desktop-portal-gtk)$"
+    scroll-factor 0.850000
+}
+window-rule {
+    match app-id="^(info.febvre.Komikku)$"
+    scroll-factor 0.100000
+}
+window-rule {
+    match app-id="^(zen|firefox|equibop|chromium-browser|edge|chrome-.*|zen-.*)$"
+    open-maximized false
+}
+window-rule {
+    match app-id="firefox$" title="^Picture-in-Picture$"
+    match app-id="zen-.*$" title="^Picture-in-Picture$"
+    match title="^Picture in picture$"
+    match title="^Discord Popout$"
+    open-floating true
+    default-floating-position relative-to="top-right" x=32 y=32
+}
+
+window-rule {
+    match app-id="^(org.wezfurlong.wezterm)$"
+    match app-id="^(kitty)$"
+    match app-id="^(com.mitchellh.ghostty)$"
+    opacity 0.960000
+}
+window-rule {
+    match app-id="^(dropdown)$"
+    match app-id="^file_chooser$"
+    default-column-width { proportion 0.500000; }
+    default-window-height { proportion 0.500000; }
+    open-floating true
+    default-floating-position relative-to="top" x=10 y=10
+}
+window-rule {
+    match app-id="^(pwvucontrol)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(Volume Control)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(dialog)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(file_progress)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(confirm)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(download)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(error)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(notification)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(thunar)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(discord)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(spotify)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(hiddify)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(mpv)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(com.mitchellh.ghostty)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(org.kde.dolphin)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(org.Waytrogen.Waytrogen)" title=""
+    open-floating true
+}
+window-rule {
+    match app-id="^(waypaper)" title=""
+    open-floating true
+}
+layer-rule {
+    match namespace="^swww-daemon$"
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}

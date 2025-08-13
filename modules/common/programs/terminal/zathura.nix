@@ -1,8 +1,6 @@
-{ pkgs
-, ...
-}: {
+{pkgs, ...}: {
   hj = {
-    packages = [ pkgs.zathura ];
+    packages = [pkgs.zathura];
     files = {
       ".config/zathura/zathurarc".text = ''
                               # Open document in fit-width mode by default
@@ -30,6 +28,8 @@
         # Key mappings
         unmap f
         map f toggle_fullscreen
+        map j scroll full-up
+        map k scroll full-down
         unmap a
         map a toggle_statusbar
         map [fullscreen] f toggle_fullscreen

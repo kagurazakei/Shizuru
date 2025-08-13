@@ -1,0 +1,33 @@
+input {
+    keyboard {
+        xkb {
+            layout "us"
+            model ""
+            rules ""
+            variant ""
+            options "caps:swapescape"
+        }
+        repeat-delay 600
+        repeat-rate 25
+        track-layout "global"
+    }
+    touchpad {
+        tap
+        dwt
+        dwtp
+        middle-emulation
+        accel-profile "adaptive"
+        scroll-method "two-finger"
+        click-method "button-areas"
+        tap-button-map "left-right-middle"
+        scroll-factor 0.700000
+    }
+    warp-mouse-to-focus
+    focus-follows-mouse
+    workspace-auto-back-and-forth
+}
+output "eDP-1" {
+    scale 1.000000
+    transform "normal"
+    mode "2160x1440"
+}

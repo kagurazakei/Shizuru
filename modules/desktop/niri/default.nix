@@ -6,12 +6,13 @@
   wallpaperScript = pkgs.writeScriptBin "niri-wallpaper" (builtins.readFile ./wallpaperAutoChange.sh);
   swww = inputs.swww.packages.${pkgs.system}.swww;
 in {
+  imports = [
+    ./bind.nix
+    ./settings.nix
+  ];
   hm = {
     imports = [
       inputs.niri.homeModules.niri
-      ./settings.nix
-      ./binds.nix
-      ./rules.nix
     ];
 
     xdg.portal.extraPortals = [
