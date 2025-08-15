@@ -30,7 +30,6 @@ in {
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       SDL_VIDEODRIVER = "wayland";
       QT_QPA_PLATFORMTHEME = "qt6ct";
-      GTK_THEME = "catppuccin-mocha-blue-standard+normal";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
       OZONE_PLATFORM = "wayland";
       JAVA_AWT_WM_NONEREPARENTING = "1";

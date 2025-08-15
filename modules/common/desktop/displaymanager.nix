@@ -32,20 +32,20 @@ in {
     services.displayManager.sddm = {
       enable = true; # Enable SDDM.
       package = pkgs.kdePackages.sddm;
-      # extraPackages = with pkgs; [
-      #   kdePackages.qtsvg
-      #   kdePackages.qtmultimedia
-      #   kdePackages.qtvirtualkeyboard
-      # ];
-      extraPackages = sddm-theme.propagatedBuildInputs;
+      extraPackages = with pkgs; [
+        kdePackages.qtsvg
+        kdePackages.qtmultimedia
+        kdePackages.qtvirtualkeyboard
+      ];
+      #extraPackages = sddm-theme.propagatedBuildInputs;
       wayland.enable = true;
-      theme = sddm-theme.pname;
-      #theme = "sddm-theme-stray";
+      #theme = sddm-theme.pname;
+      theme = "sddm-theme-stray";
       settings = {
-        General = {
-          GreeterEnvironment = "QML2_IMPORT_PATH=${sddm-theme}/share/sddm/themes/${sddm-theme.pname}/components/,QT_IM_MODULE=qtvirtualkeyboard";
-          InputMethod = "qtvirtualkeyboard";
-        };
+        # General = {
+        #   GreeterEnvironment = "QML2_IMPORT_PATH=${sddm-theme}/share/sddm/themes/${sddm-theme.pname}/components/,QT_IM_MODULE=qtvirtualkeyboard";
+        #   InputMethod = "qtvirtualkeyboard";
+        # };
         Theme = {
           CursorTheme = "Reichi-Shinigami";
         };

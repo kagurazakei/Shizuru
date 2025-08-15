@@ -8,7 +8,7 @@
     font-flake.url = "github:redyf/font-flake";
     systems.url = "github:nix-systems/x86_64-linux";
     agenix.url = "github:ryantm/agenix";
-    walker.url = "github:abenz1267/walker";
+    walker.url = "github:abenz1267/walker/v0.13.26";
     private-key.url = "git+ssh://git@codeberg.org/maotseantonio/secrets.git";
     sops-nix = {
       url = "github:mic92/sops-nix";
