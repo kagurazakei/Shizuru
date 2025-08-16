@@ -1,112 +1,65 @@
-# Main default config
-{ config
-, pkgs
-, lib
-, inputs
-, system
-, ...
-}:
-let
+{
+  pkgs,
+  lib,
+  ...
+}: let
   inherit (import ./variables.nix) keyboardLayout;
   python-packages = pkgs.python3.withPackages (
     ps:
       with ps; [
         requests
-        pyquery # needed for hyprland-dots Weather script
+        pyquery
       ]
   );
-in
-{
+in {
   imports = [
     ./hardware.nix
     ./users.nix
-    ../../modules/system/desktop.nix
+    ./hjem.nix
+    ./themes.nix
+    ../../modules/options/hana.nix
   ];
-
-  nixpkgs.overlays = [
-    (_final: prev: {
-      sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
-        pname = "sf-mono-liga-bin";
-        version = "dev";
-        src = inputs.sf-mono-liga-src;
-        dontConfigure = true;
-        installPhase = ''
-          mkdir -p $out/share/fonts/opentype
-          cp -R $src/*.otf $out/share/fonts/opentype/
-        '';
-      };
-    })
-  ];
-
-  drivers.amdgpu.enable = true;
-  drivers.intel.enable = false;
-  drivers.nvidia.enable = true;
-  #  drivers.nvidia-prime = {
-  #    enable = true;
-  #    intelBusID = "PCI:0:2:0";
-  #    nvidiaBusID = "PCI:1:0:0";
-  #  };
-  vm.guest-services.enable = false;
-  local.hardware-clock.enable = true;
-  system.kernel.enable = true;
-  system.bootloader-systemd.enable = false;
-  system.bootloader-grub.enable = true;
-  system.plymouth.enable = true;
-  system.audio.enable = true;
-  system.greetd.enable = true;
-  system.powermanagement.enable = false;
-  system.scheduler.enable = true;
-  system.btrfs.enable = true;
-  system.zfs.enable = false;
-  system.zram.enable = true;
+  services.xserver.videoDrivers = ["modesetting" "nvidia"];
+  catppuccin.tty.enable = false;
   nixpkgs.config.allowUnfree = true;
-  users = {
-    mutableUsers = true;
+  nixpkgs.config.allowBroken = true;
+  programs.command-not-found.enable = true;
+  nixpkgs.config = {
+    allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) ["joypixels"];
+    joypixels.acceptLicense = true;
   };
-
   environment.systemPackages =
     (with pkgs; [
       libva-utils
       libvdpau-va-gl
-      #intel-compute-runtime
-      #intel-vaapi-driver
+      intel-compute-runtime
+      intel-vaapi-driver
       vaapiVdpau
-      mesa
+      vaapi-intel-hybrid
+      #mesa_git
       egl-wayland
-      #waybar  # if wanted experimental next line
-      #(pkgs.waybar.overrideAttrs (oldAttrs: { mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];}))
+      master.waybar
     ])
-    ++ [
-      python-packages
-    ];
-  # OpenGL
-  hardware.graphics = {
+    ++ [python-packages];
+  hardware.graphics.enable = true;
+
+  services.btrfs.autoScrub = {
     enable = true;
+    interval = "monthly";
+    fileSystems = ["/"];
   };
   console.keyMap = "${keyboardLayout}";
-  # For Electron apps to use wayland
-  environment.variables = {
-    VDAPU_DRIVER = lib.mkIf config.hardware.graphics.enable (lib.mkDefault "va_gl");
-  };
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.sessionVariables = {
     EDITOR = "nvim";
     BROWSER = "firefox";
-    TERMINAL = "wezterm";
+    TERMINAL = "kitty";
     VISUAL = "vscodium";
     GSK_RENDERER = "gl";
+    NIXPKGS_ALLOW_UNFREE = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+    ZDOTDIR = "$HOME/.config/zsh";
+    NH_OS_FLAKE = "/home/antonio/shizuru";
   };
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }

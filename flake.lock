@@ -4628,15 +4628,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1755106409,
-        "narHash": "sha256-3UWu7uMezJwyFGxfjYdy6I8e0OXg/BW3Oc6NBSUg2NY=",
-        "owner": "uiriansan",
+        "lastModified": 1755268370,
+        "narHash": "sha256-z7gn8h8Zea1dcSrSDjrHCSIfRdu+CrJ0rKpoO8e2/5c=",
+        "owner": "kagurazakei",
         "repo": "SilentSDDM",
-        "rev": "8ea5b24b4633383cd51ed42ec0a4d970f6be5baa",
+        "rev": "c03efa34c027a9dd57e7b4b01302b4a00d8d82be",
         "type": "github"
       },
       "original": {
-        "owner": "uiriansan",
+        "owner": "kagurazakei",
         "repo": "SilentSDDM",
         "type": "github"
       }

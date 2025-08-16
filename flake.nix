@@ -21,7 +21,7 @@
       url = "github:kagurazakei/fish-flake";
     };
     silentSDDM = {
-      url = "github:uiriansan/SilentSDDM";
+      url = "github:kagurazakei/SilentSDDM";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     shizuruPkgs.url = "github:kagurazakei/shizuruPkgs";

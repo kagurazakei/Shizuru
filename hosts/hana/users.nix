@@ -2,34 +2,42 @@
 , inputs
 , username
 , host
+, lib
 , ...
 }:
 let
   inherit (import ./variables.nix) gitUsername;
 in
 {
-  imports = [ inputs.home-manager.nixosModules.home-manager ];
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+    (lib.modules.mkAliasOptionModule [ "hm" ] [ "home-manager" "users" "${username}" ]) # gitlab/fazzi
+  ];
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    backupFileExtension = "bak";
+    sharedModules = [
+      inputs.sops-nix.homeManagerModules.sops
+    ];
+    backupFileExtension = "backup";
     extraSpecialArgs = {
       inherit inputs username host;
     };
     users.${username} = {
-      imports =
-        if (host == "shizuru")
-        then [ ../../modules/home-manager ]
-        else [ ../../modules/home-manager/desktop.nix ];
+      imports = [
+        ./home.nix
+      ];
       home.username = "${username}";
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "25.05";
       programs.home-manager.enable = true;
     };
   };
-
   users = {
+    defaultUserShell = pkgs.fish;
+    mutableUsers = true;
     users."${username}" = {
+      shell = pkgs.fish;
       homeMode = "755";
       isNormalUser = true;
       description = "${gitUsername}";
@@ -48,42 +56,9 @@ in
       packages = with pkgs; [
       ];
     };
-
-    defaultUserShell = pkgs.fish;
   };
+  #security.sudo.wheelNeedsPassword = false;
   nix.settings.allowed-users = [ "${username}" ];
   environment.shells = with pkgs; [ fish ];
   environment.systemPackages = with pkgs; [ fzf ];
-  programs.fish.enable = true;
-  programs.fish.interactiveShellInit = ''
-    ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
-  '';
-  programs = {
-    # Zsh configuration
-    zsh = {
-      enable = false;
-      enableCompletion = false;
-      ohMyZsh = {
-        enable = false;
-        plugins = [ "git" ];
-        theme = "xiong-chiamiov-plus";
-      };
-
-      autosuggestions.enable = true;
-      syntaxHighlighting.enable = true;
-
-      promptInit = ''
-        fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
-
-        #pokemon colorscripts like. Make sure to install krabby package
-        #krabby random --no-mega --no-gmax --no-regional --no-title -s;
-
-        source <(fzf --zsh);
-        HISTFILE=~/.zsh_history;
-        HISTSIZE=10000;
-        SAVEHIST=10000;
-        setopt appendhistory;
-      '';
-    };
-  };
 }

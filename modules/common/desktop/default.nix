@@ -5,6 +5,7 @@
     ./fonts.nix
     ./greetd.nix
     ./niri.nix
+    ./sddm-stray.nix
     ./hm-clean.nix
     ./portal.nix
     ./xdg.nix

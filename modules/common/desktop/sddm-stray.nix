@@ -6,20 +6,16 @@
   ...
 }:
 with lib; let
-  cfg = config.system.displayManager;
+  cfg = config.system.sddm-stray;
   cursorPkg = inputs.kureiji-ollie-cursor.packages.${pkgs.system}.kureiji-ollie-cursor;
-  sddm-theme = inputs.silentSDDM.packages.${pkgs.system}.default.override {
-    theme = "new";
-  };
 in {
-  options.system.displayManager = {
+  options.system.sddm-stray = {
     enable = mkEnableOption "Enable Display Manager Services";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      sddm-theme
-      sddm-theme.test
+      pkgs.lyra-cursors
       inputs.app2unit.packages.${pkgs.system}.default
       cursorPkg
       inputs.sddm-stray.packages.${pkgs.system}.default
@@ -31,14 +27,14 @@ in {
     services.displayManager.sddm = {
       enable = true; # Enable SDDM.
       package = pkgs.kdePackages.sddm;
-      extraPackages = sddm-theme.propagatedBuildInputs;
+      extraPackages = with pkgs; [
+        kdePackages.qtsvg
+        kdePackages.qtmultimedia
+        kdePackages.qtvirtualkeyboard
+      ];
       wayland.enable = true;
-      theme = sddm-theme.pname;
+      theme = "sddm-theme-stray";
       settings = {
-        General = {
-          GreeterEnvironment = "QML2_IMPORT_PATH=${sddm-theme}/share/sddm/themes/${sddm-theme.pname}/components/,QT_IM_MODULE=qtvirtualkeyboard";
-          InputMethod = "qtvirtualkeyboard";
-        };
         Theme = {
           CursorTheme = "Reichi-Shinigami";
         };
