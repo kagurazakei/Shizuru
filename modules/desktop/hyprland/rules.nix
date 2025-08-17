@@ -194,7 +194,7 @@
       windowrule = opacity 0.8 0.6, class:^(pcmanfm-qt)$
       windowrule = opacity 0.8 0.7, class:^(gedit|org.gnome.TextEditor|mousepad)$
       windowrule = opacity 0.9 0.8, class:^(deluge)$
-      windowrule = opacity 0.95 0.96, class:^(firefox|org.wezfurlong.wezterm|foot|com.mitchellh.ghostty|Alacritty|kitty|kitty-dropterm|equibop)$
+      windowrule = opacity 0.9 0.8, class:^(firefox|org.wezfurlong.wezterm|foot|com.mitchellh.ghostty|Alacritty|kitty|kitty-dropterm|equibop)$
       windowrule = opacity 0.7 0.9, class:^(VSCodium|codium-url-handler|code-oss)$
       windowrule = opacity 0.9 0.8, class:^(nwg-look|qt5ct|qt6ct|[Yy]ad)$
       windowrule = opacity 0.9 0.8, title:(Kvantum Manager)
