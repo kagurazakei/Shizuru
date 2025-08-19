@@ -310,7 +310,7 @@
     ...
   }: let
     system = "x86_64-linux";
-    host = "shizuru";
+    host = "hanako";
     username = "antonio";
 
     pkgs = import nixpkgs {
@@ -354,7 +354,7 @@
     };
 
     nixosConfigurations = {
-      shizuru = nixpkgs.lib.nixosSystem {
+      hanako = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit system inputs username host pkgs-master;
         };
