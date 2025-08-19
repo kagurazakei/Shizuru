@@ -1,5 +1,4 @@
 <p align="center">
-    💜 Shizuru - NixOS Configuration
     💜 Now hostname was change to hanako - Taken from "Toilet-Bound Hanako-kun"
 
 </p>
