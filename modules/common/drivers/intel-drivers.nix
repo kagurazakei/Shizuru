@@ -12,7 +12,6 @@ in
     config = mkIf cfg.enable {
       environment.systemPackages = with pkgs; [
         vulkan-loader
-        vulkan-validation-layers
         vulkan-tools
         libva-utils
       ];
@@ -20,7 +19,6 @@ in
       environment.variables = {
         LIBVA_DRIVER_NAME = "iHD";
         VDPAU_DRIVER = "va_gl";
-        LIBVA_DRIVERS_PATH = "${pkgs.intel-media-driver}/lib/dri";
       };
 
       boot = {
@@ -40,7 +38,6 @@ in
         enable = true;
         extraPackages = with pkgs; [
           intel-media-driver
-          intel-ocl
           vaapiIntel
         ];
       };
@@ -48,7 +45,6 @@ in
         enable = true;
         extraPackages = with pkgs; [
           intel-media-driver
-          intel-ocl
           libva
           intel-vaapi-driver
           vaapiVdpau

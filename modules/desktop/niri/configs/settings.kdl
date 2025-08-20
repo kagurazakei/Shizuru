@@ -45,7 +45,7 @@ layout {
     always-center-single-column
 }
 cursor {
-    xcursor-theme "Bloodthirst"
+    xcursor-theme "Hatsune-Miku"
     xcursor-size 32
 }
 hotkey-overlay { skip-at-startup; }
