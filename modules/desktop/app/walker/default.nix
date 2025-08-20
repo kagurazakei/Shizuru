@@ -12,326 +12,408 @@
     runAsService = true;
     config = ''
 
-       app_launch_prefix = "uwsm-app -- "
-       close_when_open = true
-       as_window = false
-       disable_click_to_close = true
-       force_keyboard_focus = true
-       hotreload_theme = true
-       locale = ""
-       monitor = ""
-       terminal_title_flag = ""
-       theme = "grid"
-       timeout = 0
+      close_when_open = true          # close walker when invoking while already opened
+      selection_wrap = false          # wrap list if at bottom or top
+      global_argument_delimiter = "#" # query: firefox#https://benz.dev => part after delimiter will be ignored when querying. this should be the same as in the elephant config
+      keep_open_modifier = "shift"    # won't close on activation, but rather select the next item in the list
+      exact_search_prefix = "'"       # disable fuzzy searching
+      theme = "base16"               # theme to use
+      disable_mouse = false           # disable mouse (on input and list only)
 
-       [activation_mode]
-       labels = "jkl;as"
+      [shell]
+      anchor_top = false
+      anchor_bottom = true
+      anchor_left = true
+      anchor_right = true
 
-       [builtins.ai]
-       icon = "help-browser"
-       name = "ai"
-       placeholder = "AI"
-       switcher_only = true
-       weight = 5
+      [placeholders]
+      "default" = { input = "Search", list = "No Results" } # placeholders for input and empty list, key is the providers name, so f.e. "desktopapplications" or "menus:other"
 
-       [[builtins.ai.anthropic.prompts]]
-       label = "Artificial Intelligence"
-       max_tokens = 1_000
-       model = "claude-3-5-sonnet-20241022"
-       prompt = "You are a helpful general assistant. Keep your answers short and precise."
-       temperature = 1
+      [keybinds]
+      close = "esc"
+      next = "down"
+      previous = "up"
+      toggle_exact = "ctrl e"
+      resume_last_query = "ctrl r"
 
-       [builtins.applications]
-       context_aware = true
-       hide_actions_with_empty_query = true
-       history = true
-       name = "applications"
-       placeholder = "Search.."
-       prioritize_new = true
-       refresh = true
-       show_generic = true
-       show_icon_when_single = true
-       show_sub_when_single = true
-       weight = 5
-       theme = "base16_apps"
+      [providers]
+      default = [
+        "desktopapplications",
+        "calc",
+        "runner",
+        "menus",
+        "websearch",
+        "clipboard",
+      ] # providers to be queried by default
+      empty = ["desktopapplications"] # providers to be queried when query is empty
 
-         [builtins.applications.actions]
-         enabled = true
-         hide_category = false
-         hide_without_query = true
+      [[providers.prefixes]]
+      prefix = ";"
+      provider = "providerlist"
 
-       [builtins.bookmarks]
-       icon = "bookmark"
-       name = "bookmarks"
-       placeholder = "Bookmarks"
-       switcher_only = true
-       weight = 5
+      [[providers.prefixes]]
+      prefix = "/"
+      provider = "files"
 
-         [[builtins.bookmarks.entries]]
-         keywords = [ "walker", "github" ]
-         label = "Walker"
-         url = "https://github.com/abenz1267/walker"
+      [[providers.prefixes]]
+      prefix = "."
+      provider = "symbols"
 
-       [builtins.calc]
-       icon = "accessories-calculator"
-       min_chars = 4
-       name = "calc"
-       placeholder = "Calculator"
-       require_number = true
-       weight = 5
+      [[providers.prefixes]]
+      prefix = "="
+      provider = "calc"
 
-       [builtins.clipboard]
-       avoid_line_breaks = true
-       exec = "wl-copy"
-       image_height = 300
-       max_entries = 100
-       name = "clipboard"
-       placeholder = "Clipboard"
-       switcher_only = true
-       weight = 5
-       theme = "base16"
+      [[providers.prefixes]]
+      prefix = "@"
+      provider = "websearch"
 
-       [builtins.commands]
-       icon = "utilities-terminal"
-       name = "commands"
-       placeholder = "Commands"
-       switcher_only = true
-       weight = 5
+      [[providers.prefixes]]
+      prefix = ":"
+      provider = "clipboard"
 
-       [builtins.custom_commands]
-       icon = "utilities-terminal"
-       name = "custom_commands"
-       placeholder = "Custom Commands"
-       weight = 5
+      [providers.calc]
+      copy = "enter"
+      save = "ctrl s"
+      delete = "ctrl d"
 
-       [builtins.dmenu]
-       hidden = true
-       name = "dmenu"
-       placeholder = "Dmenu"
-       switcher_only = true
-       weight = 5
+      [providers.websearch]
+      search = "enter"
 
-       [builtins.emojis]
-       exec = "wl-copy"
-       history = true
-       name = "emojis"
-       placeholder = "Emojis"
-       show_unqualified = false
-       switcher_only = true
-       typeahead = true
-       weight = 5
-       theme = "base16"
+      [providers.providerlist]
+      activate = "enter"
 
-       [builtins.finder]
-       concurrency = 8
-       icon = "file"
-       ignore_gitignore = true
-       name = "finder"
-       placeholder = "Finder"
-       refresh = true
-       show_icon_when_single = true
-       switcher_only = true
-       use_fd = true
-       weight = 5
+      [providers.clipboard]
+      time_format = "%d.%m. - %H:%M"
+      copy = "enter"
+      delete = "ctrl d"
 
-       [builtins.runner]
-       generic_entry = false
-       history = true
-       icon = "utilities-terminal"
-       name = "runner"
-       placeholder = "Runner"
-       refresh = true
-       typeahead = true
-       weight = 5
+      [providers.desktopapplications]
+      start = "enter"
 
-       [builtins.ssh]
-       history = true
-       icon = "preferences-system-network"
-       name = "ssh"
-       placeholder = "SSH"
-       refresh = true
-       switcher_only = true
-       weight = 5
+      [providers.files]
+      open = "enter"
+      open_dir = "ctrl enter"
+      copy_path = "ctrl shift C"
+      copy_file = "ctrl c"
 
-       [builtins.switcher]
-       name = "switcher"
-       placeholder = "Switcher"
-       prefix = "/"
-       weight = 5
+      [providers.runner]
+      start = "enter"
+      start_terminal = "shift enter"
 
-       [builtins.symbols]
-       after_copy = ""
-       history = true
-       name = "symbols"
-       placeholder = "Symbols"
-       switcher_only = true
-       typeahead = true
-       weight = 5
+      [providers.symbols]
+      copy = "enter"
 
-       [builtins.websearch]
-       icon = "applications-internet"
-       name = "websearch"
-       placeholder = "Websearch"
-       weight = 5
+      [providers.menus]
+      activate = "enter"
 
-         [[builtins.websearch.entries]]
-         name = "Google"
-         url = "https://www.google.com/search?q=%TERM%"
+             [activation_mode]
+             labels = "jkl;as"
 
-         [[builtins.websearch.entries]]
-         name = "Elden Ring Wiki"
-         switcher_only = true
-         url = "https://eldenring.wiki.fextralife.com/Elden+Ring+Wiki#gsc.tab=0&gsc.q=%TERM%&gsc.sort="
+             [builtins.ai]
+             icon = "help-browser"
+             name = "ai"
+             placeholder = "AI"
+             switcher_only = true
+             weight = 5
 
-       [builtins.windows]
-       icon = "view-restore"
-       name = "windows"
-       placeholder = "Windows"
-       show_icon_when_single = true
-       weight = 5
+             [[builtins.ai.anthropic.prompts]]
+             label = "Artificial Intelligence"
+             max_tokens = 1_000
+             model = "claude-3-5-sonnet-20241022"
+             prompt = "You are a helpful general assistant. Keep your answers short and precise."
+             temperature = 1
 
-       [builtins.xdph_picker]
-       hidden = true
-       name = "xdphpicker"
-       placeholder = "Screen/Window Picker"
-       theme = "base16"
-       show_sub_when_single = true
-       switcher_only = true
-       weight = 5
+             [builtins.applications]
+             context_aware = true
+             hide_actions_with_empty_query = true
+             history = true
+             name = "applications"
+             placeholder = "Search.."
+             prioritize_new = true
+             refresh = true
+             show_generic = true
+             show_icon_when_single = true
+             show_sub_when_single = true
+             weight = 5
+             theme = "base16_apps"
 
-       [events]
-       on_activate = ""
-       on_exit = ""
-       on_launch = ""
-       on_query_change = ""
-       on_selection = ""
+               [builtins.applications.actions]
+               enabled = true
+               hide_category = false
+               hide_without_query = true
 
-       [keys]
-       accept_typeahead = [ "tab" ]
-       close = [ "esc" ]
-       next = [ "down tab" ]
-       prev = [ "up" ]
-       remove_from_history = [ "shift backspace" ]
-       resume_query = [ "ctrl r" ]
-       toggle_exact_search = [ "ctrl m" ]
-       trigger_labels = "lalt"
+             [builtins.bookmarks]
+             icon = "bookmark"
+             name = "bookmarks"
+             placeholder = "Bookmarks"
+             switcher_only = true
+             weight = 5
 
-         [keys.activation_modifiers]
-         alternate = "alt"
-         keep_open = "shift"
+               [[builtins.bookmarks.entries]]
+               keywords = [ "walker", "github" ]
+               label = "Walker"
+               url = "https://github.com/abenz1267/walker"
 
-         [keys.ai]
-         clear_session = [ "ctrl x" ]
-         copy_last_response = [ "ctrl c" ]
-         resume_session = [ "ctrl r" ]
-         run_last_response = [ "ctrl e" ]
+             [builtins.calc]
+             icon = "accessories-calculator"
+             min_chars = 4
+             name = "calc"
+             placeholder = "Calculator"
+             require_number = true
+             weight = 5
 
-       [list]
-       dynamic_sub = true
-       keyboard_scroll_style = "neovim"
-       max_entries = 1_000
-       placeholder = "No Results"
-       show_initial_entries = true
-       single_click = true
-       visibility_threshold = 20
+             [builtins.clipboard]
+             avoid_line_breaks = true
+             exec = "wl-copy"
+             image_height = 300
+             max_entries = 100
+             name = "clipboard"
+             placeholder = "Clipboard"
+             switcher_only = true
+             weight = 5
+             theme = "base16"
 
-       [[plugins]]
-       name = "wallpaper"
-       placeholder = "Wallpapers"
-       theme = "base16_wall"
-       switcher_only = false
-       refresh = true
-       src = "bash -c ~/.config/walker/scripts/wallpaper.sh"
-       parser = "kv"
+             [builtins.commands]
+             icon = "utilities-terminal"
+             name = "commands"
+             placeholder = "Commands"
+             switcher_only = true
+             weight = 5
 
-       [[plugins]]
-       name = "edit"
-       placeholder = "Edit"
-       theme = "base16"
-       switcher_only = false
-       refresh = true
-       src = "bash -c ~/.config/walker/scripts/edit.sh"
-       parser = "kv"
+             [builtins.custom_commands]
+             icon = "utilities-terminal"
+             name = "custom_commands"
+             placeholder = "Custom Commands"
+             weight = 5
 
-       [[plugins]]
-       name = "niri"
-       placeholder = "Edit Niri"
-       theme = "base16"
-       switcher_only = false
-       refresh = true
-       src = "bash -c ~/.config/walker/scripts/niri.sh"
-       parser = "kv"
+             [builtins.dmenu]
+             hidden = true
+             name = "dmenu"
+             placeholder = "Dmenu"
+             switcher_only = true
+             weight = 5
 
-       [[plugins]]
-       name = "themes"
-       placeholder = "Color Scheme"
-       theme = "base16"
-       switcher_only = false
-       refresh = true
-       src = "bash -c ~/.config/walker/scripts/themes.sh"
-       parser = "kv"
+             [builtins.emojis]
+             exec = "wl-copy"
+             history = true
+             name = "emojis"
+             placeholder = "Emojis"
+             show_unqualified = false
+             switcher_only = true
+             typeahead = true
+             weight = 5
+             theme = "base16"
 
-       [[plugins]]
-       name = "power"
-       placeholder = "System"
-       theme = "base16_power"
-       switcher_only = true
-       keep_sort = true
-       recalculate_score = true
-       show_icon_when_single = true
+             [builtins.finder]
+             concurrency = 8
+             icon = "file"
+             ignore_gitignore = true
+             name = "finder"
+             placeholder = "Finder"
+             refresh = true
+             show_icon_when_single = true
+             switcher_only = true
+             use_fd = true
+             weight = 5
 
-      [[plugins.entries]]
-         label = "Change Wallpaper"
-         icon = "preferences-desktop-wallpaper"
-         exec = "walker -n -m wallpaper"
+             [builtins.runner]
+             generic_entry = false
+             history = true
+             icon = "utilities-terminal"
+             name = "runner"
+             placeholder = "Runner"
+             refresh = true
+             typeahead = true
+             weight = 5
 
-         [[plugins.entries]]
-         label = "Logout System"
-         icon = "system-suspend"
-         exec = "uwsm stop"
+             [builtins.ssh]
+             history = true
+             icon = "preferences-system-network"
+             name = "ssh"
+             placeholder = "SSH"
+             refresh = true
+             switcher_only = true
+             weight = 5
 
-         [[plugins.entries]]
-         label = "Lock Screen"
-         icon = "system-lock-screen"
-         exec = "hyprlock"
+             [builtins.switcher]
+             name = "switcher"
+             placeholder = "Switcher"
+             prefix = "/"
+             weight = 5
 
-         [[plugins.entries]]
-         label = "Reboot"
-         icon = "system-reboot"
-         exec = "reboot"
+             [builtins.symbols]
+             after_copy = ""
+             history = true
+             name = "symbols"
+             placeholder = "Symbols"
+             switcher_only = true
+             typeahead = true
+             weight = 5
 
-         [[plugins.entries]]
-         label = "Shutdown"
-         icon = "system-shutdown"
-         exec = "shutdown now"
+             [builtins.websearch]
+             icon = "applications-internet"
+             name = "websearch"
+             placeholder = "Websearch"
+             weight = 5
 
-       [[plugins]]
-       name = "screenshot"
-       placeholder = "Screenshot"
-       theme = "base16_popup"
-       switcher_only = false
-       recalculate_score = true
-       show_icon_when_single = true
+               [[builtins.websearch.entries]]
+               name = "Google"
+               url = "https://www.google.com/search?q=%TERM%"
 
-         [[plugins.entries]]
-         label = "Region"
-         icon = "region"
-         exec = 'hyprshot -m region -z -o ~/Pictures/Screenshots -f "screenshot_$(date +%d%m%Y_%H%M%S).png"'
+               [[builtins.websearch.entries]]
+               name = "Elden Ring Wiki"
+               switcher_only = true
+               url = "https://eldenring.wiki.fextralife.com/Elden+Ring+Wiki#gsc.tab=0&gsc.q=%TERM%&gsc.sort="
 
-         [[plugins.entries]]
-         label = "Window"
-         icon = "window"
-         exec = 'hyprshot -m window -z -o ~/Pictures/Screenshots -f "screenshot_$(date +%d%m%Y_%H%M%S).png"'
+             [builtins.windows]
+             icon = "view-restore"
+             name = "windows"
+             placeholder = "Windows"
+             show_icon_when_single = true
+             weight = 5
 
-         [[plugins.entries]]
-         label = "Screen"
-         icon = "preferences-system-windows"
-         exec = 'hyprshot -m output -z -o ~/Pictures/Screenshots -f "screenshot_$(date +%d%m%Y_%H%M%S).png"'
+             [builtins.xdph_picker]
+             hidden = true
+             name = "xdphpicker"
+             placeholder = "Screen/Window Picker"
+             theme = "base16"
+             show_sub_when_single = true
+             switcher_only = true
+             weight = 5
 
-       [search]
-       delay = 0
-       placeholder = "Search..."
-       resume_last_query = false
+             [events]
+             on_activate = ""
+             on_exit = ""
+             on_launch = ""
+             on_query_change = ""
+             on_selection = ""
+
+             [keys]
+             accept_typeahead = [ "tab" ]
+             close = [ "esc" ]
+             next = [ "down tab" ]
+             prev = [ "up" ]
+             remove_from_history = [ "shift backspace" ]
+             resume_query = [ "ctrl r" ]
+             toggle_exact_search = [ "ctrl m" ]
+             trigger_labels = "lalt"
+
+               [keys.activation_modifiers]
+               alternate = "alt"
+               keep_open = "shift"
+
+               [keys.ai]
+               clear_session = [ "ctrl x" ]
+               copy_last_response = [ "ctrl c" ]
+               resume_session = [ "ctrl r" ]
+               run_last_response = [ "ctrl e" ]
+
+             [list]
+             dynamic_sub = true
+             keyboard_scroll_style = "neovim"
+             max_entries = 1_000
+             placeholder = "No Results"
+             show_initial_entries = true
+             single_click = true
+             visibility_threshold = 20
+
+             [[plugins]]
+             name = "wallpaper"
+             placeholder = "Wallpapers"
+             theme = "base16_wall"
+             switcher_only = false
+             refresh = true
+             src = "bash -c ~/.config/walker/scripts/wallpaper.sh"
+             parser = "kv"
+
+             [[plugins]]
+             name = "edit"
+             placeholder = "Edit"
+             theme = "base16"
+             switcher_only = false
+             refresh = true
+             src = "bash -c ~/.config/walker/scripts/edit.sh"
+             parser = "kv"
+
+             [[plugins]]
+             name = "niri"
+             placeholder = "Edit Niri"
+             theme = "base16"
+             switcher_only = false
+             refresh = true
+             src = "bash -c ~/.config/walker/scripts/niri.sh"
+             parser = "kv"
+
+             [[plugins]]
+             name = "themes"
+             placeholder = "Color Scheme"
+             theme = "base16"
+             switcher_only = false
+             refresh = true
+             src = "bash -c ~/.config/walker/scripts/themes.sh"
+             parser = "kv"
+
+             [[plugins]]
+             name = "power"
+             placeholder = "System"
+             theme = "base16_power"
+             switcher_only = true
+             keep_sort = true
+             recalculate_score = true
+             show_icon_when_single = true
+
+            [[plugins.entries]]
+               label = "Change Wallpaper"
+               icon = "preferences-desktop-wallpaper"
+               exec = "walker -n -m wallpaper"
+
+               [[plugins.entries]]
+               label = "Logout System"
+               icon = "system-suspend"
+               exec = "uwsm stop"
+
+               [[plugins.entries]]
+               label = "Lock Screen"
+               icon = "system-lock-screen"
+               exec = "hyprlock"
+
+               [[plugins.entries]]
+               label = "Reboot"
+               icon = "system-reboot"
+               exec = "reboot"
+
+               [[plugins.entries]]
+               label = "Shutdown"
+               icon = "system-shutdown"
+               exec = "shutdown now"
+
+             [[plugins]]
+             name = "screenshot"
+             placeholder = "Screenshot"
+             theme = "base16_popup"
+             switcher_only = false
+             recalculate_score = true
+             show_icon_when_single = true
+
+               [[plugins.entries]]
+               label = "Region"
+               icon = "region"
+               exec = 'hyprshot -m region -z -o ~/Pictures/Screenshots -f "screenshot_$(date +%d%m%Y_%H%M%S).png"'
+
+               [[plugins.entries]]
+               label = "Window"
+               icon = "window"
+               exec = 'hyprshot -m window -z -o ~/Pictures/Screenshots -f "screenshot_$(date +%d%m%Y_%H%M%S).png"'
+
+               [[plugins.entries]]
+               label = "Screen"
+               icon = "preferences-system-windows"
+               exec = 'hyprshot -m output -z -o ~/Pictures/Screenshots -f "screenshot_$(date +%d%m%Y_%H%M%S).png"'
+
+             [search]
+             delay = 0
+             placeholder = "Search..."
+             resume_last_query = false
     '';
   };
   hj.files = {

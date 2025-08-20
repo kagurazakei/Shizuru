@@ -47,6 +47,6 @@
     };
   };
   services.elephant = {
-    enable = true;
+    enable = false;
   };
 }

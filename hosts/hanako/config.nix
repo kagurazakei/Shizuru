@@ -36,7 +36,6 @@ in {
       intel-vaapi-driver
       vaapiVdpau
       vaapi-intel-hybrid
-      #mesa_git
       egl-wayland
       master.waybar
     ])

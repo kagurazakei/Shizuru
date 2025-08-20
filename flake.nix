@@ -8,7 +8,8 @@
     font-flake.url = "github:redyf/font-flake";
     systems.url = "github:nix-systems/x86_64-linux";
     agenix.url = "github:ryantm/agenix";
-    walker.url = "github:abenz1267/walker/v0.13.26";
+    #walker.url = "github:abenz1267/walker/v0.13.26";
+    walker.url = "github:not-matthias/walker";
     private-key.url = "git+ssh://git@codeberg.org/maotseantonio/secrets.git";
     sops-nix = {
       url = "github:mic92/sops-nix";
@@ -44,10 +45,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=main&rev=4d4c2b8f0a801c91ce5b717c77fe3a17efa1402f";
+      url = "git+https://git.lix.systems/lix-project/nixos-module";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.lix = {
-        url = "git+https://git.lix.systems/lix-project/lix?ref=main&rev=cad6118e20a520b7536879d951ab6c3228b3e111";
+        url = "git+https://git.lix.systems/lix-project/lix";
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };
@@ -383,6 +384,7 @@
       extra-substituters = [
         "https://nix-community.cachix.org"
         "https://cache.nixos.org?priority=10" # Keep this last
+        "https://cache.lix.systems"
         "https://nyx.chaotic.cx"
         "https://hyprland.cachix.org"
         "https://yazi.cachix.org"
@@ -394,6 +396,7 @@
       extra-trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
         "chaotic-nyx.cachix.org-1:HfnXSw4pj95iI/n17rIDy40agHj12WfF+Gqk6SonIT8="
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         "yazi.cachix.org-1:Dcdz63NZKfvUCbDGngQDAZq6kOroIrFoyO064uvLh8k="
