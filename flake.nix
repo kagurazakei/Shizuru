@@ -9,7 +9,7 @@
     systems.url = "github:nix-systems/x86_64-linux";
     agenix.url = "github:ryantm/agenix";
     #walker.url = "github:abenz1267/walker/v0.13.26";
-    walker.url = "github:not-matthias/walker";
+    walker.url = "github:kagurazakei/walker";
     private-key.url = "git+ssh://git@codeberg.org/maotseantonio/secrets.git";
     sops-nix = {
       url = "github:mic92/sops-nix";
@@ -44,14 +44,16 @@
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.lix = {
-        url = "git+https://git.lix.systems/lix-project/lix";
+        url = "git+https://git.lix.systems/lix-project/lix?ref=main";
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };
+
     flake-programs-sqlite = {
       url = "github:wamserma/flake-programs-sqlite";
       inputs.nixpkgs.follows = "nixpkgs";

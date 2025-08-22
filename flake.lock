@@ -2964,11 +2964,11 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1755608933,
-        "narHash": "sha256-1iSxO09S7MXC5ovHHEiugBcUHAesVfKivS/fm6KA5AQ=",
-        "ref": "refs/heads/main",
-        "rev": "001c70d2bab8a06c648cbc456e59a271792fe99d",
-        "revCount": 18285,
+        "lastModified": 1755827507,
+        "narHash": "sha256-Uy8Xd8ofiuwquDnpDSVIH5slTSFqAYQwCWAkFa9plF4=",
+        "ref": "main",
+        "rev": "a84355a813f57b919d5c676224ed9ea40b3e52ac",
+        "revCount": 18301,
         "type": "git",
         "url": "https://git.lix.systems/lix-project/lix"
       },
@@ -2987,15 +2987,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1755621638,
-        "narHash": "sha256-xGdoc9Uv8BvzMcQXPtdKnIltw5kQIPFiLYeKt4yiznc=",
-        "ref": "refs/heads/main",
-        "rev": "ba169d91ddf35e47e02ec12f6de02c413144efe4",
-        "revCount": 152,
+        "lastModified": 1755826886,
+        "narHash": "sha256-AzCj0tc+JHFg74VqvLYgro5xSJ6eT0NoS6zxhavc4eo=",
+        "ref": "main",
+        "rev": "71bd6a06def2404b7e0f68e57bf5a08c634f5041",
+        "revCount": 159,
         "type": "git",
         "url": "https://git.lix.systems/lix-project/nixos-module"
       },
       "original": {
+        "ref": "main",
         "type": "git",
         "url": "https://git.lix.systems/lix-project/nixos-module"
       }
@@ -5522,15 +5523,15 @@
         "systems": "systems_26"
       },
       "locked": {
-        "lastModified": 1755456889,
-        "narHash": "sha256-uPn6fZHrqJ54IAE7tFTplQDjJTvhuME7ySiDwLeNsVg=",
-        "owner": "not-matthias",
+        "lastModified": 1755756640,
+        "narHash": "sha256-XxXwTFQGqHV02nzW2ehz+N+oDlFR1jmpOCek7l4bhgY=",
+        "owner": "kagurazakei",
         "repo": "walker",
-        "rev": "6b14a914a84cb6347e4eb21211514796008adc80",
+        "rev": "57fc3e6ff2fcc7b13deb464e751f969bc10bac5b",
         "type": "github"
       },
       "original": {
-        "owner": "not-matthias",
+        "owner": "kagurazakei",
         "repo": "walker",
         "type": "github"
       }

@@ -55,7 +55,7 @@ in {
     "Mod+Shift+F".action = "expand-column-to-available-width";
     "Mod+Space".action = "toggle-window-floating";
     "Mod+W".action = "toggle-column-tabbed-display";
-    "Mod+V".spawn = ["walker" "-m" "clipboard"];
+    "Mod+V".spawn = ["fuzzel-clip"];
     "Mod+Comma".action = "consume-window-into-column";
     "Mod+Period".action = "expel-window-from-column";
     "Mod+C".action = "center-window";
