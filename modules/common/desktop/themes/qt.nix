@@ -17,7 +17,6 @@
     qt6.qtmultimedia
     wlsunset
     libqalculate
-    colloid-kde
     quickshellPkg
   ];
 

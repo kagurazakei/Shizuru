@@ -34,7 +34,7 @@ in {
     "Mod+D".spawn = ["walker"];
     "Mod+N".spawn = ["lock-qs"];
     "Mod+Return".spawn = ["kitty"];
-    "Mod+E".spawn = ["walker" "-m" "emojis"];
+    "Mod+E".spawn = ["walker" "-m" "symbols"];
     "Alt+Tab".spawn = ["walker" "-m" "windows"];
     "Mod+Shift+X".spawn = ["ani-cli" "--rofi"];
     "Alt+Space".spawn = ["fuzzel"];
@@ -55,7 +55,7 @@ in {
     "Mod+Shift+F".action = "expand-column-to-available-width";
     "Mod+Space".action = "toggle-window-floating";
     "Mod+W".action = "toggle-column-tabbed-display";
-    "Mod+V".spawn = ["fuzzel-clip"];
+    "Mod+V".spawn = ["walker" "-m" "clipboard"];
     "Mod+Comma".action = "consume-window-into-column";
     "Mod+Period".action = "expel-window-from-column";
     "Mod+C".action = "center-window";

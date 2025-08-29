@@ -18,7 +18,7 @@
     alejandra.url = "github:kamadorueda/alejandra/4.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     fastanime.url = "github:Benexl/FastAnime";
-    elephant.url = "github:kagurazakei/elephant";
+    elephant.url = "github:umbrageodotus/elephant";
     fish-flake = {
       url = "github:kagurazakei/fish-flake";
     };
@@ -371,7 +371,7 @@
           inputs.nixos-hardware.nixosModules.huawei-machc-wa
           inputs.nvf.nixosModules.default
           agenix.nixosModules.default
-          lix-module.nixosModules.default
+          #lix-module.nixosModules.default
           inputs.flake-programs-sqlite.nixosModules.programs-sqlite
           {
             nixpkgs.overlays = import ./overlays {

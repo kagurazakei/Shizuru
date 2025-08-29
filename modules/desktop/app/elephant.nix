@@ -8,8 +8,7 @@
     ];
     programs.elephant = {
       enable = true;
-      autoStart = true;
-      debug = false;
+      debug = true;
 
       # Select specific providers
       providers = [
@@ -43,6 +42,6 @@
     };
   };
   services.elephant = {
-    enable = false;
+    enable = true;
   };
 }

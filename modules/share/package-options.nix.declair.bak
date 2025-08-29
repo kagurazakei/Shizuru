@@ -27,6 +27,7 @@ in {
       gnome-system-monitor
       file-roller
       grim
+      hiddify-app
       gtk-engine-murrine # for gtk themes
       hyprcursor # requires unstable channel
       qcomicbook
@@ -41,6 +42,7 @@ in {
       playerctl
       polkit_gnome
       pyprland
+      python313Packages.kde-material-you-colors
       rofi-wayland
       slurp
       swappy
@@ -53,7 +55,8 @@ in {
       nix-ld
       power-profiles-daemon
       fd
-      waypaper
+      master.home-manager
+      master.waypaper
       bluez-tools
       wgpu-utils
       gtk3
