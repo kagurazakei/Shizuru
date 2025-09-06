@@ -30,7 +30,7 @@ in {
             else prevModules.v4l2loopback;
         };
       in
-        pkgs.linuxPackages_cachyos.extend apply;
+        pkgs.linuxPackages_cachyos-gcc.extend apply;
 
       # kernelPackages = let
       #   apply = _: prevModules: {

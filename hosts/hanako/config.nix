@@ -47,11 +47,10 @@ in {
     BROWSER = "firefox";
     TERMINAL = "kitty";
     VISUAL = "vscodium";
-    GSK_RENDERER = "gl";
+    GSK_RENDERER = "opengl";
     NIXPKGS_ALLOW_UNFREE = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
-    ZDOTDIR = "$HOME/.config/zsh";
     NH_OS_FLAKE = "/home/antonio/shizuru";
   };
   system.stateVersion = "25.05";

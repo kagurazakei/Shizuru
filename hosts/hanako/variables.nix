@@ -3,7 +3,7 @@
 
   configDirectory = "/home/antonio/shizuru/";
   gitUsername = "kagurazakei";
-  gitEmail = "maotseugiri@gmail.com";
+  gitEmail = "maotsugiri@gmail.com";
   extraMonitorSettings = "";
   clock24h = true;
   browser = "firefox"; # Set Default Browser (google-chrome-stable for google-chrome)
