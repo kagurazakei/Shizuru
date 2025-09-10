@@ -1,7 +1,4 @@
 {inputs, ...}: {
-  imports = [
-    inputs.elephant.nixosModules.default
-  ];
   hm = {
     imports = [
       inputs.elephant.homeManagerModules.default
@@ -40,8 +37,5 @@
         };
       };
     };
-  };
-  services.elephant = {
-    enable = true;
   };
 }

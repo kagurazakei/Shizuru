@@ -9,7 +9,7 @@
     systems.url = "github:nix-systems/x86_64-linux";
     agenix.url = "github:ryantm/agenix";
     #walker.url = "github:abenz1267/walker/v0.13.26";
-    walker.url = "github:kagurazakei/walker/1c4a5fd80d04cd0907496d94ee465ca67450e8bd";
+    walker.url = "github:abenz1267/walker";
     private-key.url = "git+ssh://git@codeberg.org/maotseantonio/secrets.git";
     sops-nix = {
       url = "github:mic92/sops-nix";
@@ -18,7 +18,7 @@
     alejandra.url = "github:kamadorueda/alejandra/4.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     fastanime.url = "github:Benexl/FastAnime";
-    elephant.url = "github:umbrageodotus/elephant/8c78dfb3b69ac3cbff0919e2b7a2f180ea117fd4";
+    elephant.url = "github:abenz1267/elephant";
     fish-flake = {
       url = "github:kagurazakei/fish-flake";
     };
