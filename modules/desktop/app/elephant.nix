@@ -4,7 +4,7 @@
       inputs.elephant.homeManagerModules.default
     ];
     programs.elephant = {
-      enable = true;
+      enable = false;
       debug = true;
 
       # Select specific providers

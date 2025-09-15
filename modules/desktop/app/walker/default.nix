@@ -13,7 +13,7 @@
   };
   services.elephant = {
     enable = true;
-};
+  };
   hj.files = {
     ".config/walker/config.toml".source = "${./config/config.toml}";
     ".config/walker/themes".source = "${./themes}";

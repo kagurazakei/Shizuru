@@ -12,7 +12,7 @@ in {
   config = lib.mkIf cfg.enable {
     hj.rum.programs.foot = {
       enable = true;
-      package = inputs.nyxexprs.packages.${pkgs.system}.foot-git;
+      # package = inputs.nyxexprs.packages.${pkgs.system}.foot-git;
       settings = {
         main = {
           term = "foot";

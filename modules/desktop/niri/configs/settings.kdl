@@ -11,7 +11,7 @@ layout {
     }
     focus-ring { off; }
     border {
-        width 4
+        width 2.5
         active-gradient angle=150 from="#e97078" relative-to="window" to="#80c8ff"
         inactive-gradient angle=180 from="#414868" relative-to="window" to="#1e1e2e"
     }
