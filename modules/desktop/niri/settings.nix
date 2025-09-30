@@ -8,7 +8,8 @@
 in {
   hj.rum.desktops.niri = {
     enable = true;
-    configFile = pkgs.concatText "config.kdl" (listFilesRecursive ./configs);
+    #config = pkgs.concatText "config.kdl" (listFilesRecursive ./configs);
+    config = lib.concatMapStringsSep "\n" builtins.readFile [./configs/animation.kdl ./configs/inputs.kdl ./configs/rule.kdl ./configs/settings.kdl];
     spawn-at-startup = [
       ["wl-paste" "--type" "image" "--watch" "cliphist" "store"]
       ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"]

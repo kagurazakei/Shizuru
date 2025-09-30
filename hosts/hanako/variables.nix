@@ -2,7 +2,7 @@
   # Git Configuration ( For Pulling Software Repos )
 
   configDirectory = "/home/antonio/shizuru/";
-  gitUsername = "kagurazakei";
+  gitUsername = "antonio";
   gitEmail = "maotsugiri@gmail.com";
   extraMonitorSettings = "";
   clock24h = true;

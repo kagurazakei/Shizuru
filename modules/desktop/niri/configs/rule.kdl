@@ -1,6 +1,6 @@
 window-rule {
     draw-border-with-background false
-    geometry-corner-radius 15.000000 15.000000 15.000000 15.000000
+    geometry-corner-radius 5.000000 5.000000 5.000000 5.000000
     clip-to-geometry true
 }
 window-rule {

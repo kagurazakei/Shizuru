@@ -48,7 +48,7 @@ in
           libva
           intel-vaapi-driver
           vaapiVdpau
-          intel-compute-runtime
+          # intel-compute-runtime
           libvdpau-va-gl
           libvdpau
           mesa

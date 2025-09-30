@@ -7,8 +7,8 @@
     ./gsd-settings.nix
     ./niri-wallpaper.nix
     ./pipewire-idle.nix
-    ./satellite.nix
-    ./walker.nix
-    ./wl-clip-persist.nix
+    #./satellite.nix
+    #./walker.nix
+    #./wl-clip-persist.nix
   ];
 }

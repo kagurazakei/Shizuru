@@ -103,7 +103,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
-        hyprlang.follows = "hyprlang";
+        # hyprlang.follows = "hyprlang";
       };
     };
 
@@ -128,18 +128,18 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
-        hyprlang.follows = "hyprlang";
+        # hyprlang.follows = "hyprlang";
       };
     };
 
-    hyprlang = {
-      url = "github:hyprwm/hyprlang";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        systems.follows = "systems";
-        hyprutils.follows = "hyprutils";
-      };
-    };
+    # hyprlang = {
+    #   url = "github:hyprwm/hyprlang";
+    #   inputs = {
+    #     nixpkgs.follows = "nixpkgs";
+    #     systems.follows = "systems";
+    #     hyprutils.follows = "hyprutils";
+    #   };
+    # };
 
     hyprutils = {
       url = "github:hyprwm/hyprutils";
@@ -162,7 +162,7 @@
         nixpkgs.follows = "nixpkgs";
         systems.follows = "systems";
         hyprland-protocols.follows = "hyprland-protocols";
-        hyprlang.follows = "hyprlang";
+        # hyprlang.follows = "hyprlang";
         hyprutils.follows = "hyprutils";
         hyprwayland-scanner.follows = "hyprwayland-scanner";
       };
@@ -177,7 +177,7 @@
         hyprgraphics.follows = "hyprgraphics";
         hyprland-protocols.follows = "hyprland-protocols";
         hyprland-qtutils.follows = "hyprland-qtutils";
-        hyprlang.follows = "hyprlang";
+        # hyprlang.follows = "hyprlang";
         hyprutils.follows = "hyprutils";
         hyprwayland-scanner.follows = "hyprwayland-scanner";
         xdph.follows = "xdph";
@@ -271,7 +271,8 @@
     };
 
     ghostty.url = "github:ghostty-org/ghostty";
-    nixcord.url = "github:kaylorben/nixcord";
+    # nixcord.url = "github:kaylorben/nixcord";
+    nixcord.url = "github:kaylorben/nixcord?rev=f93293513fdf2a5d530e3c3bce9cc87bd9b47b2a";
     textfox.url = "github:adriankarlen/textfox";
     nh = {
       url = "github:nix-community/nh";
@@ -279,6 +280,7 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager";
+      # url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

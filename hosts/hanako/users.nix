@@ -10,8 +10,9 @@
 in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    (lib.modules.mkAliasOptionModule ["hm"] ["home-manager" "users" "${username}"]) # gitlab/fazzi
+    (lib.modules.mkAliasOptionModule ["hm"] ["home-manager" "users" "${username}"])
   ];
+
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
@@ -22,16 +23,16 @@ in {
     extraSpecialArgs = {
       inherit inputs username host;
     };
-    users.${username} = {
-      imports = [
-        ./home.nix
-      ];
-      home.username = "${username}";
-      home.homeDirectory = "/home/${username}";
-      home.stateVersion = "25.05";
-      programs.home-manager.enable = true;
-    };
   };
+  hm = {
+    imports = [
+      ./home.nix
+    ];
+    home.username = "${username}";
+    home.homeDirectory = "/home/${username}";
+    home.stateVersion = "25.05";
+  };
+
   users = {
     defaultUserShell = pkgs.fish;
     mutableUsers = true;
@@ -51,12 +52,10 @@ in {
         "audio"
       ];
 
-      # define user packages here
-      packages = with pkgs; [
-      ];
+      packages = with pkgs; [];
     };
   };
-  #security.sudo.wheelNeedsPassword = false;
+
   nix.settings.allowed-users = ["${username}"];
   environment.shells = with pkgs; [fish];
   environment.systemPackages = with pkgs; [fzf];

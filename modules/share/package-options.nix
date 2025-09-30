@@ -33,6 +33,7 @@ in {
       ahoviewer
       imagemagick
       inxi
+      home-manager
       jq
       nwg-look # requires unstable channel
       nwg-dock-hyprland
@@ -41,7 +42,7 @@ in {
       playerctl
       polkit_gnome
       pyprland
-      rofi-wayland
+      rofi
       slurp
       swappy
       swww

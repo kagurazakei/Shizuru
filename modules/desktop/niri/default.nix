@@ -20,7 +20,6 @@ in {
       pkgs.xdg-desktop-portal-gnome
       pkgs.gnome-keyring
     ];
-    services.arrpc.enable = true;
     services.swww = {
       enable = true;
       package = swww;

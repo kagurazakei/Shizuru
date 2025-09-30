@@ -23,18 +23,19 @@
   programs.htop = {
     enable = true;
   };
-  catppuccin.enable = true;
+  catppuccin.enable = false;
+  # catppuccin.vivid.enable = false;
   catppuccin.btop.enable = false;
   catppuccin.mako.enable = false;
   catppuccin.cava.enable = false;
   catppuccin.kvantum.enable = false;
-  services.mako.enable = false;
+  #services.mako.enable = false;
   home.packages = with pkgs; [
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qtstyleplugin-kvantum
-    inputs.ags.packages.${pkgs.system}.agsFull
+    # inputs.ags.packages.${pkgs.system}.agsFull
   ];
-  home.file = {};
+  # home.file = {};
 
   home.sessionVariables = {
     EDITOR = "nvim";

@@ -2,10 +2,10 @@
   stylix = {
     enable = true;
     autoEnable = false;
-    homeManagerIntegration = {
-      followSystem = true;
-      autoImport = true;
-    };
+    # homeManagerIntegration = {
+    #   followSystem = false;
+    #   autoImport = false;
+    # };
   };
   stylix.base16Scheme = ./themes/oxo-draco.yaml;
   stylix = {
