@@ -49,7 +49,8 @@ in
         nvidiaPersistenced = false;
         open = false;
         nvidiaSettings = true;
-        package = nvidiaPackage;
+        #package = nvidiaPackage;
+        package = config.boot.kernelPackages.nvidiaPackages.latest;
       };
     };
   }
