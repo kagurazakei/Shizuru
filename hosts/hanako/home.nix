@@ -23,12 +23,12 @@
   programs.htop = {
     enable = true;
   };
-  catppuccin.enable = false;
+  catppuccin.enable = true;
   # catppuccin.vivid.enable = false;
   catppuccin.btop.enable = false;
-  catppuccin.mako.enable = false;
-  catppuccin.cava.enable = false;
-  catppuccin.kvantum.enable = false;
+  catppuccin.mako.enable = true;
+  catppuccin.cava.enable = true;
+  catppuccin.kvantum.enable = true;
   #services.mako.enable = false;
   home.packages = with pkgs; [
     libsForQt5.qtstyleplugin-kvantum
