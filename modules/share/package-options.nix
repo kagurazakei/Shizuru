@@ -22,6 +22,7 @@ in {
       python313Packages.pywayland
       neovide
       cliphist
+      app2unit
       hyprpanel
       eog
       gnome-system-monitor
@@ -29,8 +30,6 @@ in {
       grim
       gtk-engine-murrine # for gtk themes
       hyprcursor # requires unstable channel
-      qcomicbook
-      ahoviewer
       imagemagick
       inxi
       home-manager
@@ -64,7 +63,6 @@ in {
       zoxide
       dart-sass
       sass
-      readest
       wf-recorder
       sassc
       libgtop

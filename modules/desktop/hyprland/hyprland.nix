@@ -13,6 +13,7 @@ in {
     pkgs.kdePackages.qtstyleplugin-kvantum
     inputs.hyprland-qtutils.packages.${pkgs.system}.default
     inputs.hypridle.packages.${pkgs.system}.default
+    #pkgs.hypridle
   ];
   programs = {
     hyprland = {

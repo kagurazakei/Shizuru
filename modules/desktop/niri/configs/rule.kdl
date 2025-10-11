@@ -43,7 +43,7 @@ window-rule {
 }
 window-rule {
     match app-id="^(info.febvre.Komikku)$"
-    scroll-factor 0.100000
+    scroll-factor 0.650000
 }
 window-rule {
     match app-id="^(zen|firefox|equibop|chromium-browser|edge|chrome-.*|zen-.*)$"

@@ -4,14 +4,14 @@ overview { backdrop-color "#11121d"; }
 layout {
     gaps 6
     struts {
-        left 12
-        right 12
-        top 12
-        bottom 12
+        left 2
+        right 2
+        top 2
+        bottom 2
     }
     focus-ring { off; }
     border {
-        width 2.5
+        width 1.5
         active-gradient angle=150 from="#e97078" relative-to="window" to="#80c8ff"
         inactive-gradient angle=180 from="#414868" relative-to="window" to="#1e1e2e"
     }
@@ -45,7 +45,7 @@ layout {
     always-center-single-column
 }
 cursor {
-    xcursor-theme "Hatsune-Miku"
+    xcursor-theme "Yuurei-Angel"
     xcursor-size 32
 }
 hotkey-overlay { skip-at-startup; }

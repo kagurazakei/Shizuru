@@ -15,6 +15,7 @@
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia-shell.url = "github:noctalia-dev/noctalia-shell";
     alejandra.url = "github:kamadorueda/alejandra/4.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
     fastanime.url = "github:Benexl/FastAnime";
@@ -36,9 +37,6 @@
     };
     caelestia-cli = {
       url = "github:caelestia-dots/cli";
-    };
-    app2unit = {
-      url = "github:soramanew/app2unit";
     };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";

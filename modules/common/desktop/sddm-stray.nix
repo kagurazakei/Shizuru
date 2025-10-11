@@ -16,7 +16,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [
       pkgs.lyra-cursors
-      inputs.app2unit.packages.${pkgs.system}.default
+      pkgs.app2unit
       cursorPkg
       inputs.sddm-stray.packages.${pkgs.system}.default
       inputs.waifu-cursors.packages.${pkgs.system}.Reichi-Shinigami

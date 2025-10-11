@@ -1,11 +1,18 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   inherit (lib.meta) getExe;
   inherit (lib.filesystem) listFilesRecursive;
 in {
+  imports = [
+    inputs.noctalia-shell.nixosModules.default
+  ];
+  services.noctalia-shell = {
+    enable = true;
+  };
   hj.rum.desktops.niri = {
     enable = true;
     #configFile = pkgs.concatText "config.kdl" (listFilesRecursive ./configs);
@@ -15,7 +22,8 @@ in {
       ["${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"]
       ["wl-paste" "--type" "text" "--watch" "cliphist" "store"]
       ["swww-daemon"]
-      ["lysec-bar"]
+      ["elephant"]
+      #["noctalia-shell" "-d"]
       ["dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"]
       ["systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"]
       ["dbus-update-activation-environment" "--all"]
