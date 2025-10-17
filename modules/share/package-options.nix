@@ -29,12 +29,12 @@ in {
       file-roller
       grim
       gtk-engine-murrine # for gtk themes
-      hyprcursor # requires unstable channel
+      hyprcursor
       imagemagick
       inxi
       home-manager
       jq
-      nwg-look # requires unstable channel
+      nwg-look
       nwg-dock-hyprland
       master.pamixer
       pavucontrol
@@ -76,7 +76,7 @@ in {
       libqalculate
       dbus-glib
       gtkmm4
-      komikku
+      #master.komikku
       mangayomi
       mangal
       mangareader

@@ -1,32 +1,31 @@
-{ pkgs
-, config
-, username
-, options
-, lib
-, system
-, ...
+{
+  pkgs,
+  config,
+  username,
+  options,
+  lib,
+  system,
+  ...
 }:
 with lib; let
   cfg = config.system.greetd;
-in
-{
+in {
   options.system.greetd = {
     enable = mkEnableOption "Enable Greetd Display Manager Services";
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      greetd.tuigreet
+      tuigreet
       lyra-cursors
     ];
 
     services.greetd = {
       enable = true;
-      vt = 1;
       settings = {
         default_session = {
           user = username;
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet \
+          command = "${pkgs.tuigreet}/bin/tuigreet \
             --user-menu \
             -w 30 \
             --window-padding 40 \
@@ -62,6 +61,12 @@ in
       TTYHangup = true;
       TTYVTDisallocate = true;
     };
-    systemd.extraConfig = "DefaultTimeoutStopSec=1os";
+    systemd.settings.Manager = {
+      KExecWatchdogSec = "5min";
+      RebootWatchdogSec = "10min";
+      RuntimeWatchdogSec = "30s";
+      DefaultTimeoutStopSec = "10s";
+      WatchdogDevice = "/dev/watchdog";
+    };
   };
 }

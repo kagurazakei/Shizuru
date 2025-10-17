@@ -15,7 +15,6 @@ in {
   };
   hj.rum.desktops.niri = {
     enable = true;
-    #config = pkgs.concatText "config.kdl" (listFilesRecursive ./configs);
     config = lib.concatMapStringsSep "\n" builtins.readFile [./configs/animation.kdl ./configs/inputs.kdl ./configs/rule.kdl ./configs/settings.kdl];
     spawn-at-startup = [
       ["wl-paste" "--type" "image" "--watch" "cliphist" "store"]
@@ -23,7 +22,6 @@ in {
       ["wl-paste" "--type" "text" "--watch" "cliphist" "store"]
       ["swww-daemon"]
       ["elephant"]
-      #["noctalia-shell" "-d"]
       ["dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"]
       ["systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP"]
       ["dbus-update-activation-environment" "--all"]
